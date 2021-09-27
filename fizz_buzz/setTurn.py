@@ -1,9 +1,9 @@
-def setTurn(index, data):
-    if index >= 0 and index < 9:
+def setTurn(index, data, numberMonkeys, turns):
+    if index >= 0 and index < data['monkeys']['number']:
         turnData = data["monkeys"]
         turn = "monkey"
         print("C'est au tour du singe")
-    elif index > 9 and index < 10:
+    elif index == len(turns)-2:
         turnData = data['boss']
         turn = "boss"
         print("C'est au tour du boss")

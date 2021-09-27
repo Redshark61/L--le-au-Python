@@ -3,13 +3,19 @@ from random import randint
 from fizz_buzz.setTurn import setTurn
 import colorama
 from colorama import Fore, Back, Style
+import os.path
+import copy
 
 colorama.init(autoreset=True)
 
 
 def fizzBuzz():
-    with open('data/fizzBuzz.json') as file:
-        data = json.load(file)
+    if os.path.isfile("mods/fizzBuzz.json"):
+        with open('mods/fizzBuzz.json') as file:
+            data = json.load(file)
+    else:
+        with open("data/fizzBuzz.json") as file:
+            data = json.load(file)
 
     numberMonkeys = data["monkeys"]["number"] + 1
 
@@ -26,15 +32,18 @@ def fizzBuzz():
     chanceBoss = randint(minBoss, maxBoss+1)
     chancePlayer = randint(minPlayer, maxPlayer+1)
 
-    n = 0
+    n = 1
     playerIsWrong = False
 
-    turns = [chanceMonkey]*9 + [chanceBoss, chancePlayer]
+    turns = [chanceMonkey]*(data['monkeys']['number']) + \
+        [chanceBoss, chancePlayer]
+
+    playerLeft = copy.deepcopy(turns)
     while numberMonkeys > 0 and not playerIsWrong:
 
         for index, chance in enumerate(turns):
 
-            turnData, turn = setTurn(index, data)
+            turnData, turn = setTurn(index, data, numberMonkeys, turns)
 
             if n % 3 == 0 and n % 5 == 0:
                 if randint(0, 100) < chance:
@@ -45,11 +54,11 @@ def fizzBuzz():
                     print(Fore.RED + turnData['loose'])
 
                     if turn == "monkey":
-                        del turns[index]
+                        del playerLeft[0]
                         numberMonkeys -= 1
 
                     elif turn == "boss":
-                        del turns[index]
+                        del playerLeft[-2]
 
                     else:
                         playerIsWrong = True
@@ -64,11 +73,11 @@ def fizzBuzz():
                     print(Fore.RED + turnData['loose'])
 
                     if turn == "monkey":
-                        del turns[index]
+                        del playerLeft[0]
                         numberMonkeys -= 1
 
                     elif turn == "boss":
-                        del turns[index]
+                        del playerLeft[-2]
 
                     else:
                         playerIsWrong = True
@@ -83,11 +92,11 @@ def fizzBuzz():
                     print(Fore.RED + turnData['loose'])
 
                     if turn == "monkey":
-                        del turns[index]
+                        del playerLeft[0]
                         numberMonkeys -= 1
 
                     elif turn == "boss":
-                        del turns[index]
+                        del playerLeft[-2]
 
                     else:
                         playerIsWrong = True
@@ -103,11 +112,11 @@ def fizzBuzz():
                     print(Fore.RED + turnData['loose'])
 
                     if turn == "monkey":
-                        del turns[index]
+                        del playerLeft[0]
                         numberMonkeys -= 1
 
                     elif turn == "boss":
-                        del turns[index]
+                        del playerLeft[-2]
 
                     else:
                         playerIsWrong = True
@@ -115,6 +124,7 @@ def fizzBuzz():
 
             print(f"Il reste {numberMonkeys} singes")
             n += 1
+        turns = copy.deepcopy(playerLeft)
 
     if numberMonkeys == 0:
         print(Fore.GREEN + 'Tous les singes ont été éliminé ! \n Tu as gagné !')
