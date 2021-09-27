@@ -1,0 +1,24 @@
+{
+    "monkeys": {
+        "number": 9,
+        "minChance": 10,
+        "maxChance": 70,
+        "winFizz": "Fizz",
+        "winBuzz": "Buzz",
+        "loose": "Le singe ne sais pas quoi dire ! Il a perdu"
+    },
+    "boss": {
+        "minChance": 50,
+        "maxChance": 80,
+        "winFizz": "Fizz",
+        "winBuzz": "Buzz",
+        "loose": "Oh non, le grand chef s'est trompé ! Il a perdu"
+    },
+    "player": {
+        "minChance": 80,
+        "maxChance": 90,
+        "winFizz": "Fizz",
+        "winBuzz": "Buzz",
+        "loose": "Dommage pour toi ! Tu as perdu"
+    }
+}
