@@ -9,7 +9,7 @@ from map.displayMap import displayMap
 def map():
     colorama.init(autoreset=True)
 
-    def clear(): return system('clear')
+    def cls(): return system('cls')
 
     # Récupérer la map et les coordonnées
     with open('data/map.json') as file:
@@ -18,7 +18,30 @@ def map():
     with open('data/coordinates.json') as file:
         coord = json.load(file)
 
-    displayMap(data, coord)
+    playerX = coord['player']["coords"][0]
+    playerY = coord['player']["coords"][1]
 
     print('')
-    userInput = input("Où souhaites-tu aller (nord, sud, est, oust): \n")
+    keepGoing = True
+
+    west = ['OUEST', 'WEST', 'W', 'O']
+    north = ['NORTH', 'NORD', 'N']
+    south = ['SOUTH', 'SUD', 'S']
+    east = ['EAST', 'EST', 'E']
+    stop = ['STOP', 'EXIT', 'CLS']
+
+    while keepGoing:
+
+        cls()
+        displayMap(data, coord, playerX, playerY)
+        userInput = input("Où souhaites-tu aller (nord, sud, est, oust): \n")
+        if userInput.upper() in north:
+            playerY -= 1
+        elif userInput.upper() in south:
+            playerY += 1
+        elif userInput.upper() in east:
+            playerX += 1
+        elif userInput.upper() in west:
+            playerX -= 1
+        elif userInput.upper() in stop:
+            keepGoing = False

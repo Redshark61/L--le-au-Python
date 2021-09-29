@@ -13,7 +13,7 @@
     },
     "player": {
         "coords": [41, 22],
-        "mark": "\u02c5"
+        "mark": "\u25cf"
     },
     "house": {
         "coords": [24, 12],
