@@ -32,7 +32,7 @@ def map():
 
     while keepGoing:
 
-        cls()
+        # cls()
         displayMap(data, coord, playerX, playerY)
         userInput = input("Où souhaites-tu aller (nord, sud, est, oust): \n")
         if userInput.upper() in north:

@@ -1,17 +1,32 @@
 import colorama
 from colorama import Fore, Back, Style
-import sys
-
-
-def displayPlayer(x, y, text):
-    sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (x, y, text))
-    sys.stdout.flush()
+import os
+import json
 
 
 def displayMap(data, coord, playerX, playerY):
+
+    os.system('')
+
+    colors = {
+        "brightGray": "\033[100m",
+        "brightCyan": "\033[106m",
+        "darkBlue": "\033[44m",
+        "brightYellow": "\033[103m",
+        "brightGreen": "\033[102m",
+        "darkGray": "\033[42m",
+        "red": "\033[91m",
+        "endFor": "\033[39m",
+        "endBack": "\033[49m"
+    }
+
+    # On remonte le curseur de la taille de la map + la où est le curseur acutellement
+    print((len(data)+3) * "\033[A", end="")
+
     row = 0
+    map = ''
     # Pour chaque ligne dans le json de la carte
-    for index, i in enumerate(data):
+    for i in data:
         col = 0
 
         # Pour chaque case dans le json de la carte
@@ -25,30 +40,28 @@ def displayMap(data, coord, playerX, playerY):
                 if item != "player":
                     if row == coord[item]['coords'][1] and col == coord[item]['coords'][0]:
                         symbol = coord[item]['mark'] + '\u0020'
-                        char = Fore.RED+symbol
+                        char = colors['red']+symbol+colors['endFor']
                 else:
                     if row == playerY and col == playerX:
                         symbol = coord["player"]['mark'] + '\u0020'
-                        char = Fore.RED+symbol
+                        char = colors['red']+symbol+colors['endFor']
 
             # En fonction du code couleur de la case, on change le background
             if j == 1:
-                print(Back.LIGHTBLACK_EX + char, end="", flush=True)
+                map += colors["brightGray"] + char + colors["endBack"]
             elif j == 2:
-                print(Back.LIGHTBLUE_EX + char, end="", flush=True)
+                map += colors['brightCyan'] + char + colors["endBack"]
             elif j == 3:
-                print(Back.CYAN + char, end="", flush=True)
+                map += colors['darkBlue'] + char + colors["endBack"]
             elif j == 4:
-                print(Back.YELLOW + char, end="", flush=True)
+                map += colors['brightYellow'] + char + colors["endBack"]
             elif j == 5:
-                print(Back.GREEN + char, end="", flush=True)
+                map += colors['brightGreen'] + char + colors["endBack"]
             elif j == 6:
-                print(Back.LIGHTGREEN_EX + char, end="", flush=True)
+                map += colors['darkGray'] + char + colors["endBack"]
 
             col += 1
 
         row += 1
-        if index > len(data) - 1:
-            print('', end='\r')
-        else:
-            print('\r')
+        map += '\n'
+    print(map)
