@@ -4,7 +4,6 @@ from random import randint
 def number():
     answer = ''
     rand = randint(0, 100)
-    print(rand)
 
     while(answer != rand):
         answer = int(input('Quel est mon nombre ? \n'))
