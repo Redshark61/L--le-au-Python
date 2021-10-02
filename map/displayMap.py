@@ -23,13 +23,17 @@ def displayMap(data, coord, playerX, playerY):
             # Si le coordonnée actuel est une coord de quête, alors on met une croix et pas un espace
             for item in coord:
 
+                string = coord[item]['mark']
+                byteArray = bytearray.fromhex(string)
+                mark = byteArray.decode()
+                symbol = mark
+
                 if item != "player":
                     if row == coord[item]['coords'][1] and col == coord[item]['coords'][0]:
-                        symbol = coord[item]['mark'] + '\u0020'
+                        # symbol = coord[item]['mark']
                         char = color.setForeground('red', symbol)
                 else:
                     if row == playerY and col == playerX:
-                        symbol = coord["player"]['mark'] + '\u0020'
                         char = color.setForeground('red', symbol)
 
             # En fonction du code couleur de la case, on change le background

@@ -1,22 +1,18 @@
 {
     "quest1": {
         "coords": [10, 10],
-        "mark": "\u00d7"
+        "mark": "e29d8c"
     },
     "quest2": {
         "coords": [35, 15],
-        "mark": "\u00d7"
+        "mark": "e29d8c"
     },
     "quest3": {
         "coords": [22, 4],
-        "mark": "\u00d7"
+        "mark": "e29d8c"
     },
     "player": {
         "coords": [41, 22],
-        "mark": "\u25cf"
-    },
-    "house": {
-        "coords": [24, 12],
-        "mark": "\u00d7"
+        "mark": "f09fa4a0"
     }
 }
