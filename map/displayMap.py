@@ -1,24 +1,10 @@
-import colorama
-from colorama import Fore, Back, Style
-import os
-import json
+from functions.Colors import Colors
 
 
 def displayMap(data, coord, playerX, playerY):
 
-    os.system('')
-
-    colors = {
-        "brightGray": "\033[100m",
-        "brightCyan": "\033[106m",
-        "darkBlue": "\033[44m",
-        "brightYellow": "\033[103m",
-        "brightGreen": "\033[102m",
-        "darkGray": "\033[42m",
-        "red": "\033[91m",
-        "endFor": "\033[39m",
-        "endBack": "\033[49m"
-    }
+    color = Colors
+    color.init()
 
     # On remonte le curseur de la taille de la map + la où est le curseur acutellement
     print((len(data)+3) * "\033[A", end="")
@@ -40,25 +26,25 @@ def displayMap(data, coord, playerX, playerY):
                 if item != "player":
                     if row == coord[item]['coords'][1] and col == coord[item]['coords'][0]:
                         symbol = coord[item]['mark'] + '\u0020'
-                        char = colors['red']+symbol+colors['endFor']
+                        char = color.setForeground('red', symbol)
                 else:
                     if row == playerY and col == playerX:
                         symbol = coord["player"]['mark'] + '\u0020'
-                        char = colors['red']+symbol+colors['endFor']
+                        char = color.setForeground('red', symbol)
 
             # En fonction du code couleur de la case, on change le background
             if j == 1:
-                map += colors["brightGray"] + char + colors["endBack"]
+                map += color.setBackground("brightGray", char)
             elif j == 2:
-                map += colors['brightCyan'] + char + colors["endBack"]
+                map += color.setBackground('brightCyan', char)
             elif j == 3:
-                map += colors['darkBlue'] + char + colors["endBack"]
+                map += color.setBackground('darkBlue', char)
             elif j == 4:
-                map += colors['brightYellow'] + char + colors["endBack"]
+                map += color.setBackground('brightYellow', char)
             elif j == 5:
-                map += colors['brightGreen'] + char + colors["endBack"]
+                map += color.setBackground('brightGreen', char)
             elif j == 6:
-                map += colors['darkGray'] + char + colors["endBack"]
+                map += color.setBackground('darkGray', char)
 
             col += 1
 

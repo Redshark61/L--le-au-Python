@@ -1,15 +1,16 @@
 import json
 from random import randint
 from fizz_buzz.setTurn import setTurn
-import colorama
-from colorama import Fore, Back, Style
 import os.path
 import copy
-
-colorama.init(autoreset=True)
+from functions.Colors import Colors
 
 
 def fizzBuzz():
+
+    color = Colors
+    color.init()
+
     if os.path.isfile("mods/fizzBuzz.json"):
         with open('mods/fizzBuzz.json') as file:
             data = json.load(file)
@@ -47,11 +48,10 @@ def fizzBuzz():
 
             if n % 3 == 0 and n % 5 == 0:
                 if randint(0, 100) < chance:
-                    print(Fore.LIGHTCYAN_EX +
-                          turnData["winFizz"] + turnData["winBuzz"])
+                    print(color.setForeground('brightCyan', turnData["winFizz"] + turnData["winBuzz"]))
 
                 else:
-                    print(Fore.RED + turnData['loose'])
+                    print(color.setForeground('red', turnData['loose']))
 
                     if turn == "monkey":
                         del playerLeft[0]
@@ -67,10 +67,10 @@ def fizzBuzz():
             elif n % 3 == 0:
 
                 if randint(0, 100) < chance:
-                    print(Fore.LIGHTCYAN_EX + turnData["winFizz"])
+                    print(color.setForeground('brightCyan', turnData["winFizz"]))
 
                 else:
-                    print(Fore.RED + turnData['loose'])
+                    print(color.setForeground('red', turnData['loose']))
 
                     if turn == "monkey":
                         del playerLeft[0]
@@ -86,10 +86,9 @@ def fizzBuzz():
             elif n % 5 == 0:
 
                 if randint(0, 100) < chance:
-                    print(Fore.LIGHTCYAN_EX + turnData["winBuzz"])
-
+                    print(color.setForeground('brightCyan', turnData["winBuzz"]))
                 else:
-                    print(Fore.RED + turnData['loose'])
+                    print(color.setForeground('red', turnData['loose']))
 
                     if turn == "monkey":
                         del playerLeft[0]
@@ -105,11 +104,10 @@ def fizzBuzz():
             else:
 
                 if randint(0, 100) < chance:
-                    print(Fore.LIGHTYELLOW_EX +
-                          turnData['play'] + str(n) + "\n")
+                    print(color.setForeground('brightYellow', turnData['play'] + str(n) + "\n"))
 
                 else:
-                    print(Fore.RED + turnData['loose'])
+                    print(color.setForeground('red', turnData['loose']))
 
                     if turn == "monkey":
                         del playerLeft[0]
@@ -127,6 +125,6 @@ def fizzBuzz():
         turns = copy.deepcopy(playerLeft)
 
     if numberMonkeys == 0:
-        print(Fore.GREEN + 'Tous les singes ont été éliminé ! \n Tu as gagné !')
+        print(color.setForeground('brightGreen', 'Tous les singes ont été éliminé ! \nTu as gagné !'))
     else:
-        print(Fore.RED + "Tu as perdu")
+        print(color.setForeground('red', "Tu as perdu !"))

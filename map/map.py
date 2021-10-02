@@ -1,15 +1,14 @@
 #coding: utf-8
 import json
-import colorama
-from colorama import Fore, Back, Style
 from os import system
 from map.displayMap import displayMap
 
 
 def map():
-    colorama.init(autoreset=True)
 
     def cls(): return system('cls')
+
+    cls()
 
     # Récupérer la map et les coordonnées
     with open('data/map.json') as file:
