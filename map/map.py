@@ -1,7 +1,9 @@
-#coding: utf-8
+# coding: utf-8
+from functions.Clear import clear
 import json
 from os import system
 from map.displayMap import displayMap
+import msvcrt
 
 
 def map():
@@ -21,26 +23,22 @@ def map():
     playerY = coord['player']["coords"][1]
 
     print('')
-    keepGoing = True
+    char = ' '
 
-    west = ['OUEST', 'WEST', 'W', 'O']
-    north = ['NORTH', 'NORD', 'N']
-    south = ['SOUTH', 'SUD', 'S']
-    east = ['EAST', 'EST', 'E']
-    stop = ['STOP', 'EXIT', 'CLS']
+    while ord(char) != 113:
 
-    while keepGoing:
-
-        # cls()
         displayMap(data, coord, playerX, playerY)
-        userInput = input("Où souhaites-tu aller (nord, sud, est, oust): \n")
-        if userInput.upper() in north:
+
+        if msvcrt.kbhit:
+            char = msvcrt.getch()
+
+        if ord(char) == 72:
             playerY -= 1
-        elif userInput.upper() in south:
+        elif ord(char) == 80:
             playerY += 1
-        elif userInput.upper() in east:
-            playerX += 1
-        elif userInput.upper() in west:
+        elif ord(char) == 75:
             playerX -= 1
-        elif userInput.upper() in stop:
-            keepGoing = False
+        elif ord(char) == 77:
+            playerX += 1
+
+    clear()
