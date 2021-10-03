@@ -25,11 +25,11 @@ class Colors:
     colorBgEnd = "\033[49m"
     colorFgEnd = "\033[39m"
 
-    def init():
+    def init() -> None:
         os.system('')
 
-    def setBackground(color, text):
+    def setBackground(color: str, text: str) -> str:
         return Colors.colorsBg[color] + text + Colors.colorBgEnd
 
-    def setForeground(color, text):
+    def setForeground(color: str, text: str) -> str:
         return Colors.colorsFg[color] + text + Colors.colorFgEnd

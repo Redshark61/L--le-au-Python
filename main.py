@@ -4,7 +4,7 @@ from map.map import map
 from functions.Clear import clear
 
 
-def main():
+def main() -> None:
     print("Que veux-tu faire ?")
     print("1 - FizzBuzz")
     print("2 - Devine le nombre")

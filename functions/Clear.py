@@ -1,5 +1,5 @@
 import os
 
 
-def clear():
+def clear() -> None:
     os.system('cls')

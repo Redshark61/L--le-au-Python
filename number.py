@@ -1,7 +1,7 @@
 from random import randint
 
 
-def number():
+def number() -> None:
     answer = ''
     rand = randint(0, 100)
 

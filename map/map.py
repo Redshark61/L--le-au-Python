@@ -6,39 +6,43 @@ from map.displayMap import displayMap
 import msvcrt
 
 
-def map():
+def map() -> None:
 
-    def cls(): return system('cls')
+    clear()
 
-    cls()
-
-    # Récupérer la map et les coordonnées
+    # Récupérer la map
     with open('data/map.json') as file:
         data = json.load(file)
 
+    # Récupérer les coordonnés
     with open('data/coordinates.json') as file:
         coord = json.load(file)
 
+    # Coordonnés du joueur
     playerX = coord['player']["coords"][0]
     playerY = coord['player']["coords"][1]
 
     print('')
     char = ' '
 
+    # Tant que le code de la touche pressé n'est pas 113 (q)
     while ord(char) != 113:
 
+        # Afficher la carte
         displayMap(data, coord, playerX, playerY)
 
+        # Si une touche du clavier est pressé
         if msvcrt.kbhit:
+            # Récupérer cett touche
             char = msvcrt.getch()
 
-        if ord(char) == 72:
+        if ord(char) == 72:  # Up
             playerY -= 1
-        elif ord(char) == 80:
+        elif ord(char) == 80:  # Down
             playerY += 1
-        elif ord(char) == 75:
+        elif ord(char) == 75:  # Left
             playerX -= 1
-        elif ord(char) == 77:
+        elif ord(char) == 77:  # Right
             playerX += 1
 
     clear()

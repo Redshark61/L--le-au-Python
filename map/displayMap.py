@@ -1,7 +1,7 @@
 from functions.Colors import Colors
 
 
-def displayMap(data, coord, playerX, playerY):
+def displayMap(data: dict, coord: dict, playerX: int, playerY: int) -> None:
 
     color = Colors
     color.init()
@@ -20,18 +20,20 @@ def displayMap(data, coord, playerX, playerY):
             # Le caractère de base est 2 espaces
             char = '\u0020\u0020'
 
-            # Si le coordonnée actuel est une coord de quête, alors on met une croix et pas un espace
+            # Pour chaque position dans le json de coordonnés
             for item in coord:
 
+                # Toutes les icônes doivent être converties de hex en string lisible par le terminal
                 string = coord[item]['mark']
                 byteArray = bytearray.fromhex(string)
                 mark = byteArray.decode()
                 symbol = mark
 
+                # Si ce n'est pas un joueur, on vérifie si la boucle affiche les coordonnés d'une position du json
                 if item != "player":
                     if row == coord[item]['coords'][1] and col == coord[item]['coords'][0]:
-                        # symbol = coord[item]['mark']
                         char = color.setForeground('red', symbol)
+                # Si c'est un joueur, on vérifie si la boucle affiche les coords du joueur
                 else:
                     if row == playerY and col == playerX:
                         char = color.setForeground('red', symbol)
