@@ -24,12 +24,12 @@ def map() -> None:
 
     print('')
     char = ' '
+    questDone = []
 
     # Tant que le code de la touche pressé n'est pas 113 (q)
     while ord(char) != 113:
 
         # Afficher la carte
-        displayMap(data, coord, playerX, playerY)
 
         # Si une touche du clavier est pressé
         if msvcrt.kbhit:
@@ -45,4 +45,5 @@ def map() -> None:
         elif ord(char) == 77:  # Right
             playerX += 1
 
+        questDone = displayMap(data, coord, playerX, playerY, questDone)
     clear()

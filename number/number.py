@@ -1,10 +1,12 @@
 from random import randint
-from .. import functions
+from functions.Clear import clear
+import time
 
 
-def number() -> None:
+def main() -> None:
     answer = ''
     rand = randint(0, 100)
+    clear()
 
     while(answer != rand):
         answer = int(input('Quel est mon nombre ? \n'))
@@ -15,8 +17,3 @@ def number() -> None:
             print("Mon nombre est plus petit")
         else:
             print("Tu as gagné !")
-
-
-if __name__ == '__main__':
-    functions.Clear.clear()
-    number()

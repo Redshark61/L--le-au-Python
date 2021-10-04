@@ -1,9 +1,9 @@
 from functions.Colors import Colors
 from functions.Clear import clear
-import os
+import time
 
 
-def displayMap(data: dict, coord: dict, playerX: int, playerY: int) -> None:
+def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: list) -> None:
 
     color = Colors
     color.init()
@@ -40,12 +40,12 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int) -> None:
                     if row == playerY and col == playerX:
                         char = color.setForeground('red', symbol)
 
-                if (playerY == coord[item]['coords'][1] and playerX == coord[item]['coords'][0]) and item != 'player':
-                    currentDir = os.path.dirname(__file__)
-                    relativePath = coord[item]['file']
-                    absolutePath = os.path.join(currentDir, relativePath)
-                    os.system("py "+absolutePath)
-                    return
+            for quest in questDone:
+                if row == quest[1] and col == quest[0]:
+                    string = "e29c85"
+                    byteArray = bytearray.fromhex(string)
+                    mark = byteArray.decode()
+                    char = mark
 
             # En fonction du code couleur de la case, on change le background
             if j == 1:
@@ -66,3 +66,22 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int) -> None:
         row += 1
         map += '\n'
     print(map)
+
+    for item in coord:
+        if (playerY == coord[item]['coords'][1] and playerX == coord[item]['coords'][0]) and item != 'player':
+            if len(questDone) == 0:
+                questDone.append(coord[item]['coords'])
+                module = __import__(f"{coord[item]['folder']}.{coord[item]['mainFile']}", fromlist=[None])
+                module.main()
+                return questDone
+            else:
+                for quest in questDone:
+                    if (playerY != quest[1] and playerX != quest[0]):
+                        continue
+                    else:
+                        return questDone
+                questDone.append(coord[item]['coords'])
+                module = __import__(f"{coord[item]['folder']}.{coord[item]['mainFile']}", fromlist=[None])
+                module.main()
+                return questDone
+    return questDone

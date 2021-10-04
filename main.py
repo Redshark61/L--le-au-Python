@@ -1,5 +1,3 @@
-from fizz_buzz.fizz_buzz import fizzBuzz
-from number import number
 from map.map import map
 from functions.Clear import clear
 

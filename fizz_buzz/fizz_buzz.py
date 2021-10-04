@@ -5,6 +5,7 @@ import os.path
 import copy
 from functions.Colors import Colors
 from functions.Clear import clear
+import time
 
 
 def deletePlayer(turn: str, playerLeft: list, numberMonkeys: int, isPlayerWrong: bool) -> tuple[bool, list, int]:
@@ -24,11 +25,12 @@ def deletePlayer(turn: str, playerLeft: list, numberMonkeys: int, isPlayerWrong:
     return isPlayerWrong, playerLeft, numberMonkeys
 
 
-def fizzBuzz() -> None:
-
+def main() -> None:
     # Permettre l'affichage des couleurs
     color = Colors
     color.init()
+    color.colorBgEnd
+    clear()
 
     # Vérifier la présence d'un mod
     if os.path.isfile("mods/fizzBuzz.json"):
@@ -69,7 +71,8 @@ def fizzBuzz() -> None:
     while numberMonkeys > 0 and not isPlayerWrong:
 
         for index, chance in enumerate(turns):
-
+            time.sleep(0.4)
+            print("\033[40m")
             turnData, turn = setTurn(index, data, turns)
 
             # Si c'est FizzBuzz
@@ -120,8 +123,3 @@ def fizzBuzz() -> None:
         print(color.setForeground('brightGreen', 'Tous les singes ont été éliminé ! \nTu as gagné !'))
     else:
         print(color.setForeground('red', "Tu as perdu !"))
-
-
-if __name__ == '__main__':
-    clear()
-    fizzBuzz()

@@ -2,12 +2,14 @@
     "fizzBuzz": {
         "coords": [10, 10],
         "mark": "e29d8c",
-        "file": "../fizz_buzz/fizz_buzz.py"
+        "folder": "fizz_buzz",
+        "mainFile": "fizz_buzz"
     },
     "number": {
         "coords": [35, 15],
         "mark": "e29d8c",
-        "file": "../number/number.py"
+        "folder": "number",
+        "mainFile": "number"
     },
     "player": {
         "coords": [41, 22],
