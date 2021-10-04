@@ -1,15 +1,13 @@
 {
-    "quest1": {
+    "fizzBuzz": {
         "coords": [10, 10],
-        "mark": "e29d8c"
+        "mark": "e29d8c",
+        "file": "../fizz_buzz/fizz_buzz.py"
     },
-    "quest2": {
+    "number": {
         "coords": [35, 15],
-        "mark": "e29d8c"
-    },
-    "quest3": {
-        "coords": [22, 4],
-        "mark": "e29d8c"
+        "mark": "e29d8c",
+        "file": "../number/number.py"
     },
     "player": {
         "coords": [41, 22],

@@ -5,23 +5,8 @@ from functions.Clear import clear
 
 
 def main() -> None:
-    print("Que veux-tu faire ?")
-    print("1 - FizzBuzz")
-    print("2 - Devine le nombre")
-    print("3 - Afficher la carte")
-    print("q - Quitter")
-    entry = input("")
-    clear()
 
-    if entry == "1":
-        fizzBuzz()
-    elif entry == "2":
-        number()
-    elif entry == "3":
-        map()
-    elif entry.upper() == "Q":
-        return
-    main()
+    map()
 
 
 if __name__ == "__main__":

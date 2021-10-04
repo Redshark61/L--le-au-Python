@@ -1,4 +1,6 @@
 from functions.Colors import Colors
+from functions.Clear import clear
+import os
 
 
 def displayMap(data: dict, coord: dict, playerX: int, playerY: int) -> None:
@@ -37,6 +39,13 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int) -> None:
                 else:
                     if row == playerY and col == playerX:
                         char = color.setForeground('red', symbol)
+
+                if (playerY == coord[item]['coords'][1] and playerX == coord[item]['coords'][0]) and item != 'player':
+                    currentDir = os.path.dirname(__file__)
+                    relativePath = coord[item]['file']
+                    absolutePath = os.path.join(currentDir, relativePath)
+                    os.system("py "+absolutePath)
+                    return
 
             # En fonction du code couleur de la case, on change le background
             if j == 1:

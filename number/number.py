@@ -1,4 +1,5 @@
 from random import randint
+from .. import functions
 
 
 def number() -> None:
@@ -14,3 +15,8 @@ def number() -> None:
             print("Mon nombre est plus petit")
         else:
             print("Tu as gagné !")
+
+
+if __name__ == '__main__':
+    functions.Clear.clear()
+    number()

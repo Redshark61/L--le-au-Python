@@ -4,6 +4,7 @@ from fizz_buzz.setTurn import setTurn
 import os.path
 import copy
 from functions.Colors import Colors
+from functions.Clear import clear
 
 
 def deletePlayer(turn: str, playerLeft: list, numberMonkeys: int, isPlayerWrong: bool) -> tuple[bool, list, int]:
@@ -119,3 +120,8 @@ def fizzBuzz() -> None:
         print(color.setForeground('brightGreen', 'Tous les singes ont été éliminé ! \nTu as gagné !'))
     else:
         print(color.setForeground('red', "Tu as perdu !"))
+
+
+if __name__ == '__main__':
+    clear()
+    fizzBuzz()
