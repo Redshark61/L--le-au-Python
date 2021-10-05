@@ -1,6 +1,7 @@
 from functions.Colors import Colors
 from functions.Clear import clear
 import time
+from functions.Position import *
 
 
 def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: list) -> None:

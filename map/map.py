@@ -4,6 +4,7 @@ import json
 from os import system
 from map.displayMap import displayMap
 import msvcrt
+from functions.Position import position, printBox
 
 
 def map() -> None:
@@ -30,6 +31,11 @@ def map() -> None:
     while ord(char) != 113:
 
         # Afficher la carte
+        questDone = displayMap(data, coord, playerX, playerY, questDone)
+
+        printBox(103, 1, 50, 38)
+        printBox(1, 30, 101, 9)
+        print(position(105, 2, "C'est la carte, c'est la carte..."))
 
         # Si une touche du clavier est pressé
         if msvcrt.kbhit:
@@ -45,5 +51,4 @@ def map() -> None:
         elif ord(char) == 77:  # Right
             playerX += 1
 
-        questDone = displayMap(data, coord, playerX, playerY, questDone)
     clear()

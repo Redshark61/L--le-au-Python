@@ -1,19 +1,23 @@
 from random import randint
-from functions.Clear import clear
+from functions.Position import *
 import time
 
 
 def main() -> None:
     answer = ''
     rand = randint(0, 100)
-    clear()
 
+    line = -2
     while(answer != rand):
-        answer = int(input('Quel est mon nombre ? \n'))
+        line = clearBox(line, 2)
+        print(position(x=105, y=3, text='Quel est mon nombre ?'))
+        answer = int(input(position(x=105, y=4+line, text='')))
 
         if(answer < rand):
-            print("Mon nombre est plus grand")
+            print(position(x=105, y=5+line, text="Mon nombre est plus grand"))
         elif(answer > rand):
-            print("Mon nombre est plus petit")
+            print(position(x=105, y=5+line, text="Mon nombre est plus petit"))
         else:
-            print("Tu as gagné !")
+            print(position(x=105, y=5+line, text="Tu as gagné !"))
+            time.sleep(2)
+            clearBox(30, 3)
