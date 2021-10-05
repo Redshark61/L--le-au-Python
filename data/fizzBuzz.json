@@ -3,25 +3,25 @@
         "number": 9,
         "minChance": 10,
         "maxChance": 70,
-        "winFizz": "Fizz\n",
-        "winBuzz": "Buzz\n",
-        "loose": "Le singe ne sais pas quoi dire ! Il a perdu\n",
+        "winFizz": "Fizz",
+        "winBuzz": "Buzz",
+        "loose": "Le singe ne sais pas quoi dire ! Il a perdu",
         "play": "Le singe dit : "
     },
     "boss": {
         "minChance": 50,
         "maxChance": 80,
-        "winFizz": "Fizz\n",
-        "winBuzz": "Buzz\n",
-        "loose": "Oh non, le grand chef s'est trompé ! Il a perdu\n",
+        "winFizz": "Fizz",
+        "winBuzz": "Buzz",
+        "loose": "Oh non, le grand chef s'est tromp\u00e9 ! Il a perdu",
         "play": "Le chef dit : "
     },
     "player": {
         "minChance": 80,
         "maxChance": 90,
-        "winFizz": "Fizz\n",
-        "winBuzz": "Buzz\n",
-        "loose": "Dommage pour toi ! Tu as perdu\n",
+        "winFizz": "Fizz",
+        "winBuzz": "Buzz",
+        "loose": "Dommage pour toi ! Tu as perdu",
         "play": "Tu dis : "
     }
 }
