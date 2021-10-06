@@ -25,13 +25,16 @@ def map() -> None:
 
     print('')
     char = ' '
+    questToDo = []
     questDone = []
-
+    for quest in coord:
+        if quest != 'player':
+            questToDo.append({quest: coord[quest]['coords']})
     # Tant que le code de la touche pressé n'est pas 113 (q)
     while ord(char) != 113:
 
         # Afficher la carte
-        questDone, playerX, playerY = displayMap(data, coord, playerX, playerY, questDone)
+        questToDo, playerX = displayMap(data, coord, playerX, playerY, questToDo, questDone)
 
         printBox(103, 1, 50, 38)
         printBox(1, 30, 101, 9)

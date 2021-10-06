@@ -1,10 +1,17 @@
 from functions.Colors import Colors
-from functions.Clear import clear
-import time
 from functions.Position import *
+from map.startQuest import startQuest
+from map.emojiDecoder import emojiDecoder
+import time
 
 
-def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: list) -> None:
+def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list) -> None:
+    """
+    Display the map using the map.json. Each number is for a particular color. By default, the characters are just 2 spaces
+    but it can be emoji.
+
+    It also stores the different quest already done, and handle if it needs to be done or not.
+    """
 
     color = Colors
     color.init()
@@ -14,6 +21,7 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: l
 
     row = 0
     map = ''
+    isWon = False
     # Pour chaque ligne dans le json de la carte
     for i in data:
         col = 0
@@ -27,10 +35,7 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: l
             for item in coord:
 
                 # Toutes les icônes doivent être converties de hex en string lisible par le terminal
-                string = coord[item]['mark']
-                byteArray = bytearray.fromhex(string)
-                mark = byteArray.decode()
-                symbol = mark
+                symbol = emojiDecoder(coord[item]['mark'])
 
                 # Si ce n'est pas un joueur, on vérifie si la boucle affiche les coordonnés d'une position du json
                 if item != "player":
@@ -41,12 +46,17 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: l
                     if row == playerY and col == playerX:
                         char = color.setForeground('red', symbol)
 
-            for quest in questDone:
-                if row == quest[1] and col == quest[0]:
-                    string = "e29c85"
-                    byteArray = bytearray.fromhex(string)
-                    mark = byteArray.decode()
-                    char = mark
+            for index, quest in enumerate(questToDo):
+                quest = list(quest.keys())[0]
+                if (playerY == questToDo[index][quest][1] and playerX == questToDo[index][quest][0]):
+                    questToDo, playerX = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
+                    return questToDo, playerX
+
+            # Si les coordonnés actuel sont une quête, mettre une coche verte si elle est faite
+            if len(questDone) > 0:
+                for quest in questDone:
+                    if row == quest[1] and col == quest[0]:
+                        char = emojiDecoder("e29c85")
 
             # En fonction du code couleur de la case, on change le background
             if j == 1:
@@ -68,32 +78,4 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: l
         map += '\n'
     print(map)
 
-    for item in coord:
-        if (playerY == coord[item]['coords'][1] and playerX == coord[item]['coords'][0]) and item != 'player':
-            if len(questDone) == 0:
-                module = __import__(f"{coord[item]['folder']}.{coord[item]['mainFile']}", fromlist=[None])
-                isWon = module.main()
-                if isWon:
-                    questDone.append(coord[item]['coords'])
-                    time.sleep(2)
-                    clearBox(30, 3)
-
-                    return questDone, playerX+1, playerY+1
-                else:
-                    return questDone, playerX+1, playerY+1
-            else:
-                for quest in questDone:
-                    if (playerY != quest[1] and playerX != quest[0]):
-                        continue
-                    else:
-                        return questDone, playerX+1, playerY+1
-                module = __import__(f"{coord[item]['folder']}.{coord[item]['mainFile']}", fromlist=[None])
-                isWon = module.main()
-                if isWon:
-                    questDone.append(coord[item]['coords'])
-                    time.sleep(2)
-                    clearBox(30, 3)
-                    return questDone, playerX+1, playerY+1
-                else:
-                    return questDone, playerX+1, playerY+1
-    return questDone, playerX, playerY
+    return questToDo, playerX
