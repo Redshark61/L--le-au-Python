@@ -1,13 +1,14 @@
 #coding: utf-8
 import json
+import os.path
 from random import randint
 from fizz_buzz.setTurn import setTurn
-import os.path
 import copy
 from functions.Colors import Colors
 from functions.Position import *
 from fizz_buzz.deletePlayer import deletePlayer
 import time
+from functions.checkLength import checkLength
 
 
 def main() -> None:
@@ -16,6 +17,14 @@ def main() -> None:
     color.init()
     color.colorBgEnd
 
+    fileName = os.path.basename(__file__)[:-3]
+    text = checkLength(fileName)
+
+    for index, line in enumerate(text):
+        print(position(105, 4+index+1, line), flush=True)
+        time.sleep(0.2)
+
+    clearBox()
     # Vérifier la présence d'un mod
     if os.path.isfile("mods/fizzBuzz.json"):
         with open('mods/fizzBuzz.json') as file:
