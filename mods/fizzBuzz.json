@@ -1,7 +1,7 @@
 {
     "monkeys": {
         "number": 9,
-        "minChance": 10,
+        "minChance": 50,
         "maxChance": 70,
         "winFizz": "Fizz",
         "winBuzz": "Buzz",
@@ -17,7 +17,7 @@
         "play": "Le chef dit : "
     },
     "player": {
-        "minChance": 40,
+        "minChance": 10,
         "maxChance": 50,
         "winFizz": "Fizz",
         "winBuzz": "Buzz",
