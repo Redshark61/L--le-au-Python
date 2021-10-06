@@ -1,9 +1,20 @@
+import os
 from random import randint
 import time
 from functions.Position import *
+from functions.checkLength import checkLength
 
 
 def main() -> None:
+
+    fileName = os.path.basename(__file__)[:-3]
+    text = checkLength(fileName)
+    for index, line in enumerate(text):
+        print(position(105, 4+index+1, line), flush=True)
+        time.sleep(0.2)
+
+    clearBox()
+
     print("\x1b[?25h")
     for i in range(3):
         answer = ''

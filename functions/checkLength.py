@@ -11,7 +11,6 @@ def checkLength(fileName: str) -> list[str]:
 
     with open('data/cinematic.json', encoding='utf-8') as f:
         allCinematics = json.load(f)
-
     cinematic = ''.join(allCinematics[fileName])
 
     separatedCinematic = ['']
