@@ -71,18 +71,29 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questDone: l
     for item in coord:
         if (playerY == coord[item]['coords'][1] and playerX == coord[item]['coords'][0]) and item != 'player':
             if len(questDone) == 0:
-                questDone.append(coord[item]['coords'])
                 module = __import__(f"{coord[item]['folder']}.{coord[item]['mainFile']}", fromlist=[None])
-                module.main()
-                return questDone
+                isWon = module.main()
+                if isWon:
+                    questDone.append(coord[item]['coords'])
+                    time.sleep(2)
+                    clearBox(30, 3)
+
+                    return questDone, playerX+1, playerY+1
+                else:
+                    return questDone, playerX+1, playerY+1
             else:
                 for quest in questDone:
                     if (playerY != quest[1] and playerX != quest[0]):
                         continue
                     else:
-                        return questDone
-                questDone.append(coord[item]['coords'])
+                        return questDone, playerX+1, playerY+1
                 module = __import__(f"{coord[item]['folder']}.{coord[item]['mainFile']}", fromlist=[None])
-                module.main()
-                return questDone
-    return questDone
+                isWon = module.main()
+                if isWon:
+                    questDone.append(coord[item]['coords'])
+                    time.sleep(2)
+                    clearBox(30, 3)
+                    return questDone, playerX+1, playerY+1
+                else:
+                    return questDone, playerX+1, playerY+1
+    return questDone, playerX, playerY

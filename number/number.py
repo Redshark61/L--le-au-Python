@@ -19,5 +19,4 @@ def main() -> None:
             print(position(x=105, y=5+line, text="Mon nombre est plus petit"))
         else:
             print(position(x=105, y=5+line, text="Tu as gagné !"))
-            time.sleep(2)
-            clearBox(30, 3)
+            return True

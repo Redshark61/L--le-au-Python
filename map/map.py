@@ -31,7 +31,7 @@ def map() -> None:
     while ord(char) != 113:
 
         # Afficher la carte
-        questDone = displayMap(data, coord, playerX, playerY, questDone)
+        questDone, playerX, playerY = displayMap(data, coord, playerX, playerY, questDone)
 
         printBox(103, 1, 50, 38)
         printBox(1, 30, 101, 9)

@@ -113,5 +113,7 @@ def main() -> None:
 
     if numberMonkeys == 0:
         print(position(x=105, y=5+line, text=color.setForeground('brightGreen', 'Tous les singes ont été éliminé ! Tu as gagné !')))
+        return True
     else:
         print(position(x=105, y=5+line, text=color.setForeground('red', "Tu as perdu !")))
+        return False
