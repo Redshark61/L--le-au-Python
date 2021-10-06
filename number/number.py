@@ -1,6 +1,5 @@
 from random import randint
 from functions.Position import *
-import time
 
 
 def main() -> None:
@@ -9,7 +8,7 @@ def main() -> None:
 
     line = -2
     while(answer != rand):
-        line = clearBox(line, 2)
+        line = clearBoxWithLine(line, 2)
         print(position(x=105, y=3, text='Quel est mon nombre ?'))
         answer = int(input(position(x=105, y=4+line, text='')))
 

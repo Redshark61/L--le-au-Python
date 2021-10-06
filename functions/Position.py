@@ -33,7 +33,7 @@ def printBox(xStart: int, YStart: int, width: int, height: int) -> int:
     print(f"\033[{YStart+height};{xStart+width}H\u255d")
 
 
-def clearBox(line, n):
+def clearBoxWithLine(line, n):
     if line+n >= 30:
         for i in range(105, 153):
             for j in range(2, 36):
@@ -41,3 +41,9 @@ def clearBox(line, n):
         return 0
     else:
         return line + n
+
+
+def clearBox():
+    for i in range(105, 153):
+        for j in range(2, 36):
+            print(position(x=i, y=j, text=" "))

@@ -63,7 +63,7 @@ def main() -> None:
         for index, chance in turns.items():
             time.sleep(1)
 
-            line = clearBox(line, 4)
+            line = clearBoxWithLine(line, 4)
             print("\033[40m")
             turnData, turn = setTurn(index, data, line)
 
