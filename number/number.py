@@ -7,6 +7,7 @@ def main() -> None:
     rand = randint(0, 100)
 
     line = -2
+    # Début de la boucle pour deviner le nombre
     while(answer != rand):
         line = clearBoxWithLine(line, 2)
         print(position(x=105, y=3, text='Quel est mon nombre ?'))
