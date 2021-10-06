@@ -27,6 +27,9 @@ def map() -> None:
     char = ' '
     questToDo = []
     questDone = []
+
+    printBox(103, 1, 50, 38)
+    printBox(1, 30, 101, 9)
     for quest in coord:
         if quest != 'player':
             questToDo.append({quest: coord[quest]['coords']})
@@ -34,10 +37,11 @@ def map() -> None:
     while ord(char) != 113:
 
         # Afficher la carte
-        questToDo, playerX = displayMap(data, coord, playerX, playerY, questToDo, questDone)
+        questToDo, playerX, isQuestDone = displayMap(data, coord, playerX, playerY, questToDo, questDone)
+        if isQuestDone:
+            displayMap(data, coord, playerX, playerY, questToDo, questDone)
+            isQuestDone = False
 
-        printBox(103, 1, 50, 38)
-        printBox(1, 30, 101, 9)
         print(position(105, 2, "C'est la carte, c'est la carte..."))
 
         # Si une touche du clavier est pressé
