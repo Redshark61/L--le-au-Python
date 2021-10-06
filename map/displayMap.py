@@ -21,7 +21,6 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
 
     row = 0
     map = ''
-    isWon = False
     # Pour chaque ligne dans le json de la carte
     for i in data:
         col = 0
@@ -30,6 +29,12 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
         for j in i:
             # Le caractère de base est 2 espaces
             char = '\u0020\u0020'
+
+            # Si les coordonnés actuel sont une quête, mettre une coche verte si elle est faite
+            if len(questDone) > 0:
+                for quest in questDone:
+                    if row == quest[1] and col == quest[0]:
+                        char = emojiDecoder("e29c85")
 
             # Pour chaque position dans le json de coordonnés
             for item in coord:
@@ -40,23 +45,11 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                 # Si ce n'est pas un joueur, on vérifie si la boucle affiche les coordonnés d'une position du json
                 if item != "player":
                     if row == coord[item]['coords'][1] and col == coord[item]['coords'][0]:
-                        char = color.setForeground('red', symbol)
+                        char = symbol
                 # Si c'est un joueur, on vérifie si la boucle affiche les coords du joueur
                 else:
                     if row == playerY and col == playerX:
-                        char = color.setForeground('red', symbol)
-
-            for index, quest in enumerate(questToDo):
-                quest = list(quest.keys())[0]
-                if (playerY == questToDo[index][quest][1] and playerX == questToDo[index][quest][0]):
-                    questToDo, playerX = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
-                    return questToDo, playerX
-
-            # Si les coordonnés actuel sont une quête, mettre une coche verte si elle est faite
-            if len(questDone) > 0:
-                for quest in questDone:
-                    if row == quest[1] and col == quest[0]:
-                        char = emojiDecoder("e29c85")
+                        char = symbol
 
             # En fonction du code couleur de la case, on change le background
             if j == 1:
@@ -68,7 +61,10 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
             elif j == 4:
                 map += color.setBackground('brightYellow', char)
             elif j == 5:
-                map += color.setBackground('brightGreen', char)
+                if row == playerY and col == playerX:
+                    map += color.setBackground('darkGray', char)
+                else:
+                    map += color.setBackground('darkGray', emojiDecoder('f09f8cb4'))
             elif j == 6:
                 map += color.setBackground('darkGray', char)
 
@@ -77,5 +73,9 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
         row += 1
         map += '\n'
     print(map)
-
+    for index, quest in enumerate(questToDo):
+        quest = list(quest.keys())[0]
+        if (playerY == questToDo[index][quest][1] and playerX == questToDo[index][quest][0]):
+            questToDo, playerX = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
+            return questToDo, playerX
     return questToDo, playerX

@@ -11,5 +11,5 @@ def startQuest(coord, index, questToDo, playerX, playerY, quest, questDone):
         questToDo.pop(index)
         time.sleep(2)
         clearBox()
-        playerX += 1
+
     return questToDo, playerX+1
