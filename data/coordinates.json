@@ -6,7 +6,7 @@
         "mainFile": "fizz_buzz"
     },
     "number": {
-        "coords": [35, 15],
+        "coords": [38, 13],
         "mark": "e29d8c",
         "folder": "number",
         "mainFile": "number"
