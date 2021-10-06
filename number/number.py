@@ -1,24 +1,33 @@
 from random import randint
+import time
 from functions.Position import *
 
 
 def main() -> None:
     print("\x1b[?25h")
-    answer = ''
-    rand = randint(0, 100)
+    for i in range(3):
+        answer = ''
+        rand = randint(0, 100)
 
-    line = -2
-    while(answer != rand):
-        line = clearBoxWithLine(line, 2)
-        print(position(x=105, y=3, text='Quel est mon nombre ?'))
-        answer = int(input(position(x=105, y=4+line, text='')))
+        line = -3
+        tried = 0
+        while(answer != rand or tried >= 20):
+            line = clearBoxWithLine(line, 3)
+            print(position(x=105, y=3, text='Quel est mon nombre ?'))
+            answer = int(input(position(x=105, y=4+line, text='')))
 
-        if(answer < rand):
-            print(position(x=105, y=5+line, text="Mon nombre est plus grand"))
-        elif(answer > rand):
-            print(position(x=105, y=5+line, text="Mon nombre est plus petit"))
-        else:
-            print(position(x=105, y=5+line, text="Tu as gagné !"))
-            print('\x1b[?25l')
+            if(answer < rand):
+                tried += 1
+                print(position(x=105, y=5+line, text="Mon nombre est plus grand"))
+                print(position(x=105, y=6+line, text=f"Attention, tu n'as plus que {20-tried} essais"))
+            elif(answer > rand):
+                tried += 1
+                print(position(x=105, y=5+line, text="Mon nombre est plus petit"))
+                print(position(x=105, y=6+line, text=f"Attention, tu n'as plus que {20-tried} essais"))
+            else:
+                print(position(x=105, y=6+line, text="Tu as gagné !"))
+                time.sleep(2)
+                clearBox()
+                print('\x1b[?25l')
 
-            return True
+    return True
