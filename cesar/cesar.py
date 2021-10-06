@@ -1,37 +1,36 @@
 import string
+from cesar.encode import encode
+from cesar.decode import decode
+from functions.Position import position, clearBoxWithLine, clearBox
+import time
 
 alphabet = string.ascii_lowercase
 alphabet = list(alphabet)
+name = 'Timothee'
+zen = """Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex."""
 
 
-def encode(sentence, move):
-    newSentence = ''
-    for i in sentence.lower():
-        if i not in alphabet:
-            newSentence += i
-        else:
-            for index, letter2 in enumerate(alphabet):
-                if i == letter2:
-                    place = index + move
-                    newSentence += alphabet[place]
+def main(line=-10):
+    line = clearBoxWithLine(line, 10)
+    print(position(x=105, y=3+line, text="Entre une lettre : "))
+    letter = input(position(x=105, y=4+line, text=''))
+    code = alphabet.index(letter)+1
 
-    return newSentence
+    for index, value in enumerate(zen.split('\n')):
+        coded = encode(value, code, alphabet)
+        print(position(x=105, y=5+index+1+line, text=coded))
 
+    decodedInput = ''
 
-def decode(codedSentence, code):
+    while decodedInput != name.lower():
+        print(position(x=105, y=8+line, text='Rentre un code pour deviner ton nom :'))
+        tryInput = input(position(x=105, y=9+line, text=''))
+        decodedInput = decode(tryInput, code, alphabet)
+        if decodedInput != name.lower():
+            print(position(x=105, y=10+line, text=f'Même pas proche ! {decodedInput}'))
+        line = clearBoxWithLine(line, 3)
 
-    newSentence = ''
-    for i in codedSentence.lower():
-        if i not in alphabet:
-            newSentence += i
-        else:
-            for index, letter2 in enumerate(alphabet):
-                if i == letter2:
-                    place = index - code
-                    newSentence += alphabet[place]
-
-    return newSentence
-
-
-print(encode('Les mouches volent', 2))
-print(decode("ngu oqwejgu xqngpv", 2))
+    print(position(x=105, y=10+line, text='Bravo, tu as trouvé !'))
+    return True
