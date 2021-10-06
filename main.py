@@ -3,7 +3,7 @@ from functions.Clear import clear
 
 
 def main() -> None:
-
+    # Début du programme
     map()
 
 
