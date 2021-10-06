@@ -13,6 +13,7 @@ Simple is better than complex."""
 
 
 def main(line=-10):
+    print("\x1b[?25h")
     line = clearBoxWithLine(line, 10)
     print(position(x=105, y=3+line, text="Entre une lettre : "))
     letter = input(position(x=105, y=4+line, text=''))
@@ -33,4 +34,6 @@ def main(line=-10):
         line = clearBoxWithLine(line, 3)
 
     print(position(x=105, y=10+line, text='Bravo, tu as trouvé !'))
+    print('\x1b[?25l')
+
     return True

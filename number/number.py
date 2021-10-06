@@ -3,6 +3,7 @@ from functions.Position import *
 
 
 def main() -> None:
+    print("\x1b[?25h")
     answer = ''
     rand = randint(0, 100)
 
@@ -18,4 +19,6 @@ def main() -> None:
             print(position(x=105, y=5+line, text="Mon nombre est plus petit"))
         else:
             print(position(x=105, y=5+line, text="Tu as gagné !"))
+            print('\x1b[?25l')
+
             return True
