@@ -16,10 +16,12 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
     color.init()
 
     # Move the cursor all the way to the top + where he currently is
-    print((len(data)+3) * "\033[A", end="")
+    # print((len(data)+3) * "\033[A", end="")
+    print(position(1, 0, ''))
 
     row = 0
     map = ''
+    isQuestDone = False
     # for each line of the map
     for i in data:
         col = 0
@@ -28,12 +30,6 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
         for j in i:
             # Main character is 2 spaces
             char = '\u0020\u0020'
-
-            # If current cell is a played quest, then check it
-            if len(questDone) > 0:
-                for quest in questDone:
-                    if row == quest[1] and col == quest[0]:
-                        char = emojiDecoder("e29c85")  # Green check
 
             # For every positioned element in the json
             for item in coord:
@@ -49,6 +45,12 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                 else:
                     if row == playerY and col == playerX:
                         char = symbol
+
+            # If current cell is a played quest, then check it
+            if len(questDone) > 0:
+                for quest in questDone:
+                    if row == quest[1] and col == quest[0]:
+                        char = emojiDecoder("e29c85")  # Green check
 
             # Change the background depending on the color code of the json map
             if j == 1:
@@ -79,6 +81,6 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
         quest = list(quest.keys())[0]
         # If it is, then we play the quest
         if (playerY == questToDo[index][quest][1] and playerX == questToDo[index][quest][0]):
-            questToDo, playerX = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
+            questToDo, playerX, isQuestDone = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
     # In either case we return the questToDo and the next player's position
-    return questToDo, playerX
+    return questToDo, playerX, isQuestDone
