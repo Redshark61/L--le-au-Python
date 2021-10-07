@@ -1,10 +1,9 @@
 # coding: utf-8
 from functions.Clear import clear
-import json
-from os import system
 from map.displayMap import displayMap
 import msvcrt
 from functions.Position import position, printBox
+from functions.checkMod import checkMod
 
 
 def map() -> None:
@@ -12,16 +11,16 @@ def map() -> None:
     clear()
 
     # Récupérer la map
-    with open('data/map.json') as file:
-        data = json.load(file)
+    data = checkMod('map')
 
     # Récupérer les coordonnés
-    with open('data/coordinates.json') as file:
-        coord = json.load(file)
+    coord = checkMod('coordinates')
 
     # Coordonnés du joueur
     playerX = coord['player']["coords"][0]
     playerY = coord['player']["coords"][1]
+    prevPlayerY = playerY
+    prevPlayerX = playerX
 
     print('')
     char = ' '
@@ -33,13 +32,14 @@ def map() -> None:
     for quest in coord:
         if quest != 'player':
             questToDo.append({quest: coord[quest]['coords']})
+
     # Tant que le code de la touche pressé n'est pas 113 (q)
     while ord(char) != 113:
 
         # Afficher la carte
-        questToDo, playerX, isQuestDone = displayMap(data, coord, playerX, playerY, questToDo, questDone)
+        questToDo, playerX, playerY, isQuestDone = displayMap(data, coord, playerX, playerY, questToDo, questDone, prevPlayerX, prevPlayerY)
         if isQuestDone:
-            displayMap(data, coord, playerX, playerY, questToDo, questDone)
+            displayMap(data, coord, playerX, playerY, questToDo, questDone, prevPlayerX, prevPlayerY)
             isQuestDone = False
 
         print(position(105, 2, "C'est la carte, c'est la carte..."))
@@ -50,12 +50,20 @@ def map() -> None:
             char = msvcrt.getch()
 
         if ord(char) == 72:  # Up
+            prevPlayerY = playerY
+            prevPlayerX = playerX
             playerY -= 1
         elif ord(char) == 80:  # Down
+            prevPlayerY = playerY
+            prevPlayerX = playerX
             playerY += 1
         elif ord(char) == 75:  # Left
+            prevPlayerY = playerY
+            prevPlayerX = playerX
             playerX -= 1
         elif ord(char) == 77:  # Right
+            prevPlayerY = playerY
+            prevPlayerX = playerX
             playerX += 1
 
     clear()
