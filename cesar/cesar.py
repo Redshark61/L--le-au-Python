@@ -1,8 +1,7 @@
 import string
 from cesar.encode import encode
 from cesar.decode import decode
-from functions.Position import position, clearBoxWithLine, clearBox
-import time
+from functions.Position import position, clearBoxWithLine
 
 alphabet = string.ascii_lowercase
 alphabet = list(alphabet)
