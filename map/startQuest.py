@@ -12,6 +12,6 @@ def startQuest(coord: dict, index: int, questToDo: list[dict], playerX: int, pla
         questDone.append(questToDo[index][quest])
         questToDo.pop(index)
         time.sleep(2)
-        clearBox()
 
+    clearBox()
     return questToDo, playerY+1, isQuestDone
