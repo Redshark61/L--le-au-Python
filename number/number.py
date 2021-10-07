@@ -3,7 +3,6 @@ from random import randint
 import time
 from functions.Position import *
 from functions.checkLength import checkLength
-import json
 from functions.checkMod import checkMod
 
 
@@ -25,27 +24,30 @@ def main() -> None:
     print("\x1b[?25h")
     tried = 0
     for i in range(numberOfGame):
+        clearBox()
         answer = ''
         rand = randint(0, maxRandom)
 
         line = -3
-        while(answer != rand or tried >= maxTry):
+        while(answer != rand and tried < maxTry):
             line = clearBoxWithLine(line, 3)
             print(position(x=105, y=3, text='Quel est mon nombre ?'))
             answer = int(input(position(x=105, y=4+line, text='')))
 
-            if(answer < rand):
-                tried += 1
+            tried += 1
+            if(answer < rand and tried < maxTry):
                 print(position(x=105, y=5+line, text="Mon nombre est plus grand"))
                 print(position(x=105, y=6+line, text=f"Attention, tu n'as plus que {maxTry-tried} essais"))
-            elif(answer > rand):
-                tried += 1
+            elif(answer > rand and tried < maxTry):
                 print(position(x=105, y=5+line, text="Mon nombre est plus petit"))
                 print(position(x=105, y=6+line, text=f"Attention, tu n'as plus que {maxTry-tried} essais"))
-            else:
+            elif(answer == rand and tried <= maxTry):
                 print(position(x=105, y=6+line, text="Tu as gagné !"))
-                # time.sleep(2)
-                # clearBox()
                 print('\x1b[?25l')
+                break
+        else:
+            print(position(x=105, y=6+line, text="Tu as perdu !"))
+            time.sleep(2)
+            return False
 
     return True
