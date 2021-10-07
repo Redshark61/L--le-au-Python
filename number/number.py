@@ -16,12 +16,12 @@ def main() -> None:
     clearBox()
 
     print("\x1b[?25h")
+    tried = 0
     for i in range(3):
         answer = ''
         rand = randint(0, 100)
 
         line = -3
-        tried = 0
         while(answer != rand or tried >= 20):
             line = clearBoxWithLine(line, 3)
             print(position(x=105, y=3, text='Quel est mon nombre ?'))
