@@ -32,6 +32,10 @@ There are 3 different quest. Each quest give a special key, necessary to leave t
 
 This game is pretty simple. All you have to do is to guess a number between 0 and 100 three times. You have 20 try to guess the three numbers. Once it's done, you'll get the bronze key.
 
+---
+
+First we get the name of the current file in order to get the story associated with this quest and display it into the right panel. Then we check if there is any mod in the mod folder, and we fetch its data. Next we show the cursor and let the player find the number.
+
 ### Ceasar Code
 
 In this game, you'll have to decode a secret message. This will give you the silver key.
@@ -43,6 +47,16 @@ The last quest is random game. In fact, you dont have to do anything, just let t
 ## Mods
 
 The most important point of this game is to be "modable". You have a _mod_ folder in wich you can store moded json file. If you want to do it, you **need** to respect the exact same syntax as the main json file stored in the *data* folder.
+
+### To create new quests
+
+If you want to add a new quest, you first need to add its coordinate in a *coordinates.json* file into the *mods* folder. You must copy the *coordinates.json* file in order to add your own coords among the original one. Moreover, you need to specify :
+
+- what kind of mark should your quest be shown as
+- what's the name of the folder in wich your file is
+- what's the name of the file wich launch the quest
+
+You **need** to have a *main* function into the main file. You can also use the *checkLength* function to create your very own story. To achieve this you can copy the *cinematic.json* file and add your own story. You **need** to give the same name for the cinematic key and your main file.
 
 ## Contribution
 
