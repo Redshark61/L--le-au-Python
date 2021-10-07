@@ -7,6 +7,7 @@ def deletePlayer(index: str, turn: str, playerLeft: list, numberMonkeys: int, is
     # Si c'était au tour du boss, on supprime l'avant dernier élément
     elif turn == "boss":
         del playerLeft[index]
+        numberMonkeys -= 1
 
     # Si c'était au tour du joueur, on supprime le dernier élément
     else:
