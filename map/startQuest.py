@@ -1,8 +1,9 @@
 import time
 from functions.Position import clearBox
+from typing import Union
 
 
-def startQuest(coord, index, questToDo, playerX, playerY, quest, questDone):
+def startQuest(coord: dict, index: int, questToDo: list[dict], playerX: int, playerY: int, quest: dict, questDone: list) -> Union[list[dict], int, bool]:
     clearBox()
     module = __import__(f"{coord[quest]['folder']}.{coord[quest]['mainFile']}", fromlist=[None])
     hasWon = module.main()
@@ -13,4 +14,4 @@ def startQuest(coord, index, questToDo, playerX, playerY, quest, questDone):
         time.sleep(2)
         clearBox()
 
-    return questToDo, playerX+1, isQuestDone
+    return questToDo, playerY+1, isQuestDone
