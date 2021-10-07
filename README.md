@@ -42,7 +42,7 @@ The last quest is random game. In fact, you dont have to do anything, just let t
 
 ## Mods
 
-The most important point of this game is to be "modable". You have a _mod_ folder in wich you can store moded json file. If you want to do it, you **need** to respect the exact same syntax as the main json file.
+The most important point of this game is to be "modable". You have a _mod_ folder in wich you can store moded json file. If you want to do it, you **need** to respect the exact same syntax as the main json file stored in the *data* folder.
 
 ## Contribution
 
