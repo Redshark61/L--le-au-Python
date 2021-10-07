@@ -9,6 +9,7 @@ from functions.Position import *
 from fizz_buzz.deletePlayer import deletePlayer
 import time
 from functions.checkLength import checkLength
+from functions.checkMod import checkMod
 
 
 def main() -> None:
@@ -25,13 +26,9 @@ def main() -> None:
         time.sleep(0.2)
 
     clearBox()
+
     # Vérifier la présence d'un mod
-    if os.path.isfile("mods/fizzBuzz.json"):
-        with open('mods/fizzBuzz.json') as file:
-            data = json.load(file)
-    else:
-        with open("data/fizzBuzz.json") as file:
-            data = json.load(file)
+    data = checkMod("fizzBuzz")
 
     # Mise en place des variables de base
     numberMonkeys = data["monkeys"]["number"] + 1
