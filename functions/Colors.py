@@ -9,7 +9,7 @@ class Colors:
         "darkBlue": "\033[44m",
         "brightYellow": "\033[103m",
         "brightGreen": "\033[102m",
-        "darkGray": "\033[42m",
+        "darkGreen": "\033[42m",
     }
 
     colorsFg = {
