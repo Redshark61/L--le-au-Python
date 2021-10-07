@@ -5,11 +5,12 @@
 - [Presentation](#presentation)
 - [Prerequisite](#prerequisite)
 - [Quests](#quests)
+- [Mods](#mods)
 - [Contribution](#contribution)
 
 ## Presentation
 
-"Python Island" is a console game. You are a lost surivor after your boat sunk. Your goal is to complete 3 quest :
+"Python Island" is a console game. You are a lost surivor after your boat sunk. Your goal is to complete 3 quest in order to leave this island:
 
 - [Guess the number](#guess-the-number)
 - [Ceasar Code](#ceasar-code)
@@ -19,7 +20,7 @@ You need to take care of your energy, thirst and food, otherwise you could die. 
 
 ## Prerequisite
 
-In order for this game to works, and have the best graphical experience you must install the new windows terminal. Indeed, this game use emojis to display the player, palm trees, quests...  You don't need to install this console, but if you don't you'll just have squares in place of emojis.
+In order for this game to works, and have the best graphical experience you must install the new windows terminal. Indeed, this game use emojis to display the player, palm trees, quests...  You don't *need* to install this console, but if you don't you'll just have squares in place of emojis.
 
 To install the new windows terminal, go to the `windows store` and type `terminal` in the search box. You'll then see the new Windows terminal.
 
@@ -38,6 +39,10 @@ In this game, you'll have to decode a secret message. This will give you the sil
 ### Fizzbuzz
 
 The last quest is random game. In fact, you dont have to do anything, just let the game play for you. You are against a certain number of monkeys and their boss. The goal is to enumerate numbers, starting from 1, and to **fizz** when the number is a multiple of 3, **buzz** if it's a multiple of 5, and **fizzbuzz** if it's both. Otherwise, you just say the number.
+
+## Mods
+
+The most important point of this game is to be "modable". You have a _mod_ folder in wich you can store moded json file. If you want to do it, you **need** to respect the exact same syntax as the main json file.
 
 ## Contribution
 
