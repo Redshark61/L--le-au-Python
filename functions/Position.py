@@ -47,3 +47,9 @@ def clearBox():
     for i in range(105, 153):
         for j in range(2, 36):
             print(position(x=i, y=j, text=" "))
+
+
+def clearBottomPanel():
+    for i in range(3, 100):
+        for j in range(31, 40):
+            print(position(x=i, y=j, text=" "))
