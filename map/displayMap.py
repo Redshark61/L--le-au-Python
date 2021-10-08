@@ -4,11 +4,9 @@ from map.startQuest import startQuest
 from functions.emojiDecoder import emojiDecoder
 from map.printMonkeys import printMonkeys
 from map.mapBackground import mapBackground
-from functions.checkMod import checkMod
-import random
 
 
-def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int, food: int, water: int, createdItems, currentItems,  playerFace: str = None) -> None:
+def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int, food: int, water: int, createdItems, currentItems, pickedUpItem, playerFace: str = None) -> None:
     """
     Display the map using the map.json. Each number is for a particular color. By default, the characters are just 2 spaces
     but it can be emoji.
@@ -43,12 +41,14 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                     if name == baseItem:
                         if col == currentitemPosX and row == currentitemPosY:
                             char = emojiDecoder(currentItems[name]["mark"])
-                        if currentItems[name]["type"] == "goodFood" and currentitemPosX == playerX and currentitemPosY == playerY:
-                            food += currentItems[name]['food']
-                            del createdItems[index]
-                        if currentItems[name]["type"] == "goodDrink" and currentitemPosX == playerX and currentitemPosY == playerY:
-                            water += currentItems[name]['water']
-                            del createdItems[index]
+                        if currentitemPosX == playerX and currentitemPosY == playerY:
+                            pickedUpItem.append(baseItem)
+                            if currentItems[name]["type"] == "goodFood":
+                                food += currentItems[name]['food']
+                                del createdItems[index]
+                            if currentItems[name]["type"] == "goodDrink":
+                                water += currentItems[name]['water']
+                                del createdItems[index]
                             break
 
             # For every positioned element in the json
@@ -65,7 +65,7 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                 else:
                     if row == playerY and col == playerX:
                         if j == 3 or j == 2:
-                            return questToDo, prevPlayerX, prevPlayerY, isQuestDone, food, water, currentItems
+                            return questToDo, prevPlayerX, prevPlayerY, isQuestDone, food, water, currentItems, pickedUpItem
                         elif playerFace != None:
                             char = playerFace
                         else:
@@ -97,4 +97,4 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
             questToDo, playerY, isQuestDone = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
 
     # In either case we return the questToDo and the next player's position
-    return questToDo, playerX, playerY, isQuestDone, food, water, currentItems
+    return questToDo, playerX, playerY, isQuestDone, food, water, currentItems, pickedUpItem
