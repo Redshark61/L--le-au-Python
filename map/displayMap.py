@@ -6,7 +6,7 @@ from map.printMonkeys import printMonkeys
 from map.mapBackground import mapBackground
 
 
-def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int) -> None:
+def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int, playerFace: str = None) -> None:
     """
     Display the map using the map.json. Each number is for a particular color. By default, the characters are just 2 spaces
     but it can be emoji.
@@ -48,7 +48,10 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                     if row == playerY and col == playerX:
                         if j == 3 or j == 2:
                             return questToDo, prevPlayerX, prevPlayerY, isQuestDone
-                        char = symbol
+                        elif playerFace != None:
+                            char = playerFace
+                        else:
+                            char = symbol
 
             # If current cell is a played quest, then check it
             if len(questDone) > 0:
