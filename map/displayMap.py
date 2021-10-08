@@ -4,9 +4,11 @@ from map.startQuest import startQuest
 from functions.emojiDecoder import emojiDecoder
 from map.printMonkeys import printMonkeys
 from map.mapBackground import mapBackground
+from functions.checkMod import checkMod
+import random
 
 
-def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int, playerFace: str = None) -> None:
+def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int, food: int, water: int, createdItems, currentItems,  playerFace: str = None) -> None:
     """
     Display the map using the map.json. Each number is for a particular color. By default, the characters are just 2 spaces
     but it can be emoji.
@@ -17,13 +19,13 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
     color = Colors
     color.init()
 
-    # Move the cursor all the way to the top + where he currently is
-    # print((len(data)+3) * "\033[A", end="")
+    # Move the cursor all the way to the top
     print(position(1, 0, ''))
 
     row = 0
     map = ''
     isQuestDone = False
+
     # for each line of the map
     for i in data:
         col = 0
@@ -33,27 +35,42 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
             # Main character is 2 spaces
             char = '\u0020\u0020'
 
+            for index, item in enumerate(createdItems):
+                name = list(createdItems[index].keys())[0]
+                currentitemPosX = createdItems[index][name][0]
+                currentitemPosY = createdItems[index][name][1]
+                for baseItem in currentItems:
+                    if name == baseItem:
+                        if col == currentitemPosX and row == currentitemPosY:
+                            char = emojiDecoder(currentItems[name]["mark"])
+                        if currentItems[name]["type"] == "goodFood" and currentitemPosX == playerX and currentitemPosY == playerY:
+                            food += currentItems[name]['food']
+                            del createdItems[index]
+                        if currentItems[name]["type"] == "goodDrink" and currentitemPosX == playerX and currentitemPosY == playerY:
+                            water += currentItems[name]['water']
+                            del createdItems[index]
+                            break
+
             # For every positioned element in the json
-            for item in coord:
+            for element in coord:
 
                 # Every emoji needs to be convert from hex to string in order to properly display
-                symbol = emojiDecoder(coord[item]['mark'])
+                symbol = emojiDecoder(coord[element]['mark'])
 
                 # If the current cell is not a player, then we change its value to an emojie, if needed
-                if item != "player":
-                    if row == coord[item]['coords'][1] and col == coord[item]['coords'][0]:
+                if element != "player":
+                    if row == coord[element]['coords'][1] and col == coord[element]['coords'][0]:
                         char = symbol
                 # If the current cell is the player, then we change its char to be the player's emoji
                 else:
                     if row == playerY and col == playerX:
                         if j == 3 or j == 2:
-                            return questToDo, prevPlayerX, prevPlayerY, isQuestDone
+                            return questToDo, prevPlayerX, prevPlayerY, isQuestDone, food, water, currentItems
                         elif playerFace != None:
                             char = playerFace
                         else:
                             char = symbol
 
-            # If current cell is a played quest, then check it
             if len(questDone) > 0:
                 for quest in questDone:
                     if row == quest[1] and col == quest[0]:
@@ -80,4 +97,4 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
             questToDo, playerY, isQuestDone = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
 
     # In either case we return the questToDo and the next player's position
-    return questToDo, playerX, playerY, isQuestDone
+    return questToDo, playerX, playerY, isQuestDone, food, water, currentItems
