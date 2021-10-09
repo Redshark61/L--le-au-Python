@@ -66,8 +66,13 @@ def map() -> None:
         print(position(105, 2, "L'île aux Python !".center(47, ' ')))
         print(position(105, 3, "-"*47))
         print(position(105, 4, "1 - Dormir"))
+
         inventoryX = 3
-        for pickedItem in pickedUpItem:
+        for index, pickedItem in enumerate(pickedUpItem):
+            numberOfPickedItem = pickedUpItem.count(pickedItem)
+            if numberOfPickedItem > 1 and pickedUpItem.index(pickedItem) < index:
+                continue
+            print(position(inventoryX, 36, str(numberOfPickedItem)))
             print(position(inventoryX, 35, pickedItem))
             inventoryX += len(pickedItem) + 5
 
