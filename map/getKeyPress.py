@@ -43,7 +43,6 @@ def getKeyPress(playerX: int, playerY: int, foodMax: int, waterMax: int, energyM
         energyMax -= 3
     elif ord(char) == 49:  # 1
         char = ' '
-        print("sleep")
         print(position(105, 6, 'Je dors...'+' '*10))
         playerFace = position(playerX*2+1, playerY+2, emojiDecoder('f09f98b4'))
         displayMap(data, coord, playerX, playerY, questToDo, questDone, prevPlayerX, prevPlayerY, foodMax, waterMax, createdItems, currentItems, pickedUpItem, playerFace)
