@@ -3,7 +3,7 @@ from functions.Position import clearBox
 from typing import Union
 
 
-def startQuest(coord: dict, index: int, questToDo: list[dict], playerX: int, playerY: int, quest: dict, questDone: list) -> Union[list[dict], int, bool]:
+def startQuest(coord: dict, index: int, questToDo: list[dict], playerY: int, quest: dict, questDone: list) -> Union[list[dict], int, bool]:
     clearBox()
     module = __import__(f"{coord[quest]['folder']}.{coord[quest]['mainFile']}", fromlist=[None])
     hasWon = module.main()

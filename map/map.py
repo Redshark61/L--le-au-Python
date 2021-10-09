@@ -11,6 +11,7 @@ from functions.drawEnergy import drawEnergy
 from map.getKeyPress import getKeyPress
 import random
 from map.randomItemPosition import randomItemPosition
+import copy
 
 
 def map() -> None:
@@ -27,10 +28,10 @@ def map() -> None:
     pickedUpItem = []
 
     # Coordonnés du joueur
-    playerX = coord['player']["coords"][0]
-    playerY = coord['player']["coords"][1]
-    prevPlayerY = playerY
-    prevPlayerX = playerX
+    playerCoord = []
+    playerCoord.append(coord['player']["coords"][0])
+    playerCoord.append(coord['player']["coords"][1])
+    prevPlayerCoord = copy.deepcopy(playerCoord)
 
     print('')
     char = ' '
@@ -54,13 +55,14 @@ def map() -> None:
     while ord(char) != 113:
 
         # Afficher la carte
-        questToDo, playerX, playerY, isQuestDone, foodMax, waterMax, currentItems, pickedUpItem = displayMap(
-            data, coord, playerX, playerY, questToDo, questDone, prevPlayerX, prevPlayerY, foodMax, waterMax, createdItems, currentItems, pickedUpItem)
+        questToDo, playerCoord, isQuestDone, foodMax, waterMax, currentItems, pickedUpItem = displayMap(
+            data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, foodMax, waterMax, createdItems, currentItems, pickedUpItem)
+
         drawFood(foodMax)
         drawWater(waterMax)
         drawEnergy(energyMax)
         if isQuestDone:
-            displayMap(data, coord, playerX, playerY, questToDo, questDone, prevPlayerX, prevPlayerY, foodMax, waterMax, createdItems, currentItems, pickedUpItem)
+            displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, foodMax, waterMax, createdItems, currentItems, pickedUpItem)
             isQuestDone = False
 
         print(position(105, 2, "L'île aux Python !".center(47, ' ')))
@@ -76,13 +78,13 @@ def map() -> None:
             print(position(inventoryX, 35, pickedItem))
             inventoryX += len(pickedItem) + 5
 
-        char, prevPlayerX, prevPlayerY, playerX, playerY, energyMax, foodMax, waterMax, currentItems, pickedUpItem = getKeyPress(
-            playerX, playerY, foodMax, waterMax, energyMax, data, coord, questToDo, questDone, prevPlayerX, prevPlayerY, createdItems, currentItems, pickedUpItem)
+        char, prevPlayerCoord, playerCoord, energyMax, foodMax, waterMax, currentItems, pickedUpItem = getKeyPress(
+            playerCoord, foodMax, waterMax, energyMax, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem)
 
         if foodMax < 0 or waterMax < 0 or energyMax < 0:
             print(position(105, 10, 'Vous êtes mort !'))
-            playerFace = position(playerX*2+1, playerY+2, emojiDecoder('f09f9280'))
-            displayMap(data, coord, playerX, playerY, questToDo, questDone, prevPlayerX, prevPlayerY,  foodMax, waterMax, createdItems, currentItems, pickedUpItem, playerFace)
+            playerFace = position(playerCoord[0]*2+1, playerCoord[1]+2, emojiDecoder('f09f9280'))
+            displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord,  foodMax, waterMax, createdItems, currentItems, pickedUpItem, playerFace)
             time.sleep(5)
             return
 

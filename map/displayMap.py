@@ -6,7 +6,7 @@ from map.printMonkeys import printMonkeys
 from map.mapBackground import mapBackground
 
 
-def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: list, questDone: list, prevPlayerX: int, prevPlayerY: int, food: int, water: int, createdItems, currentItems, pickedUpItem, playerFace: str = None) -> None:
+def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, questDone: list, prevPlayerCoord: int, food: int, water: int, createdItems, currentItems, pickedUpItem, playerFace: str = None) -> None:
     """
     Display the map using the map.json. Each number is for a particular color. By default, the characters are just 2 spaces
     but it can be emoji.
@@ -41,7 +41,7 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                     if name == baseItem:
                         if col == currentitemPosX and row == currentitemPosY:
                             char = emojiDecoder(currentItems[name]["mark"])
-                        if currentitemPosX == playerX and currentitemPosY == playerY:
+                        if currentitemPosX == playerCoord[0] and currentitemPosY == playerCoord[1]:
                             pickedUpItem.append(currentItems[name]["name"])
                             if currentItems[name]["type"] == "goodFood":
                                 food += currentItems[name]['food']
@@ -63,9 +63,9 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                         char = symbol
                 # If the current cell is the player, then we change its char to be the player's emoji
                 else:
-                    if row == playerY and col == playerX:
+                    if row == playerCoord[1] and col == playerCoord[0]:
                         if j == 3 or j == 2:
-                            return questToDo, prevPlayerX, prevPlayerY, isQuestDone, food, water, currentItems, pickedUpItem
+                            return questToDo, prevPlayerCoord, isQuestDone, food, water, currentItems, pickedUpItem
                         elif playerFace != None:
                             char = playerFace
                         else:
@@ -77,7 +77,7 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
                         char = emojiDecoder("e29c85")  # Green check
 
             # Change the background depending on the color code of the json map
-            map = mapBackground(color, char, map, j, row, col, playerX, playerY)
+            map = mapBackground(color, char, map, j, row, col, playerCoord)
 
             col += 1
 
@@ -90,11 +90,11 @@ def displayMap(data: dict, coord: dict, playerX: int, playerY: int, questToDo: l
         quest = list(quest.keys())[0]
 
         # If it is, then we play the quest
-        if (playerY == questToDo[index][quest][1] and playerX == questToDo[index][quest][0]):
+        if (playerCoord[1] == questToDo[index][quest][1] and playerCoord[0] == questToDo[index][quest][0]):
             if list(questToDo[index].keys())[0] == 'fizzBuzz':
                 printMonkeys(color, questToDo, index, quest)
 
-            questToDo, playerY, isQuestDone = startQuest(coord, index, questToDo, playerX, playerY, quest, questDone)
+            questToDo, playerCoord[1], isQuestDone = startQuest(coord, index, questToDo, playerCoord[1], quest, questDone)
 
     # In either case we return the questToDo and the next player's position
-    return questToDo, playerX, playerY, isQuestDone, food, water, currentItems, pickedUpItem
+    return questToDo, playerCoord, isQuestDone, food, water, currentItems, pickedUpItem
