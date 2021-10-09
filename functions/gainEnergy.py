@@ -1,5 +1,4 @@
 import time
-from functions.Position import position
 
 
 def gainEnergy(energy):
