@@ -20,7 +20,7 @@ def randomItemPosition() -> list[dict]:
     for item in currentItems:
         for i in range(currentItems[item]["number"]):
             if currentItems[item]['spawn'] == "generic":
-                itemPosX = random.randint(10, 80)
+                itemPosX = random.randint(10, 42)
                 itemPosY = random.randint(9, 20)
                 createdItems.append({item: [itemPosX, itemPosY]})
 
