@@ -6,7 +6,7 @@ from map.printMonkeys import printMonkeys
 from map.mapBackground import mapBackground
 
 
-def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, questDone: list, prevPlayerCoord: int, food: int, water: int, createdItems, currentItems, pickedUpItem, playerFace: str = None) -> None:
+def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, questDone: list, prevPlayerCoord: int, vitalSigns: dict[int], createdItems, currentItems, pickedUpItem, playerFace: str = None) -> None:
     """
     Display the map using the map.json. Each number is for a particular color. By default, the characters are just 2 spaces
     but it can be emoji.
@@ -44,10 +44,10 @@ def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, ques
                         if currentitemPosX == playerCoord[0] and currentitemPosY == playerCoord[1]:
                             pickedUpItem.append(currentItems[name]["name"])
                             if currentItems[name]["type"] == "goodFood":
-                                food += currentItems[name]['food']
+                                vitalSigns['foodMax'] += currentItems[name]['food']
                                 del createdItems[index]
                             if currentItems[name]["type"] == "goodDrink":
-                                water += currentItems[name]['water']
+                                vitalSigns['waterMax'] += currentItems[name]['water']
                                 del createdItems[index]
                             break
 
@@ -65,7 +65,7 @@ def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, ques
                 else:
                     if row == playerCoord[1] and col == playerCoord[0]:
                         if j == 3 or j == 2:
-                            return questToDo, prevPlayerCoord, isQuestDone, food, water, currentItems, pickedUpItem
+                            return questToDo, prevPlayerCoord, isQuestDone, vitalSigns, currentItems, pickedUpItem
                         elif playerFace != None:
                             char = playerFace
                         else:
@@ -97,4 +97,4 @@ def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, ques
             questToDo, playerCoord[1], isQuestDone = startQuest(coord, index, questToDo, playerCoord[1], quest, questDone)
 
     # In either case we return the questToDo and the next player's position
-    return questToDo, playerCoord, isQuestDone, food, water, currentItems, pickedUpItem
+    return questToDo, playerCoord, isQuestDone, vitalSigns, currentItems, pickedUpItem
