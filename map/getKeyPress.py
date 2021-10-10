@@ -9,41 +9,41 @@ from functions.drawFood import drawFood
 from functions.looseFood import looseFood
 
 
-def getKeyPress(playerCoord: list, vitalSigns: dict[int], data: dict, coord: dict, questToDo: list[list], questDone: list[list], prevPlayerCoord: list, createdItems: dict, currentItems: dict, pickedUpItem: list) -> Union[bytes, int, int, int, int, int, int]:
+def getKeyPress(inventoryOpen: bool, playerCoord: list, vitalSigns: dict[int], data: dict, coord: dict, questToDo: list[list], questDone: list[list], prevPlayerCoord: list, createdItems: dict, currentItems: dict, pickedUpItem: list) -> Union[bytes, int, int, int, int, int, int]:
     # Si une touche du clavier est pressé
     if msvcrt.kbhit:
         # Récupérer cett touche
         char = msvcrt.getch()
 
-    if ord(char) == 72:  # Up
+    if ord(char) == 72 and not inventoryOpen:  # Up
         prevPlayerCoord[1] = playerCoord[1]
         prevPlayerCoord[0] = playerCoord[0]
         playerCoord[1] -= 1
         vitalSigns["foodMax"] -= 2
         vitalSigns["waterMax"] -= 2
         vitalSigns["energyMax"] -= 3
-    elif ord(char) == 80:  # Down
+    elif ord(char) == 80 and not inventoryOpen:  # Down
         prevPlayerCoord[1] = playerCoord[1]
         prevPlayerCoord[0] = playerCoord[0]
         playerCoord[1] += 1
         vitalSigns["foodMax"] -= 2
         vitalSigns["waterMax"] -= 2
         vitalSigns["energyMax"] -= 3
-    elif ord(char) == 75:  # Left
+    elif ord(char) == 75 and not inventoryOpen:  # Left
         prevPlayerCoord[1] = playerCoord[1]
         prevPlayerCoord[0] = playerCoord[0]
         playerCoord[0] -= 1
         vitalSigns["foodMax"] -= 2
         vitalSigns["waterMax"] -= 2
         vitalSigns["energyMax"] -= 3
-    elif ord(char) == 77:  # Right
+    elif ord(char) == 77 and not inventoryOpen:  # Right
         prevPlayerCoord[1] = playerCoord[1]
         prevPlayerCoord[0] = playerCoord[0]
         playerCoord[0] += 1
         vitalSigns["foodMax"] -= 2
         vitalSigns["waterMax"] -= 2
         vitalSigns["energyMax"] -= 3
-    elif ord(char) == 49:  # 1
+    elif ord(char) == 49 and not inventoryOpen:  # 1
         char = ' '
         print(position(105, 6, 'Je dors...' + ' ' * 10))
         playerFace = position(playerCoord[0] * 2 + 1, playerCoord[1] + 2, emojiDecoder('f09f98b4'))
@@ -55,4 +55,18 @@ def getKeyPress(playerCoord: list, vitalSigns: dict[int], data: dict, coord: dic
             drawFood(vitalSigns["foodMax"])
         print(position(105, 6, 'Je ne dors plus !'))
 
-    return char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem
+    elif ord(char) == 50 and not inventoryOpen:
+        toBePosition1 = len(pickedUpItem[0])
+        print(position(3, 37, emojiDecoder('e2ac86').center(toBePosition1, ' ')))
+        inventoryOpen = True
+
+    elif ord(char) == 77 and inventoryOpen:
+        toBePosition2 = len(pickedUpItem[1])
+        print(position(3 + len(pickedUpItem[0])+5, 37, emojiDecoder('e2ac86').center(toBePosition2, ' ')))
+        print(position(3, 37, ' '.center(len(pickedUpItem[0]), ' ')))
+
+    elif ord(char) == 50 and inventoryOpen:
+        inventoryOpen = False
+        print(position(3, 37, " "*20))
+
+    return char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen
