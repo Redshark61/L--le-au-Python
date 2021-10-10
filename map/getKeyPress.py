@@ -45,8 +45,8 @@ def getKeyPress(playerCoord: list, vitalSigns: dict[int], data: dict, coord: dic
         vitalSigns["energyMax"] -= 3
     elif ord(char) == 49:  # 1
         char = ' '
-        print(position(105, 6, 'Je dors...'+' '*10))
-        playerFace = position(playerCoord[0]*2+1, playerCoord[1]+2, emojiDecoder('f09f98b4'))
+        print(position(105, 6, 'Je dors...' + ' ' * 10))
+        playerFace = position(playerCoord[0] * 2 + 1, playerCoord[1] + 2, emojiDecoder('f09f98b4'))
         displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, vitalSigns, createdItems, currentItems, pickedUpItem, playerFace)
         while vitalSigns["energyMax"] < 100:
             vitalSigns["energyMax"] = gainEnergy(vitalSigns["energyMax"])
