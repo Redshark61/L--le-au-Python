@@ -14,5 +14,13 @@
         "water": 10,
         "spawn": "generic",
         "mark": "f09fa789"
+    },
+    "egg": {
+        "number": 10,
+        "name": "Oeuf",
+        "type": "goodFood",
+        "food": 10,
+        "spawn": "generic",
+        "mark": "f09fa59a"
     }
 }
