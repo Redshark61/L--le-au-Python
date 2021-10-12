@@ -42,7 +42,7 @@ def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, ques
                         if col == currentitemPosX and row == currentitemPosY:
                             char = emojiDecoder(currentItems[name]["mark"])
                         if currentitemPosX == playerCoord[0] and currentitemPosY == playerCoord[1]:
-                            pickedUpItem.append(currentItems[name]["name"])
+                            pickedUpItem.append(currentItems[name])
                             if currentItems[name]["type"] == "goodFood":
                                 vitalSigns['foodMax'] += currentItems[name]['food']
                                 del createdItems[index]

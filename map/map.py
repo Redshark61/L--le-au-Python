@@ -11,6 +11,7 @@ from functions.drawEnergy import drawEnergy
 from map.getKeyPress import getKeyPress
 from map.randomItemPosition import randomItemPosition
 import copy
+from collections import Counter
 
 
 def map() -> None:
@@ -37,6 +38,7 @@ def map() -> None:
     questToDo = []
     questDone = []
     inventoryOpen = False
+    itemSelected, toBePosition, currentPosition = 0, 0, 0
 
     printBox(103, 1, 50, 38)
     printBox(1, 30, 101, 9)
@@ -76,16 +78,14 @@ def map() -> None:
         print(position(105, 5, "2 - Inventaire"))
 
         inventoryX = 3
-        for index, pickedItem in enumerate(pickedUpItem):
-            numberOfPickedItem = pickedUpItem.count(pickedItem)
-            if numberOfPickedItem > 1 and pickedUpItem.index(pickedItem) < index:
-                continue
-            print(position(inventoryX, 36, str(numberOfPickedItem).center(len(pickedItem), ' ')))
-            print(position(inventoryX, 35, pickedItem))
-            inventoryX += len(pickedItem) + 5
+        numbersOfItem = Counter(item['name'] for item in pickedUpItem)
+        for key, value in numbersOfItem.items():
+            print(position(inventoryX, 35, key))
+            print(position(inventoryX, 36, str(value).center(len(key), ' ')))
+            inventoryX += len(key) + 5
 
-        char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen = getKeyPress(inventoryOpen,
-                                                                                                                playerCoord, vitalSigns, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem)
+        char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, toBePosition, currentPosition = getKeyPress(inventoryOpen,
+                                                                                                                                                             playerCoord, vitalSigns, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem, itemSelected, toBePosition, currentPosition)
 
         if vitalSigns["foodMax"] < 0 or vitalSigns["waterMax"] < 0 or vitalSigns["energyMax"] < 0:
             print(position(105, 10, 'Vous êtes mort !'))
