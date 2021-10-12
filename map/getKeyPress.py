@@ -1,13 +1,12 @@
 import msvcrt
+from typing import Union
 from functions.Position import position
 from map.displayMap import displayMap
 from functions.emojiDecoder import emojiDecoder
 from map.map import drawEnergy
-from typing import Union
 from functions.gainEnergy import gainEnergy
 from functions.drawFood import drawFood
 from functions.looseFood import looseFood
-from collections import Counter
 from map.inventory import inventory
 
 

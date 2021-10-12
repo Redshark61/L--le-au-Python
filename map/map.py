@@ -1,5 +1,7 @@
 # coding: utf-8
 import time
+import copy
+from collections import Counter
 from functions.Clear import clear
 from functions.emojiDecoder import emojiDecoder
 from map.displayMap import displayMap
@@ -10,8 +12,7 @@ from functions.drawWater import drawWater
 from functions.drawEnergy import drawEnergy
 from map.getKeyPress import getKeyPress
 from map.randomItemPosition import randomItemPosition
-import copy
-from collections import Counter
+from map.closeInventory import closeInventory
 
 
 def map() -> None:
@@ -48,7 +49,6 @@ def map() -> None:
         "foodMax": 100,
         "waterMax": 100
     }
-    # energyMax, foodMax, waterMax = 100, 100, 100
 
     for quest in coord:
         if quest != 'player':
@@ -79,12 +79,15 @@ def map() -> None:
             isQuestDone = False
 
         inventoryX = 3
-        numbersOfItem = Counter(item['name'] for item in pickedUpItem)
-        print(position(3, 35, ' '*40))
-        print(position(3, 36, ' '*40))
-        if len([*numbersOfItem.items()]) == 0:
-            pass
+        if len(pickedUpItem) == 0:
+            char, inventoryOpen, currentPosition = closeInventory(char, inventoryOpen, currentPosition)
+            noDuplicateInventory = []
+            numbersOfItem = []
         else:
+            print(position(1, 1, ' '*40))
+            numbersOfItem = Counter(item['name'] for item in pickedUpItem)
+            print(position(3, 35, ' '*40))
+            print(position(3, 36, ' '*40))
             listOfTuple = [*numbersOfItem.items()]
             listOfTuple.sort(key=lambda x: x[0])
             for key, value in listOfTuple:
