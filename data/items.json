@@ -2,24 +2,24 @@
     "banana": {
         "number": 10,
         "name": "Banane",
-        "type": "goodFood",
-        "food": 10,
+        "type": "food",
+        "nutrition": 10,
         "spawn": "generic",
         "mark": "f09f8d8c"
     },
     "water": {
         "number": 10,
         "name": "Eau",
-        "type": "goodDrink",
-        "water": 10,
+        "type": "liquid",
+        "nutrition": 10,
         "spawn": "generic",
         "mark": "f09fa789"
     },
     "egg": {
         "number": 10,
         "name": "Oeuf",
-        "type": "goodFood",
-        "food": 10,
+        "type": "food",
+        "nutrition": 10,
         "spawn": "generic",
         "mark": "f09fa59a"
     }
