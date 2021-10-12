@@ -11,16 +11,11 @@ from collections import Counter
 from map.inventory import inventory
 
 
-def getKeyPress(inventoryOpen: bool, playerCoord: list, vitalSigns: dict[int], data: dict, coord: dict, questToDo: list[list], questDone: list[list], prevPlayerCoord: list, createdItems: dict, currentItems: dict, pickedUpItem: list, itemSelected: int, widthOfName: int, currentPosition: int) -> Union[bytes, int, int, int, int, int, int]:
+def getKeyPress(inventoryOpen: bool, playerCoord: list, vitalSigns: dict[int], data: dict, coord: dict, questToDo: list[list], questDone: list[list], prevPlayerCoord: list, createdItems: dict, currentItems: dict, pickedUpItem: list, itemSelected: int, widthOfName: int, currentPosition: int, noDuplicateInventory) -> Union[bytes, int, int, int, int, int, int]:
     # Si une touche du clavier est pressé
     if msvcrt.kbhit:
         # Récupérer cett touche
         char = msvcrt.getch()
-
-    # We get a dict wich store how many time there is each item
-    noDuplicateInventory = Counter(item['name'] for item in pickedUpItem)
-    # We just get the keys
-    noDuplicateInventory = [i for i in [*noDuplicateInventory.keys()]]
 
     if ord(char) == 72 and not inventoryOpen:  # Up
         prevPlayerCoord[1] = playerCoord[1]
@@ -64,6 +59,6 @@ def getKeyPress(inventoryOpen: bool, playerCoord: list, vitalSigns: dict[int], d
             drawFood(vitalSigns["foodMax"])
         print(position(105, 6, 'Je ne dors plus !'))
 
-    char, inventoryOpen, itemSelected, currentPosition = inventory(char, inventoryOpen, noDuplicateInventory, itemSelected, currentPosition)
+    char, inventoryOpen, itemSelected, currentPosition, pickedUpItem, vitalSigns = inventory(char, inventoryOpen, noDuplicateInventory, itemSelected, currentPosition, pickedUpItem, vitalSigns)
 
-    return char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, widthOfName, currentPosition
+    return char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, widthOfName, currentPosition, noDuplicateInventory

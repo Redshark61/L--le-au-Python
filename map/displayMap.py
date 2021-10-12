@@ -43,12 +43,7 @@ def displayMap(data: dict, coord: dict, playerCoord: list, questToDo: list, ques
                             char = emojiDecoder(currentItems[name]["mark"])
                         if currentitemPosX == playerCoord[0] and currentitemPosY == playerCoord[1]:
                             pickedUpItem.append(currentItems[name])
-                            if currentItems[name]["type"] == "goodFood":
-                                vitalSigns['foodMax'] += currentItems[name]['food']
-                                del createdItems[index]
-                            if currentItems[name]["type"] == "goodDrink":
-                                vitalSigns['waterMax'] += currentItems[name]['water']
-                                del createdItems[index]
+                            del createdItems[index]
                             break
 
             # For every positioned element in the json

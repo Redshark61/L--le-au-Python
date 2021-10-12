@@ -39,6 +39,7 @@ def map() -> None:
     questDone = []
     inventoryOpen = False
     itemSelected, toBePosition, currentPosition = 0, 0, 0
+    noDuplicateInventory = []
 
     printBox(103, 1, 50, 38)
     printBox(1, 30, 101, 9)
@@ -57,6 +58,11 @@ def map() -> None:
     drawWater(vitalSigns["waterMax"])
     drawEnergy(vitalSigns["energyMax"])
     print(position(3, 34, '-'*98))
+    print(position(105, 2, "L'île aux Pythons !".center(47, ' ')))
+    print(position(105, 3, "-"*47))
+    print(position(105, 4, "1 - Dormir"))
+    print(position(105, 5, " "*40))
+    print(position(105, 5, "2 - Ouvrir Inventaire"))
 
     # Tant que le code de la touche pressé n'est pas 113 (q)
     while ord(char) != 113:
@@ -72,20 +78,27 @@ def map() -> None:
             displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, vitalSigns, createdItems, currentItems, pickedUpItem)
             isQuestDone = False
 
-        print(position(105, 2, "L'île aux Pythons !".center(47, ' ')))
-        print(position(105, 3, "-"*47))
-        print(position(105, 4, "1 - Dormir"))
-        print(position(105, 5, "2 - Inventaire"))
-
         inventoryX = 3
         numbersOfItem = Counter(item['name'] for item in pickedUpItem)
-        for key, value in numbersOfItem.items():
-            print(position(inventoryX, 35, key))
-            print(position(inventoryX, 36, str(value).center(len(key), ' ')))
-            inventoryX += len(key) + 5
+        print(position(3, 35, ' '*40))
+        print(position(3, 36, ' '*40))
+        if len([*numbersOfItem.items()]) == 0:
+            pass
+        else:
+            listOfTuple = [*numbersOfItem.items()]
+            listOfTuple.sort(key=lambda x: x[0])
+            for key, value in listOfTuple:
+                print(position(inventoryX, 35, key))
+                print(position(inventoryX, 36, str(value).center(len(key), ' ')))
+                inventoryX += len(key) + 5
+                noDuplicateInventory = listOfTuple
 
-        char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, toBePosition, currentPosition = getKeyPress(inventoryOpen,
-                                                                                                                                                             playerCoord, vitalSigns, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem, itemSelected, toBePosition, currentPosition)
+        # We get a dict wich store how many time there is each item
+        # noDuplicateInventory = Counter(item['name'] for item in pickedUpItem)
+        # We just get the keys
+
+        char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, toBePosition, currentPosition, noDuplicateInventory = getKeyPress(inventoryOpen,
+                                                                                                                                                                                   playerCoord, vitalSigns, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem, itemSelected, toBePosition, currentPosition, noDuplicateInventory)
 
         if vitalSigns["foodMax"] < 0 or vitalSigns["waterMax"] < 0 or vitalSigns["energyMax"] < 0:
             print(position(105, 10, 'Vous êtes mort !'))
