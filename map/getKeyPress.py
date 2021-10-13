@@ -5,7 +5,7 @@ from map.displayMap import displayMap
 from functions.emojiDecoder import emojiDecoder
 from map.mapLoop import drawEnergy
 from functions.gainEnergy import gainEnergy
-from functions.drawFood import drawFood
+from functions.drawHealth import drawFood
 from functions.looseFood import looseFood
 from map.inventory import inventory
 from functions import config

@@ -8,9 +8,7 @@ from functions.emojiDecoder import emojiDecoder
 from map.displayMap import displayMap
 from functions.Position import position, printBox
 from functions.checkMod import checkMod
-from functions.drawFood import drawFood
-from functions.drawWater import drawWater
-from functions.drawEnergy import drawEnergy
+from functions.drawHealth import drawFood, drawWater, drawEnergy
 from map.getKeyPress import getKeyPress
 from map.randomItemPosition import randomItemPosition
 from map.closeInventory import closeInventory
@@ -59,9 +57,6 @@ def mapLoop() -> None:
         # Afficher la carte
         isQuestDone = displayMap()
 
-        drawFood(config.vitalSigns["foodMax"])
-        drawWater(config.vitalSigns["waterMax"])
-        drawEnergy(config.vitalSigns["energyMax"])
         if isQuestDone:
             displayMap()
             isQuestDone = False
@@ -85,8 +80,11 @@ def mapLoop() -> None:
                 noDuplicateInventory = listOfTuple
 
         inventoryOpen, noDuplicateInventory = getKeyPress(inventoryOpen, noDuplicateInventory)
+        drawFood(config.vitalSigns["foodMax"])
+        drawWater(config.vitalSigns["waterMax"])
+        drawEnergy(config.vitalSigns["energyMax"])
 
-        if config.vitalSigns["foodMax"] < 0 or config.vitalSigns["waterMax"] < 0 or config.vitalSigns["energyMax"] < 0:
+        if config.vitalSigns["foodMax"] <= 0 or config.vitalSigns["waterMax"] <= 0 or config.vitalSigns["energyMax"] <= 0:
             print(position(105, 10, 'Vous êtes mort !'))
             playerFace = position(config.playerCoord[0]*2+1, config.playerCoord[1]+2, emojiDecoder('f09f9280'))
             displayMap(playerFace)
