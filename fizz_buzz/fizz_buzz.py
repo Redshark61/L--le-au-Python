@@ -1,13 +1,12 @@
 #coding: utf-8
-import json
 import os.path
+import time
+import copy
 from random import randint
 from fizz_buzz.setTurn import setTurn
-import copy
 from functions.Colors import Colors
-from functions.Position import *
+from functions.Position import position, clearBoxWithLine, clearBox
 from fizz_buzz.deletePlayer import deletePlayer
-import time
 from functions.checkLength import checkLength
 from functions.checkMod import checkMod
 
@@ -16,7 +15,7 @@ def main() -> None:
     # Permettre l'affichage des couleurs
     color = Colors
     color.init()
-    color.colorBgEnd
+    # color.colorBgEnd
 
     fileName = os.path.basename(__file__)[:-3]
     text = checkLength(fileName)
@@ -52,7 +51,7 @@ def main() -> None:
 
     # Établissement de l'ordre de passage : une liste qui contient la liste du pourcentage de chance de victoire pour chaque joueur
     # Il y a d'abord tout les singes, puis le chefs en -2, et le joueur en -1
-    # turns = [chanceMonkey]*(data['monkeys']['number']) + [chanceBoss, chancePlayer]
+
     turns = {}
     for i in range(data['monkeys']['number']+1):
         turns['singe'+str(i)] = chanceMonkey
@@ -120,6 +119,5 @@ def main() -> None:
     if numberMonkeys == 0:
         print(position(x=105, y=5+line, text=color.setForeground('brightGreen', 'Tous les singes ont été éliminé ! Tu as gagné !')))
         return True
-    else:
-        print(position(x=105, y=5+line, text=color.setForeground('red', "Tu as perdu !")))
-        return False
+    print(position(x=105, y=5+line, text=color.setForeground('red', "Tu as perdu !")))
+    return False

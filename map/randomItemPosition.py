@@ -1,11 +1,11 @@
-from functions.checkMod import checkMod
 import random
+from functions.checkMod import checkMod
 
 
 def randomItemPosition() -> list[dict]:
     """
     Return a list of dictionnairies containing coordonates of each item on the map
-    like : 
+    like :
 
     createdItems = [
         'item' : [X,Y],
@@ -18,7 +18,7 @@ def randomItemPosition() -> list[dict]:
     currentItems = items
 
     for item in currentItems:
-        for i in range(currentItems[item]["number"]):
+        for _ in range(currentItems[item]["number"]):
             if currentItems[item]['spawn'] == "generic":
                 itemPosX = random.randint(10, 42)
                 itemPosY = random.randint(9, 20)

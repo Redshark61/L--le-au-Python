@@ -1,7 +1,7 @@
 import os
 from random import randint
 import time
-from functions.Position import *
+from functions.Position import clearBox, position, clearBoxWithLine
 from functions.checkLength import checkLength
 from functions.checkMod import checkMod
 
@@ -23,7 +23,7 @@ def main() -> None:
 
     print("\x1b[?25h")
     tried = 0
-    for i in range(numberOfGame):
+    for _ in range(numberOfGame):
         clearBox()
         answer = ''
         rand = randint(0, maxRandom)
