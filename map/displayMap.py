@@ -72,7 +72,7 @@ def displayMap(playerFace: str = None) -> None:
             if len(config.questDone) > 0:
                 for quest in config.questDone:
                     if row == quest[1] and col == quest[0]:
-                        config.char = emojiDecoder("e29c85")  # Green check
+                        char = emojiDecoder("e29c85")  # Green check
 
             # Change the background depending on the color code of the json mapBg
             mapBg = mapBackground(color, char, mapBg, j, row, col)
