@@ -24,16 +24,25 @@ def main() -> None:
 
     tried = 0
     for _ in range(numberOfGame):
+        time.sleep(1)
         clearBox()
         answer = ''
         rand = randint(0, maxRandom)
-
         line = -3
         while(answer != rand and tried < maxTry):
             line = clearBoxWithLine(line, 3)
             print(config.visibleCursor)
             print(position(x=105, y=3, text='Quel est mon nombre ?'))
-            answer = int(input(position(x=105, y=4+line, text='')))
+
+            while True:
+                try:
+                    print(position(x=105, y=4+line, text='   '))
+                    answer = int(input(position(x=105, y=4+line, text='')))
+                    print(position(105, 5+line, ' '*47))
+                    break
+                except ValueError:
+                    print(position(x=105, y=5+line, text="Rentre un nombre s'il te plaît"))
+
             print(config.hiddenCursor)
 
             tried += 1

@@ -15,7 +15,7 @@ def displayMap(playerFace: str = None) -> None:
     It also stores the different quest already done, and handle if it needs to be played or not.
     """
 
-    color = Colors
+    color = Colors()
     color.init()
 
     # Move the cursor all the way to the top
