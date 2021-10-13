@@ -1,4 +1,4 @@
-from map.map import map
+from map.mapLoop import mapLoop
 from functions.Clear import clear
 from functions import config
 
@@ -6,7 +6,7 @@ from functions import config
 def main() -> None:
     # Begining of the program
     print(config.hiddenCursor)
-    map()
+    mapLoop()
     clear()
 
 

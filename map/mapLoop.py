@@ -17,7 +17,7 @@ from map.closeInventory import closeInventory
 import functions.config as config
 
 
-def map() -> None:
+def mapLoop() -> None:
 
     clear()
 
