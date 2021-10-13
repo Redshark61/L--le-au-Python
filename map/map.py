@@ -14,6 +14,8 @@ from map.getKeyPress import getKeyPress
 from map.randomItemPosition import randomItemPosition
 from map.closeInventory import closeInventory
 
+global char
+
 
 def map() -> None:
 
@@ -35,6 +37,7 @@ def map() -> None:
     prevPlayerCoord = copy.deepcopy(playerCoord)
 
     print('')
+    # global char
     char = ' '
     questToDo = []
     questDone = []
@@ -95,10 +98,6 @@ def map() -> None:
                 print(position(inventoryX, 36, str(value).center(len(key), ' ')))
                 inventoryX += len(key) + 5
                 noDuplicateInventory = listOfTuple
-
-        # We get a dict wich store how many time there is each item
-        # noDuplicateInventory = Counter(item['name'] for item in pickedUpItem)
-        # We just get the keys
 
         char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, toBePosition, currentPosition, noDuplicateInventory = getKeyPress(inventoryOpen,
                                                                                                                                                                                    playerCoord, vitalSigns, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem, itemSelected, toBePosition, currentPosition, noDuplicateInventory)
