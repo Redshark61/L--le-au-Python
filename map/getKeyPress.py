@@ -3,48 +3,33 @@ from typing import Union
 from functions.Position import position
 from map.displayMap import displayMap
 from functions.emojiDecoder import emojiDecoder
-from map.map import drawEnergy
+from map.mapLoop import drawEnergy
 from functions.gainEnergy import gainEnergy
 from functions.drawFood import drawFood
 from functions.looseFood import looseFood
 from map.inventory import inventory
 from functions import config
+from map.movement import movement
 
 
-def getKeyPress(inventoryOpen: bool, noDuplicateInventory) -> Union[bytes, int, int, int, int, int, int]:
-    # Si une touche du clavier est pressé
+def getKeyPress(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> Union[bool, list[tuple]]:
+    """
+    Handle all of the keypress.
+    """
+    # If a key is pressed
     if msvcrt.kbhit:
-        # Récupérer cett touche
+        # Get that key
         config.char = msvcrt.getch()
 
+    # * Movement
     if ord(config.char) == 72 and not inventoryOpen:  # Up
-        config.prevPlayerCoord[1] = config.playerCoord[1]
-        config.prevPlayerCoord[0] = config.playerCoord[0]
-        config.playerCoord[1] -= 1
-        config.vitalSigns["foodMax"] -= 2
-        config.vitalSigns["waterMax"] -= 2
-        config.vitalSigns["energyMax"] -= 3
+        movement(y=-1)
     elif ord(config.char) == 80 and not inventoryOpen:  # Down
-        config.prevPlayerCoord[1] = config.playerCoord[1]
-        config.prevPlayerCoord[0] = config.playerCoord[0]
-        config.playerCoord[1] += 1
-        config.vitalSigns["foodMax"] -= 2
-        config.vitalSigns["waterMax"] -= 2
-        config.vitalSigns["energyMax"] -= 3
+        movement(y=1)
     elif ord(config.char) == 75 and not inventoryOpen:  # Left
-        config.prevPlayerCoord[1] = config.playerCoord[1]
-        config.prevPlayerCoord[0] = config.playerCoord[0]
-        config.playerCoord[0] -= 1
-        config.vitalSigns["foodMax"] -= 2
-        config.vitalSigns["waterMax"] -= 2
-        config.vitalSigns["energyMax"] -= 3
+        movement(x=-1)
     elif ord(config.char) == 77 and not inventoryOpen:  # Right
-        config.prevPlayerCoord[1] = config.playerCoord[1]
-        config.prevPlayerCoord[0] = config.playerCoord[0]
-        config.playerCoord[0] += 1
-        config.vitalSigns["foodMax"] -= 2
-        config.vitalSigns["waterMax"] -= 2
-        config.vitalSigns["energyMax"] -= 3
+        movement(x=1)
 
     # * Sleep
     elif ord(config.char) == 49 and not inventoryOpen:  # 1
