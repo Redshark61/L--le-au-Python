@@ -13,8 +13,7 @@ from functions.drawEnergy import drawEnergy
 from map.getKeyPress import getKeyPress
 from map.randomItemPosition import randomItemPosition
 from map.closeInventory import closeInventory
-
-global char
+import functions.config as config
 
 
 def map() -> None:
@@ -22,44 +21,35 @@ def map() -> None:
     clear()
 
     # Récupérer la map
-    data = checkMod('map')
+    config.data = checkMod('map')
 
     # Récupérer les coordonnés
-    coord = checkMod('coordinates')
+    config.coord = checkMod('coordinates')
 
-    createdItems, currentItems = randomItemPosition()
-    pickedUpItem = []
+    config.createdItems, config.currentItems = randomItemPosition()
+    config.pickedUpItem = []
 
     # Coordonnés du joueur
-    playerCoord = []
-    playerCoord.append(coord['player']["coords"][0])
-    playerCoord.append(coord['player']["coords"][1])
-    prevPlayerCoord = copy.deepcopy(playerCoord)
+    config.playerCoord.append(config.coord['player']["coords"][0])
+    config.playerCoord.append(config.coord['player']["coords"][1])
+    config.prevPlayerCoord = copy.deepcopy(config.playerCoord)
 
     print('')
     # global char
-    char = ' '
-    questToDo = []
-    questDone = []
+    config.questToDo = []
+    config.questDone = []
     inventoryOpen = False
-    itemSelected, toBePosition, currentPosition = 0, 0, 0
-    noDuplicateInventory = []
 
     printBox(103, 1, 50, 38)
     printBox(1, 30, 101, 9)
-    vitalSigns = {
-        "energyMax": 100,
-        "foodMax": 100,
-        "waterMax": 100
-    }
 
-    for quest in coord:
+    for quest in config.coord:
         if quest != 'player':
-            questToDo.append({quest: coord[quest]['coords']})
+            config.questToDo.append({quest: config.coord[quest]['coords']})
 
-    drawFood(vitalSigns["foodMax"])
-    drawWater(vitalSigns["waterMax"])
-    drawEnergy(vitalSigns["energyMax"])
+    drawFood(config.vitalSigns["foodMax"])
+    drawWater(config.vitalSigns["waterMax"])
+    drawEnergy(config.vitalSigns["energyMax"])
     print(position(3, 34, '-'*98))
     print(position(105, 2, "L'île aux Pythons !".center(47, ' ')))
     print(position(105, 3, "-"*47))
@@ -68,27 +58,26 @@ def map() -> None:
     print(position(105, 5, "2 - Ouvrir Inventaire"))
 
     # Tant que le code de la touche pressé n'est pas 113 (q)
-    while ord(char) != 113:
+    while ord(config.char) != 113:
 
         # Afficher la carte
-        questToDo, playerCoord, isQuestDone, vitalSigns, currentItems, pickedUpItem = displayMap(
-            data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, vitalSigns, createdItems, currentItems, pickedUpItem)
+        isQuestDone = displayMap()
 
-        drawFood(vitalSigns["foodMax"])
-        drawWater(vitalSigns["waterMax"])
-        drawEnergy(vitalSigns["energyMax"])
+        drawFood(config.vitalSigns["foodMax"])
+        drawWater(config.vitalSigns["waterMax"])
+        drawEnergy(config.vitalSigns["energyMax"])
         if isQuestDone:
-            displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, vitalSigns, createdItems, currentItems, pickedUpItem)
+            displayMap()
             isQuestDone = False
 
         inventoryX = 3
-        if len(pickedUpItem) == 0:
-            char, inventoryOpen, currentPosition = closeInventory(char, inventoryOpen, currentPosition)
+        if len(config.pickedUpItem) == 0:
+            inventoryOpen = closeInventory(inventoryOpen)
             noDuplicateInventory = []
             numbersOfItem = []
         else:
             print(position(1, 1, ' '*40))
-            numbersOfItem = Counter(item['name'] for item in pickedUpItem)
+            numbersOfItem = Counter(item['name'] for item in config.pickedUpItem)
             print(position(3, 35, ' '*40))
             print(position(3, 36, ' '*40))
             listOfTuple = [*numbersOfItem.items()]
@@ -99,13 +88,12 @@ def map() -> None:
                 inventoryX += len(key) + 5
                 noDuplicateInventory = listOfTuple
 
-        char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, toBePosition, currentPosition, noDuplicateInventory = getKeyPress(inventoryOpen,
-                                                                                                                                                                                   playerCoord, vitalSigns, data, coord, questToDo, questDone, prevPlayerCoord, createdItems, currentItems, pickedUpItem, itemSelected, toBePosition, currentPosition, noDuplicateInventory)
+        inventoryOpen, noDuplicateInventory = getKeyPress(inventoryOpen, noDuplicateInventory)
 
-        if vitalSigns["foodMax"] < 0 or vitalSigns["waterMax"] < 0 or vitalSigns["energyMax"] < 0:
+        if config.vitalSigns["foodMax"] < 0 or config.vitalSigns["waterMax"] < 0 or config.vitalSigns["energyMax"] < 0:
             print(position(105, 10, 'Vous êtes mort !'))
-            playerFace = position(playerCoord[0]*2+1, playerCoord[1]+2, emojiDecoder('f09f9280'))
-            displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, vitalSigns, createdItems, currentItems, pickedUpItem, playerFace)
+            playerFace = position(config.playerCoord[0]*2+1, config.playerCoord[1]+2, emojiDecoder('f09f9280'))
+            displayMap(playerFace)
             time.sleep(5)
             return
 

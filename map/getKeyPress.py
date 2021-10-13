@@ -8,56 +8,57 @@ from functions.gainEnergy import gainEnergy
 from functions.drawFood import drawFood
 from functions.looseFood import looseFood
 from map.inventory import inventory
+from functions import config
 
 
-def getKeyPress(inventoryOpen: bool, playerCoord: list, vitalSigns: dict[int], data: dict, coord: dict, questToDo: list[list], questDone: list[list], prevPlayerCoord: list, createdItems: dict, currentItems: dict, pickedUpItem: list, itemSelected: int, widthOfName: int, currentPosition: int, noDuplicateInventory) -> Union[bytes, int, int, int, int, int, int]:
+def getKeyPress(inventoryOpen: bool, noDuplicateInventory) -> Union[bytes, int, int, int, int, int, int]:
     # Si une touche du clavier est pressé
     if msvcrt.kbhit:
         # Récupérer cett touche
-        char = msvcrt.getch()
+        config.char = msvcrt.getch()
 
-    if ord(char) == 72 and not inventoryOpen:  # Up
-        prevPlayerCoord[1] = playerCoord[1]
-        prevPlayerCoord[0] = playerCoord[0]
-        playerCoord[1] -= 1
-        vitalSigns["foodMax"] -= 2
-        vitalSigns["waterMax"] -= 2
-        vitalSigns["energyMax"] -= 3
-    elif ord(char) == 80 and not inventoryOpen:  # Down
-        prevPlayerCoord[1] = playerCoord[1]
-        prevPlayerCoord[0] = playerCoord[0]
-        playerCoord[1] += 1
-        vitalSigns["foodMax"] -= 2
-        vitalSigns["waterMax"] -= 2
-        vitalSigns["energyMax"] -= 3
-    elif ord(char) == 75 and not inventoryOpen:  # Left
-        prevPlayerCoord[1] = playerCoord[1]
-        prevPlayerCoord[0] = playerCoord[0]
-        playerCoord[0] -= 1
-        vitalSigns["foodMax"] -= 2
-        vitalSigns["waterMax"] -= 2
-        vitalSigns["energyMax"] -= 3
-    elif ord(char) == 77 and not inventoryOpen:  # Right
-        prevPlayerCoord[1] = playerCoord[1]
-        prevPlayerCoord[0] = playerCoord[0]
-        playerCoord[0] += 1
-        vitalSigns["foodMax"] -= 2
-        vitalSigns["waterMax"] -= 2
-        vitalSigns["energyMax"] -= 3
+    if ord(config.char) == 72 and not inventoryOpen:  # Up
+        config.prevPlayerCoord[1] = config.playerCoord[1]
+        config.prevPlayerCoord[0] = config.playerCoord[0]
+        config.playerCoord[1] -= 1
+        config.vitalSigns["foodMax"] -= 2
+        config.vitalSigns["waterMax"] -= 2
+        config.vitalSigns["energyMax"] -= 3
+    elif ord(config.char) == 80 and not inventoryOpen:  # Down
+        config.prevPlayerCoord[1] = config.playerCoord[1]
+        config.prevPlayerCoord[0] = config.playerCoord[0]
+        config.playerCoord[1] += 1
+        config.vitalSigns["foodMax"] -= 2
+        config.vitalSigns["waterMax"] -= 2
+        config.vitalSigns["energyMax"] -= 3
+    elif ord(config.char) == 75 and not inventoryOpen:  # Left
+        config.prevPlayerCoord[1] = config.playerCoord[1]
+        config.prevPlayerCoord[0] = config.playerCoord[0]
+        config.playerCoord[0] -= 1
+        config.vitalSigns["foodMax"] -= 2
+        config.vitalSigns["waterMax"] -= 2
+        config.vitalSigns["energyMax"] -= 3
+    elif ord(config.char) == 77 and not inventoryOpen:  # Right
+        config.prevPlayerCoord[1] = config.playerCoord[1]
+        config.prevPlayerCoord[0] = config.playerCoord[0]
+        config.playerCoord[0] += 1
+        config.vitalSigns["foodMax"] -= 2
+        config.vitalSigns["waterMax"] -= 2
+        config.vitalSigns["energyMax"] -= 3
 
     # * Sleep
-    elif ord(char) == 49 and not inventoryOpen:  # 1
-        char = ' '
+    elif ord(config.char) == 49 and not inventoryOpen:  # 1
+        config.char = ' '
         print(position(105, 6, 'Je dors...' + ' ' * 10))
-        playerFace = position(playerCoord[0] * 2 + 1, playerCoord[1] + 2, emojiDecoder('f09f98b4'))
-        displayMap(data, coord, playerCoord, questToDo, questDone, prevPlayerCoord, vitalSigns, createdItems, currentItems, pickedUpItem, playerFace)
-        while vitalSigns["energyMax"] < 100:
-            vitalSigns["energyMax"] = gainEnergy(vitalSigns["energyMax"])
-            vitalSigns["foodMax"] = looseFood(vitalSigns["foodMax"])
-            drawEnergy(vitalSigns["energyMax"])
-            drawFood(vitalSigns["foodMax"])
+        playerFace = position(config.playerCoord[0] * 2 + 1, config.playerCoord[1] + 2, emojiDecoder('f09f98b4'))
+        displayMap(playerFace)
+        while config.vitalSigns["energyMax"] < 100:
+            config.vitalSigns["energyMax"] = gainEnergy(config.vitalSigns["energyMax"])
+            config.vitalSigns["foodMax"] = looseFood(config.vitalSigns["foodMax"])
+            drawEnergy(config.vitalSigns["energyMax"])
+            drawFood(config.vitalSigns["foodMax"])
         print(position(105, 6, 'Je ne dors plus !'))
 
-    char, inventoryOpen, itemSelected, currentPosition, pickedUpItem, vitalSigns = inventory(char, inventoryOpen, noDuplicateInventory, itemSelected, currentPosition, pickedUpItem, vitalSigns)
+    inventoryOpen = inventory(inventoryOpen, noDuplicateInventory)
 
-    return char, prevPlayerCoord, playerCoord, vitalSigns, currentItems, pickedUpItem, inventoryOpen, itemSelected, widthOfName, currentPosition, noDuplicateInventory
+    return inventoryOpen, noDuplicateInventory
