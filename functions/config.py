@@ -8,3 +8,6 @@ vitalSigns = {
     "foodMax": 100,
     "waterMax": 100
 }
+
+visibleCursor = '\033[?25h'
+hiddenCursor = '\033[?25l'

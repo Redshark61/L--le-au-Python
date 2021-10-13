@@ -1,6 +1,7 @@
 import os
 from random import randint
 import time
+from functions import config
 from functions.Position import clearBox, position, clearBoxWithLine
 from functions.checkLength import checkLength
 from functions.checkMod import checkMod
@@ -21,7 +22,6 @@ def main() -> None:
     maxRandom = data["maxRandom"]
     numberOfGame = data["numberOfGame"]
 
-    print("\x1b[?25h")
     tried = 0
     for _ in range(numberOfGame):
         clearBox()
@@ -31,8 +31,10 @@ def main() -> None:
         line = -3
         while(answer != rand and tried < maxTry):
             line = clearBoxWithLine(line, 3)
+            print(config.visibleCursor)
             print(position(x=105, y=3, text='Quel est mon nombre ?'))
             answer = int(input(position(x=105, y=4+line, text='')))
+            print(config.hiddenCursor)
 
             tried += 1
             if(answer < rand and tried < maxTry):
@@ -43,7 +45,6 @@ def main() -> None:
                 print(position(x=105, y=6+line, text=f"Attention, tu n'as plus que {maxTry-tried} essais"))
             elif(answer == rand and tried <= maxTry):
                 print(position(x=105, y=6+line, text="Tu as gagné !"))
-                print('\x1b[?25l')
                 break
         else:
             print(position(x=105, y=6+line, text="Tu as perdu !"))

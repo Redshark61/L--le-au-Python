@@ -1,10 +1,11 @@
 from map.map import map
 from functions.Clear import clear
+from functions import config
 
 
 def main() -> None:
     # Begining of the program
-    print('\x1b[?25l')
+    print(config.hiddenCursor)
     map()
     clear()
 
