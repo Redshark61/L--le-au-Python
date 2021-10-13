@@ -1,5 +1,5 @@
 #coding: utf-8
-import json
+from functions.checkMod import checkMod
 
 
 def checkLength(fileName: str) -> list[str]:
@@ -9,8 +9,7 @@ def checkLength(fileName: str) -> list[str]:
     It's very important that the dialog key and the filename have the same name
     """
 
-    with open('data/cinematic.json', encoding='utf-8') as f:
-        allCinematics = json.load(f)
+    allCinematics = checkMod('cinematic')
     cinematic = ''.join(allCinematics[fileName])
 
     separatedCinematic = ['']
