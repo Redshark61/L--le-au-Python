@@ -3,33 +3,33 @@ import os
 
 class Colors:
 
-    colorsBg = {
-        "brightGray": "\033[100m",
-        "brightCyan": "\033[106m",
-        "darkBlue": "\033[44m",
-        "brightYellow": "\033[103m",
-        "brightGreen": "\033[102m",
-        "darkGreen": "\033[42m",
-    }
+    def __init__(self) -> None:
+        self.colorsBg = {
+            "brightGray": "\033[100m",
+            "brightCyan": "\033[106m",
+            "darkBlue": "\033[44m",
+            "brightYellow": "\033[103m",
+            "brightGreen": "\033[102m",
+            "darkGreen": "\033[42m",
+            "red": "\033[101m"
+        }
+        self.colorsFg = {
+            "brightGray": "\033[900m",
+            "brightCyan": "\033[96m",
+            "darkBlue": "\033[34m",
+            "brightYellow": "\033[93m",
+            "brightGreen": "\033[92m",
+            "darkGray": "\033[32m",
+            "red": "\033[91m"
+        }
+        self.colorBgEnd = "\033[49m"
+        self.colorFgEnd = "\033[39m"
 
-    colorsFg = {
-        "brightGray": "\033[900m",
-        "brightCyan": "\033[96m",
-        "darkBlue": "\033[34m",
-        "brightYellow": "\033[93m",
-        "brightGreen": "\033[92m",
-        "darkGray": "\033[32m",
-        "red": "\033[91m"
-    }
-
-    colorBgEnd = "\033[49m"
-    colorFgEnd = "\033[39m"
-
-    def init() -> None:
+    def init(self) -> None:
         os.system('')
 
-    def setBackground(color: str, text: str) -> str:
-        return Colors.colorsBg[color] + text + Colors.colorBgEnd
+    def setBackground(self, color: str, text: str) -> str:
+        return self.colorsBg[color] + text + self.colorBgEnd
 
-    def setForeground(color: str, text: str) -> str:
-        return Colors.colorsFg[color] + text + Colors.colorFgEnd
+    def setForeground(self, color: str, text: str) -> str:
+        return self.colorsFg[color] + text + self.colorFgEnd
