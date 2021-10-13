@@ -3,6 +3,7 @@ import time
 import copy
 from collections import Counter
 from functions.Clear import clear
+from functions.drawRightPanel import drawRightPanel
 from functions.emojiDecoder import emojiDecoder
 from map.displayMap import displayMap
 from functions.Position import position, printBox
@@ -51,12 +52,7 @@ def map() -> None:
     drawWater(config.vitalSigns["waterMax"])
     drawEnergy(config.vitalSigns["energyMax"])
     print(position(3, 34, '-'*98))
-    print(position(105, 2, "L'île aux Pythons !".center(47, ' ')))
-    print(position(105, 3, "-"*47))
-    print(position(105, 4, "1 - Dormir"))
-    print(position(105, 5, " "*40))
-    print(position(105, 5, "2 - Ouvrir Inventaire"))
-
+    drawRightPanel()
     # Tant que le code de la touche pressé n'est pas 113 (q)
     while ord(config.char) != 113:
 

@@ -2,6 +2,7 @@ import time
 from typing import Union
 from functions.Position import clearBox
 import functions.config as config
+from functions.drawRightPanel import drawRightPanel
 
 
 def startQuest(index: int, quest: dict) -> Union[list[dict], int, bool]:
@@ -17,4 +18,5 @@ def startQuest(index: int, quest: dict) -> Union[list[dict], int, bool]:
     config.playerCoord[1] += 1
 
     clearBox()
+    drawRightPanel()
     return isQuestDone
