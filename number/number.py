@@ -9,6 +9,7 @@ from functions.checkMod import checkMod
 
 def main() -> None:
 
+    # Get the current file name in order to get the story from the json
     fileName = os.path.basename(__file__)[:-3]
     text = checkLength(fileName)
     for index, line in enumerate(text):
@@ -17,23 +18,27 @@ def main() -> None:
 
     clearBox()
 
+    # Get the neened data
     data = checkMod("number")
     maxTry = data["maxTry"]
     maxRandom = data["maxRandom"]
     numberOfGame = data["numberOfGame"]
 
     tried = 0
+    # You play as many time as needed
     for _ in range(numberOfGame):
         time.sleep(1)
         clearBox()
         answer = ''
         rand = randint(0, maxRandom)
         line = -3
+        # While it's not the right answer or you still have enough try
         while(answer != rand and tried < maxTry):
             line = clearBoxWithLine(line, 3)
             print(config.visibleCursor)
             print(position(x=105, y=3, text='Quel est mon nombre ?'))
 
+            # Check if the input is a number
             while True:
                 try:
                     print(position(x=105, y=4+line, text='   '))
