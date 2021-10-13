@@ -1,6 +1,6 @@
+import math
 from functions.Position import position
 from functions.emojiDecoder import emojiDecoder
-import math
 
 
 def drawWater(water: int) -> None:
