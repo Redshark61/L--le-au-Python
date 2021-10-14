@@ -48,7 +48,10 @@ In this game, you'll have to decode a secret message. This will give you the sil
 
 ### Fizzbuzz
 
-The last quest is random game. In fact, you dont have to do anything, just let the game play for you. You are against a certain number of monkeys and their boss. The goal is to enumerate numbers, starting from 1, and to **fizz** when the number is a multiple of 3, **buzz** if it's a multiple of 5, and **fizzbuzz** if it's both. Otherwise, you just say the number.
+The last quest is random game. In fact, you dont have to do anything, just let the game play for you. You are against a certain number of monkeys and their boss. The goal is to enumerate numbers, starting from 1, and to say **fizz** when the number is a multiple of 3, **buzz** if it's a multiple of 5, and **fizzbuzz** if it's both. Otherwise, you just say the number.
+
+- **checkChances** : this function just return a bool wich tell if the function needs to stop (because there are no monkeys anymore or the player failed)
+- **configFizzBuzz** : this file just store the important data for the fizzbuzz
 
 ## The map and graphical element
 

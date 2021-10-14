@@ -1,18 +1,13 @@
 from fizz_buzz import configFizzBuzz as conf
 
 
-def deletePlayer():
-    # Si c'était au tour d'un singe, on supprime le premier élément (qui de toute façon est un singe)
-    if conf.turn == "monkey":
+def deletePlayer() -> bool:
+    # If the current player is a monkey or the boss, we just delete him
+    if conf.turn == "monkey" or conf.turn == "boss":
         del conf.playerLeft[conf.index]
         conf.numberMonkeys -= 1
 
-    # Si c'était au tour du boss, on le supprime
-    elif conf.turn == "boss":
-        del conf.playerLeft[conf.index]
-        conf.numberMonkeys -= 1
-
-    # Si c'était au tour du joueur, on supprime le dernier élément
+    # else it's the player, and he is wrong
     else:
         conf.isPlayerWrong = True
 
