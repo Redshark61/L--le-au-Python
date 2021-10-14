@@ -42,14 +42,12 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list) -> Union[bytes, b
                     return inventoryOpen
                 else:
                     del config.pickedUpItem[index]
-                    print(position(1, 40, ' '*900))
 
                     stillInInventory = False
                     for item in config.pickedUpItem:
 
                         if item['name'] == itemName:
                             stillInInventory = True
-                            print(position(1, 1, 'still in !'))
                             break
                     if not stillInInventory:
                         if config.itemSelected == 0:
