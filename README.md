@@ -5,9 +5,15 @@
 - [Presentation](#presentation)
 - [Prerequisite](#prerequisite)
 - [Quests](#quests)
+  - [Guess the number](#guess-the-number)
+  - [Fizzbuzz](#fizzbuzz)
+  - [Ceasar Code](#ceasar-code)
 - [The map and graphical element](#the-map-and-graphical-element)
 - [Mods](#mods)
+  - [How to create new quests](#to-create-new-quests)
 - [Functions](#functions)
+  - [checkLength](#checkLength)
+  - [checkMod](#checkMod)
 - [Contribution](#contribution)
 
 ## Presentation
