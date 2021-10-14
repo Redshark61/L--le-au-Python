@@ -1,4 +1,10 @@
-def encode(sentence, move, alphabet):
+def encode(sentence: str, move: int, alphabet: list[str]) -> str:
+    """
+    Encode a ceasar code. The sentence is the sentence you want to code, move is the shift, and alphabet, the alphabet.
+
+    Returns the encoded sentence
+    """
+
     newSentence = ''
     for i in sentence.lower():
         if i not in alphabet:

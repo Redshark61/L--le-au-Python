@@ -1,4 +1,9 @@
-def decode(codedSentence, code, alphabet):
+def decode(codedSentence: str, code: int, alphabet: list[str]) -> str:
+    """
+    Decode a ceasar code. The codedSentence is the sentence coded, code is the shift, and alphabet, the alphabet.
+
+    Returns the decoded sentence
+    """
 
     newSentence = ''
     for i in codedSentence.lower():

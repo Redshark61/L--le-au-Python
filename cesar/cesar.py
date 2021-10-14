@@ -6,31 +6,44 @@ from functions.Position import position
 from functions import config
 from functions.Colors import Colors
 
+# Alphabet
 alphabet = string.ascii_lowercase
 alphabet = list(alphabet)
+
+# Player name (requested at the beginning at th game)
 name = 'Timothee'
 zen = """Beautiful is better than ugly.
 Explicit is better than implicit.
 Simple is better than complex."""
+
 randomLetter = alphabet[randint(0, 25)]
+
+# Initalization of the colors
 color = Colors()
 color.init()
 
 
 def main():
+    """
+    Main function wich runs the caesar code quest
+    """
+
     tried = 5
     decodedInput = ''
     code = alphabet.index(randomLetter)
+
     print(position(105, 2, 'Règles :'.center(47, '-')))
     print(position(105, 3, '- Ne rentre rien pour avoir le zen décodé'))
     print(position(105, 4, '- Rentre une lettre pour essayer de trouver le'))
     print(position(105, 5, '  cryptage du zen'))
     print(position(105, 6, '- Rentre plusieurs lettres pour décoder ton nom'))
 
+    # We print the zen of python
     for index, value in enumerate(zen.split('\n')):
         coded = encode(value, code, alphabet)
         print(position(x=105, y=8+index, text=coded))
 
+    # While the name is not decoded, or the player has no more tries
     while decodedInput != name.lower() and tried >= 0:
         print(config.hiddenCursor)
         print(position(x=105, y=12, text="Entre une lettre : "))
@@ -38,15 +51,20 @@ def main():
         letter = str(input(position(x=105, y=13, text='')))
         print(config.hiddenCursor)
 
+        # If he doesn't type anything, we  display the zen without any encoding
         if letter == '':
             for index, value in enumerate(zen.split('\n')):
                 print(position(x=105, y=14+index+1, text=value))
+
+        # If there is only one letter, we display the zen coded with the previous letter
         elif len(letter) == 1:
             code = alphabet.index(letter)+1
             for index, value in enumerate(zen.split('\n')):
                 coded = encode(value, code, alphabet)
                 print(position(x=105, y=14+index+1, text=coded))
-        if len(letter) > 1:
+
+        # Else, the plyer try to decode his name
+        elif len(letter) > 1:
             tryInput = letter
             code = alphabet.index(randomLetter)
             print(config.hiddenCursor)
