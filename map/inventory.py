@@ -58,14 +58,14 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
 
 def openInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
     if len(noDuplicateInventory) == 0:
-        print(position(105, 7, "Ton inventaire est vide !"))
+        print(position(105, 9, "Ton inventaire est vide !"))
         time.sleep(2)
-        print(position(105, 7, " "*40))
+        print(position(105, 9, " "*40))
         return True
 
-    print(position(105, 7, "-"*47))
+    print(position(105, 9, "-"*47))
     print(position(105, 5, "2 - Fermer l'inventaire"))
-    print(position(105, 8, "3 - Consommer"))
+    print(position(105, 10, "3 - Consommer"))
     config.itemSelected = 0
     widthOfName = len(noDuplicateInventory[config.itemSelected][0])
     config.currentPosition = 3
