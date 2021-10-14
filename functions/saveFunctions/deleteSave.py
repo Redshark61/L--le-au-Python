@@ -8,4 +8,4 @@ def deleteSave(saveInSavesFolder, fileChoice):
         case 'o':
             os.remove(f"./saves/{saveInSavesFolder[fileChoice]}")
         case 'n':
-            pass
+            return

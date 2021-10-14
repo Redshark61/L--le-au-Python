@@ -1,5 +1,6 @@
 # Map data
 coord, data, playerCoord, questToDo, prevPlayerCoord, questDone, createdItems, currentItems, pickedUpItem = [], [], [], [], [], [], [], [], []
+key = 0
 char = ' '
 
 # Inventory

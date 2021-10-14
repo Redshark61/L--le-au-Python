@@ -12,41 +12,28 @@ from functions.Position import position, printBox
 from functions.checkMod import checkMod
 from functions.drawHealth import drawFood, drawWater, drawEnergy
 from map.getKeyPress import getKeyPress
-from map.randomItemPosition import randomItemPosition
 from map.closeInventory import closeInventory
 from functions import config
+from functions.saveFunctions.checkSave import checkSave
 
 
 def mapLoop(saveName) -> None:
 
     clear()
 
+    checkSave(saveName)
+
     # Récupérer la map
     config.data = checkMod('map')
 
-    # Récupérer les coordonnés
-    config.coord = checkMod('coordinates')
-
-    config.createdItems, config.currentItems = randomItemPosition()
-    config.pickedUpItem = []
-
-    # Coordonnés du joueur
-    config.playerCoord.append(config.coord['player']["coords"][0])
-    config.playerCoord.append(config.coord['player']["coords"][1])
     config.prevPlayerCoord = copy.deepcopy(config.playerCoord)
 
     print('')
     # global char
-    config.questToDo = []
-    config.questDone = []
     inventoryOpen = False
 
     printBox(103, 1, 50, 38)
     printBox(1, 30, 101, 9)
-
-    for quest in config.coord:
-        if quest != 'player':
-            config.questToDo.append({quest: config.coord[quest]['coords']})
 
     drawFood(config.vitalSigns["foodMax"])
     drawWater(config.vitalSigns["waterMax"])
@@ -93,19 +80,26 @@ def mapLoop(saveName) -> None:
             time.sleep(5)
             return
 
+    save(saveName)
+
+    return
+
+
+def save(saveName):
     today = datetime.now()
 
-    with open(f"saves/{saveName}", encoding='utf-8') as f:
+    with open(saveName, encoding='utf-8') as f:
         savedData = json.load(f)
 
     savedData['playerCoord'] = config.playerCoord
     savedData['currentDate'] = today.strftime("%d/%m/%Y %H:%M:%S")
-    savedData['key'] = 0
+    savedData['key'] = config.key
     savedData['health'] = config.vitalSigns
     savedData['inventory'] = config.pickedUpItem
     savedData['itemPosition'] = config.createdItems
+    savedData['currentItems'] = config.currentItems
+    savedData['questDone'] = config.questDone
+    savedData['questToDo'] = config.questToDo
 
-    with open(f"saves/{saveName}", 'w', encoding='utf-8') as f:
+    with open(saveName, 'w', encoding='utf-8') as f:
         json.dump(savedData, f, indent=4)
-
-    return

@@ -25,7 +25,7 @@ def main() -> None:
             clear()
             match choice:
                 case '1':
-                    saveName = save
+                    saveName = f"./saves/{saveInSavesFolder[0]}"
                 case '2':
                     deleteSave(saveInSavesFolder, 0)
                     clear()
@@ -43,7 +43,7 @@ def main() -> None:
                     fileChoice = int(input(''))
                     clear()
                     print(f"Tu as choisis {saveInSavesFolder[int(fileChoice)-1][5:-5]}")
-                    saveName = saveInSavesFolder[int(fileChoice)-1]
+                    saveName = f"./saves/{saveInSavesFolder[int(fileChoice)-1]}"
                     choiceSave(saveInSavesFolder, fileChoice)
                 case '2':
                     saveName = initSave()
