@@ -62,7 +62,11 @@ The last quest is random game. In fact, you dont have to do anything, just let t
 
 ## The map and graphical element
 
-All the elements related to the map / animations are in the map folder.
+All the elements related to the map / animations are in the *map* folder. I won't explain everything, this folder is too heavy, but I'll explain the main part :
+
+- **displayMap** : thif file draw the map. In fact it loops over all the collumns, then the row of a json containing the elements of the map. If the current row and collumn is the same as an element (the player, an item, a tree, a quest...) the cell is not empty but it's another character. It's very easy then to add element on the map.
+- **getKeyPress** : it handle all the keypress using the *msvcrt* module from microsoft to read the keyboard input without typing *enter* everytime.
+- **inventory** : this file work with the inventory. You can move the arrow, and eat elements.
 
 ## Mods
 
