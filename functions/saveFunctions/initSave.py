@@ -1,8 +1,8 @@
 import json
-from datetime import date
+from datetime import datetime
 from functions import config
 
-today = date.today()
+today = datetime.now()
 
 
 def initSave():
@@ -12,6 +12,8 @@ def initSave():
         "playerName": playerName,
         "currentDate": currentDate
     }
-    with open(f'./saves/save-{playerName}.json', 'w', encoding='utf-8') as f:
-        json.dump(save, f)
+    saveName = f"save-{playerName}.json"
+    with open(f'./saves/{saveName}', 'w', encoding='utf-8') as f:
+        json.dump(save, f, indent=4)
     print(config.hiddenCursor)
+    return saveName

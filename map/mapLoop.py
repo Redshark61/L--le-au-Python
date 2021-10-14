@@ -1,7 +1,9 @@
 # coding: utf-8
+import json
 import time
 import copy
 from collections import Counter
+from datetime import datetime
 from functions.Clear import clear
 from functions.drawRightPanel import drawRightPanel
 from functions.emojiDecoder import emojiDecoder
@@ -12,10 +14,10 @@ from functions.drawHealth import drawFood, drawWater, drawEnergy
 from map.getKeyPress import getKeyPress
 from map.randomItemPosition import randomItemPosition
 from map.closeInventory import closeInventory
-import functions.config as config
+from functions import config
 
 
-def mapLoop() -> None:
+def mapLoop(saveName) -> None:
 
     clear()
 
@@ -90,5 +92,20 @@ def mapLoop() -> None:
             displayMap(playerFace)
             time.sleep(5)
             return
+
+    today = datetime.now()
+
+    with open(f"saves/{saveName}", encoding='utf-8') as f:
+        savedData = json.load(f)
+
+    savedData['playerCoord'] = config.playerCoord
+    savedData['currentDate'] = today.strftime("%d/%m/%Y %H:%M:%S")
+    savedData['key'] = 0
+    savedData['health'] = config.vitalSigns
+    savedData['inventory'] = config.pickedUpItem
+    savedData['itemPosition'] = config.createdItems
+
+    with open(f"saves/{saveName}", 'w', encoding='utf-8') as f:
+        json.dump(savedData, f, indent=4)
 
     return

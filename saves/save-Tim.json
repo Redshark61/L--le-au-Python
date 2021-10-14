@@ -1,1 +1,95 @@
-{"playerName": "Tim", "currentDate": "14/10/2021 00:00:00"}
+{
+    "playerName": "Tim",
+    "currentDate": "14/10/2021 00:00:00",
+    "playerCoord": [31, 15],
+    "key": 0,
+    "health": { "energyMax": 13, "foodMax": 42, "waterMax": 42 },
+    "inventory": [
+        {
+            "number": 15,
+            "name": "Eau",
+            "type": "liquid",
+            "nutrition": 10,
+            "spawn": "generic",
+            "mark": "f09fa789"
+        },
+        {
+            "number": 15,
+            "name": "Eau",
+            "type": "liquid",
+            "nutrition": 10,
+            "spawn": "generic",
+            "mark": "f09fa789"
+        },
+        {
+            "number": 5,
+            "name": "Caca",
+            "type": "food",
+            "nutrition": -10,
+            "spawn": "generic",
+            "mark": "f09f92a9"
+        },
+        {
+            "number": 15,
+            "name": "Banane",
+            "type": "food",
+            "nutrition": 10,
+            "spawn": "generic",
+            "mark": "f09f8d8c"
+        },
+        {
+            "number": 15,
+            "name": "Banane",
+            "type": "food",
+            "nutrition": 10,
+            "spawn": "generic",
+            "mark": "f09f8d8c"
+        },
+        {
+            "number": 15,
+            "name": "Banane",
+            "type": "food",
+            "nutrition": 10,
+            "spawn": "generic",
+            "mark": "f09f8d8c"
+        },
+        {
+            "number": 15,
+            "name": "Eau",
+            "type": "liquid",
+            "nutrition": 10,
+            "spawn": "generic",
+            "mark": "f09fa789"
+        }
+    ],
+    "itemPosition": [
+        { "banana": [20, 9] },
+        { "banana": [40, 9] },
+        { "banana": [12, 13] },
+        { "banana": [19, 13] },
+        { "banana": [28, 15] },
+        { "banana": [34, 14] },
+        { "banana": [26, 19] },
+        { "banana": [35, 12] },
+        { "banana": [17, 9] },
+        { "banana": [16, 15] },
+        { "banana": [14, 9] },
+        { "banana": [24, 14] },
+        { "water": [38, 11] },
+        { "water": [28, 14] },
+        { "water": [39, 9] },
+        { "water": [10, 15] },
+        { "water": [41, 13] },
+        { "water": [11, 11] },
+        { "water": [24, 17] },
+        { "water": [24, 11] },
+        { "water": [42, 9] },
+        { "water": [22, 20] },
+        { "water": [17, 9] },
+        { "water": [40, 12] },
+        { "poo": [34, 9] },
+        { "poo": [12, 17] },
+        { "poo": [10, 17] },
+        { "poo": [19, 10] }
+    ]
+}
