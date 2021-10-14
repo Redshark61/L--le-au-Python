@@ -1,16 +1,21 @@
-def deletePlayer(index: str, turn: str, playerLeft: list, numberMonkeys: int, isPlayerWrong: bool) -> tuple[bool, list, int]:
-    # Si c'était au tour d'un singe, on supprime le premier élément (qui de toute façon est un singe)
-    if turn == "monkey":
-        del playerLeft[index]
-        numberMonkeys -= 1
+from fizz_buzz import configFizzBuzz as conf
 
-    # Si c'était au tour du boss, on supprime l'avant dernier élément
-    elif turn == "boss":
-        del playerLeft[index]
-        numberMonkeys -= 1
+
+def deletePlayer():
+    # Si c'était au tour d'un singe, on supprime le premier élément (qui de toute façon est un singe)
+    if conf.turn == "monkey":
+        del conf.playerLeft[conf.index]
+        conf.numberMonkeys -= 1
+
+    # Si c'était au tour du boss, on le supprime
+    elif conf.turn == "boss":
+        del conf.playerLeft[conf.index]
+        conf.numberMonkeys -= 1
 
     # Si c'était au tour du joueur, on supprime le dernier élément
     else:
-        isPlayerWrong = True
+        conf.isPlayerWrong = True
 
-    return isPlayerWrong, playerLeft, numberMonkeys
+    if conf.numberMonkeys == 0:
+        return True
+    return False

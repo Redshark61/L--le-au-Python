@@ -5,6 +5,7 @@
         "maxChance": 70,
         "winFizz": "Fizz",
         "winBuzz": "Buzz",
+        "winFizzBuzz": "FizzBuzz",
         "loose": "Le singe ne sais pas quoi dire ! Il a perdu",
         "play": "Le singe dit : "
     },
