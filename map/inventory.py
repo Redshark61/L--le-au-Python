@@ -1,12 +1,12 @@
-from typing import Union
 import time
 from functions.Position import position
 from functions.emojiDecoder import emojiDecoder
 from functions import config
 from map.closeInventory import closeInventory
+from map.eating import eating
 
 
-def inventory(inventoryOpen: bool, noDuplicateInventory: list) -> Union[bytes, bool, int, int]:
+def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
 
     # * Open inventory
     if ord(config.char) == 50 and not inventoryOpen:  # ord(config.char) = 50 -> 2
@@ -30,30 +30,24 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list) -> Union[bytes, b
         for index, value in enumerate(config.pickedUpItem):
             itemName = value["name"]
             if itemName == noDuplicateInventory[config.itemSelected][0]:
-
-                if itemName == noDuplicateInventory[config.itemSelected][0] and value["type"] == "food":
-                    config.vitalSigns['foodMax'] += config.pickedUpItem[config.itemSelected]['nutrition']
-                if itemName == noDuplicateInventory[config.itemSelected][0] and value["type"] == "liquid":
-                    config.vitalSigns['waterMax'] += config.pickedUpItem[config.itemSelected]['nutrition']
-                print(position(1, 1, ' '*40))
+                eating(noDuplicateInventory, itemName, value)
 
                 if len(config.pickedUpItem) == 1:
                     config.pickedUpItem = []
                     return inventoryOpen
-                else:
-                    del config.pickedUpItem[index]
+                del config.pickedUpItem[index]
 
-                    stillInInventory = False
-                    for item in config.pickedUpItem:
+                stillInInventory = False
+                for item in config.pickedUpItem:
 
-                        if item['name'] == itemName:
-                            stillInInventory = True
-                            break
-                    if not stillInInventory:
-                        if config.itemSelected == 0:
-                            break
-                        leftInventory(noDuplicateInventory)
-                    break
+                    if item['name'] == itemName:
+                        stillInInventory = True
+                        break
+                if not stillInInventory:
+                    if config.itemSelected == 0:
+                        break
+                    leftInventory(noDuplicateInventory)
+                break
 
     # * Close inventory
     elif ord(config.char) == 50 and inventoryOpen:
@@ -62,7 +56,7 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list) -> Union[bytes, b
     return inventoryOpen
 
 
-def openInventory(noDuplicateInventory):
+def openInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
     if len(noDuplicateInventory) == 0:
         print(position(105, 7, "Ton inventaire est vide !"))
         time.sleep(2)
@@ -79,7 +73,7 @@ def openInventory(noDuplicateInventory):
     return False
 
 
-def leftInventory(noDuplicateInventory):
+def leftInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
     config.itemSelected -= 1
     prevWidth = len(noDuplicateInventory[config.itemSelected][0])
     print(position(config.currentPosition, 37, ' '.center(prevWidth, ' ')))
@@ -92,7 +86,7 @@ def leftInventory(noDuplicateInventory):
     return noDuplicateInventory
 
 
-def rightInventory(noDuplicateInventory):
+def rightInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
     config.itemSelected += 1
     prevWidth = len(noDuplicateInventory[config.itemSelected-1][0])
     print(position(config.currentPosition, 37, ' '.center(prevWidth, ' ')))
