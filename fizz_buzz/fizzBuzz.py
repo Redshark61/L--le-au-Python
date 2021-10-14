@@ -7,7 +7,6 @@ from fizz_buzz.jsonFetch import jsonFetch
 from fizz_buzz.setTurn import setTurn
 from functions.Colors import Colors
 from functions.Position import position, clearBoxWithLine, clearBox
-from fizz_buzz.deletePlayer import deletePlayer
 from functions.checkLength import checkLength
 from fizz_buzz import configFizzBuzz as conf
 from fizz_buzz.checkChances import checkChances
@@ -35,7 +34,6 @@ def main() -> None:
 
     # Vérifier la présence d'un mod
     maxMonkey, minMonkey, maxBoss, minBoss, maxPlayer, minPlayer, data = jsonFetch()
-    print(position(1, 1, conf.numberMonkeys))
 
     # Les chances sont attribué aléatoirement entre le max et le min défini dans le json
     chanceMonkey = randint(minMonkey, maxMonkey+1)
