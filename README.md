@@ -4,6 +4,7 @@
 
 - [Presentation](#presentation)
 - [Prerequisite](#prerequisite)
+- [Installation](#installation)
 - [Quests](#quests)
   - [Guess the number](#guess-the-number)
   - [Fizzbuzz](#fizzbuzz)
@@ -28,9 +29,12 @@ You need to take care of your energy, thirst and food, otherwise you could die. 
 
 ## Prerequisite
 
-In order for this game to works, and have the best graphical experience you must install the new windows terminal. Indeed, this game use emojis to display the player, palm trees, quests... You don't _need_ to install this console, but if you don't you'll just have squares in place of emojis.
+- The new windows terminal, just click on [this link](https://www.microsoft.com/fr-fr/p/windows-terminal/9n0dx20hk701#activetab=pivot:overviewtab) to download it from the windows store
+- Python 3.10
 
-To install the new windows terminal, go to the `windows store` and type `terminal` in the search box. You'll then see the new Windows terminal.
+## Installation
+
+Just download all the folder and launch the main.py file.
 
 ## Quests
 
@@ -52,6 +56,9 @@ The last quest is random game. In fact, you dont have to do anything, just let t
 
 - **checkChances** : this function just return a bool wich tell if the function needs to stop (because there are no monkeys anymore or the player failed)
 - **configFizzBuzz** : this file just store the important data for the fizzbuzz
+- **deletePlayer** : this file delete the player wich failed. It returns *True* if there is a reason for the program to stop (no more monkeys or the player failed). Otherwise it just returns *False*.
+- **jsonFetch** : just get all the data from the json and returns it.
+- **setTurn** : set the turn in order to know who is currently playing.
 
 ## The map and graphical element
 
