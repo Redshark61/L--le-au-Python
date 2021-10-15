@@ -15,6 +15,7 @@ from map.getKeyPress import getKeyPress
 from map.closeInventory import closeInventory
 from functions import config
 from functions.saveFunctions.checkSave import checkSave
+from map.displayKey import displayKey
 
 
 def mapLoop(saveName) -> None:
@@ -45,6 +46,7 @@ def mapLoop(saveName) -> None:
 
         # Afficher la carte
         isQuestDone = displayMap()
+        displayKey()
 
         if isQuestDone:
             displayMap()

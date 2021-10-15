@@ -13,6 +13,7 @@ def startQuest(index: int, quest: dict) -> Union[list[dict], int, bool]:
     if hasWon:
         config.questDone.append(config.questToDo[index][quest])
         config.questToDo.pop(index)
+        config.key += 1
         time.sleep(2)
 
     config.playerCoord[1] += 1
