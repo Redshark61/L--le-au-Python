@@ -1,3 +1,4 @@
+from functions.Position import position
 from functions.emojiDecoder import emojiDecoder
 from functions import config
 
@@ -6,6 +7,7 @@ def mapBackground(color: type, char: str, map: str, j: int, row: int, col: int) 
     """
     Function wich return a map (string) by checking the number of the current cell (j) and chnaging it's color, or symbol to be displayed
     """
+    isLeaving = False
 
     # Stone floor
     if j == 1:
@@ -37,22 +39,24 @@ def mapBackground(color: type, char: str, map: str, j: int, row: int, col: int) 
         else:
             map += color.setBackground('brightCyan', emojiDecoder('f09f9fab'))
     # Bridge on lava displayed
-    elif j == 10 and config.key == 1:
+    elif j == 10 and config.key <= 1:
         if row == config.playerCoord[1] and col == config.playerCoord[0]:
-            map += color.setBackground('DarkYellow', char)
+            map += color.setBackground('darkYellow', char)
         else:
-            map += color.setBackground('DarkYellow', emojiDecoder('f09f9fab'))
+            map += color.setBackground('darkYellow', emojiDecoder('f09f9fab'))
     # Birdge on lava not displayed
     elif j == 10 and config.key < 1:
-        map += color.setBackground('DarkYellow', char)
+        map += color.setBackground('darkYellow', char)
     # Lava
     elif j == 8:
-        map += color.setBackground('DarkYellow', char)
+        map += color.setBackground('darkYellow', char)
     # Key closed
     elif j == 9 and config.key < 1:
-        map += color.setBackground('DarkYellow', emojiDecoder("f09f9492"))
+        map += color.setBackground('darkYellow', emojiDecoder("f09f9492"))
     # Key opened
-    elif j == 9 and config.key == 1:
-        map += color.setBackground('DarkYellow', emojiDecoder("f09f9493"))
+    elif j == 9 and config.key <= 1:
+        map += color.setBackground('darkYellow', emojiDecoder("f09f9493"))
+        if row == config.playerCoord[1] and col == config.playerCoord[0]:
+            config.isLeaving = True
 
     return map

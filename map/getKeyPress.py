@@ -37,7 +37,7 @@ def getKeyPress(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> Union
         print(position(105, 9, 'Je dors...' + ' ' * 10))
         playerFace = position(config.playerCoord[0] * 2 + 1, config.playerCoord[1] + 2, emojiDecoder('f09f98b4'))
         displayMap(playerFace)
-        while config.vitalSigns["energyMax"] < 100:
+        while config.vitalSigns["energyMax"] < 100 and config.vitalSigns['foodMax'] > 20:
             config.vitalSigns["energyMax"] = gainEnergy(config.vitalSigns["energyMax"])
             config.vitalSigns["foodMax"] = looseFood(config.vitalSigns["foodMax"])
             drawEnergy(config.vitalSigns["energyMax"])

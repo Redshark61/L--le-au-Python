@@ -16,12 +16,12 @@ from map.closeInventory import closeInventory
 from functions import config
 from functions.saveFunctions.checkSave import checkSave
 from map.displayKey import displayKey
+from map.finalCinematic import finalCinematic
 
 
 def mapLoop(saveName) -> None:
 
     clear()
-
     checkSave(saveName)
 
     # Récupérer la map
@@ -82,7 +82,12 @@ def mapLoop(saveName) -> None:
             time.sleep(5)
             return
 
-    save(saveName)
+        if config.isLeaving:
+            print("here")
+            finalCinematic()
+            return
+
+        save(saveName)
 
     return
 

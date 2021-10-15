@@ -2,6 +2,7 @@
 coord, data, playerCoord, questToDo, prevPlayerCoord, questDone, createdItems, currentItems, pickedUpItem = [], [], [], [], [], [], [], [], []
 key = 0
 char = ' '
+isLeaving = False
 
 # Inventory
 itemSelected, toBePosition, currentPosition = 0, 0, 0

@@ -94,5 +94,4 @@ def displayMap(playerFace: str = None) -> None:
 
             isQuestDone = startQuest(index, quest)
 
-    # In either case we return the questToDo and the next player's position
     return isQuestDone
