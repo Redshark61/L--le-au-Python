@@ -9,11 +9,13 @@ class Colors:
             "brightCyan": "\033[106m",
             "darkBlue": "\033[44m",
             "brightYellow": "\033[103m",
+            "DarkYellow": "\033[43m",
             "brightGreen": "\033[102m",
             "darkGreen": "\033[42m",
             "red": "\033[101m"
         }
         self.colorsFg = {
+            "DarkYellow": "\033[33m",
             "brightGray": "\033[900m",
             "brightCyan": "\033[96m",
             "darkBlue": "\033[34m",

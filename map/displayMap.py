@@ -60,7 +60,7 @@ def displayMap(playerFace: str = None) -> None:
                 # If the current cell is the player, then we change its char to be the player's emoji
                 else:
                     if row == config.playerCoord[1] and col == config.playerCoord[0]:
-                        if j == 3 or j == 2:
+                        if j == 3 or j == 2 or j == 8:
                             config.playerCoord[0] = config.prevPlayerCoord[0]
                             config.playerCoord[1] = config.prevPlayerCoord[1]
                             return

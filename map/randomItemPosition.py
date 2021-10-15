@@ -24,7 +24,7 @@ def randomItemPosition() -> list[dict]:
             itemPosX = 0
             itemPosY = 0
             if currentItems[item]['spawn'] == "generic":
-                while mapCoord[itemPosY][itemPosX] == 2 or mapCoord[itemPosY][itemPosX] == 3:
+                while mapCoord[itemPosY][itemPosX] == 2 or mapCoord[itemPosY][itemPosX] == 3 or mapCoord[itemPosY][itemPosX] == 8:
                     itemPosX = random.randint(0, len(mapCoord[0])-1)
                     itemPosY = random.randint(0, len(mapCoord)-1)
                 createdItems.append({item: [itemPosX, itemPosY]})
