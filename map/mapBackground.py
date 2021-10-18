@@ -37,7 +37,7 @@ def mapBackground(color: type, char: str, map: str, j: int, row: int, col: int) 
         else:
             map += color.setBackground('brightCyan', emojiDecoder('f09f9fab'))
     # Bridge on lava displayed
-    elif j == 10 and config.key <= 1:
+    elif j == 10 and config.key >= 1:
         if row == config.playerCoord[1] and col == config.playerCoord[0]:
             map += color.setBackground('darkYellow', char)
         else:
