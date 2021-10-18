@@ -43,12 +43,14 @@ def displayMap(playerFace: str = None) -> None:
                         if col == currentitemPosX and row == currentitemPosY:
                             char = emojiDecoder(config.currentItems[name]["mark"])
                         if currentitemPosX == config.playerCoord[0] and currentitemPosY == config.playerCoord[1]:
-                            if config.InventorySize <= 5:
+                            if config.InventorySize < config.inventoryMax:
                                 config.InventorySize += config.currentItems[name]["size"]
                                 config.pickedUpItem.append(config.currentItems[name])
                                 del config.createdItems[index]
+                                print(position(1, 1, config.InventorySize))
+                                print(position(1, 2, config.inventoryMax))
                                 break
-            if config.InventorySize >= 5:
+            if config.InventorySize >= config.inventoryMax:
                 print(position(3, 38, color.setBackground('red', 'Tu es plein')))
 
             # For every positioned element in the json

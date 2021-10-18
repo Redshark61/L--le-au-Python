@@ -16,7 +16,6 @@ def randomItemPosition() -> list[dict]:
     mapCoord = checkMod("map")
 
     createdItems = []
-    # currentItems = items
     # For each item wich needs to be created
     for item in currentItems:
         # We create the number of item desired
