@@ -12,11 +12,11 @@ def randomItemPosition() -> list[dict]:
         'item' : [X,Y]
     ]
     """
-    items = checkMod("items")
+    currentItems = checkMod("items")
     mapCoord = checkMod("map")
 
     createdItems = []
-    currentItems = items
+    # currentItems = items
     # For each item wich needs to be created
     for item in currentItems:
         # We create the number of item desired

@@ -26,6 +26,7 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
     elif ord(config.char) == 51 and inventoryOpen:  # Eat element
         print(position(3, 35, ' '*40))
         print(position(3, 36, ' '*40))
+        config.InventorySize -= 1
 
         for index, value in enumerate(config.pickedUpItem):
             itemName = value["name"]

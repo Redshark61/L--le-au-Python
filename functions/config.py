@@ -5,7 +5,7 @@ char = ' '
 isLeaving = False
 
 # Inventory
-itemSelected, toBePosition, currentPosition = 0, 0, 0
+InventorySize, itemSelected, toBePosition, currentPosition = 0, 0, 0, 0
 noDuplicateInventory = []
 
 # Health

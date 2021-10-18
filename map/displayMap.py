@@ -19,7 +19,7 @@ def displayMap(playerFace: str = None) -> None:
     color.init()
 
     # Move the cursor all the way to the top
-    print(position(1, 0, ''))
+    # print(position(1, 0, ''))
 
     row = 0
     mapBg = ''
@@ -43,9 +43,13 @@ def displayMap(playerFace: str = None) -> None:
                         if col == currentitemPosX and row == currentitemPosY:
                             char = emojiDecoder(config.currentItems[name]["mark"])
                         if currentitemPosX == config.playerCoord[0] and currentitemPosY == config.playerCoord[1]:
-                            config.pickedUpItem.append(config.currentItems[name])
-                            del config.createdItems[index]
-                            break
+                            if config.InventorySize <= 5:
+                                config.InventorySize += config.currentItems[name]["size"]
+                                config.pickedUpItem.append(config.currentItems[name])
+                                del config.createdItems[index]
+                                break
+            if config.InventorySize >= 5:
+                print(position(3, 38, color.setBackground('red', 'Tu es plein')))
 
             # For every positioned element in the json
             for element in config.coord:
@@ -81,7 +85,7 @@ def displayMap(playerFace: str = None) -> None:
 
         row += 1
         mapBg += '\n'
-    print(mapBg)
+    print(position(1, 1, mapBg))
 
     # Once the mapBg is displayed, we check if the player's position is a quest to do
     for index, quest in enumerate(config.questToDo):

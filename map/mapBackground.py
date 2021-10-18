@@ -1,4 +1,3 @@
-from functions.Position import position
 from functions.emojiDecoder import emojiDecoder
 from functions import config
 
@@ -7,7 +6,6 @@ def mapBackground(color: type, char: str, map: str, j: int, row: int, col: int) 
     """
     Function wich return a map (string) by checking the number of the current cell (j) and chnaging it's color, or symbol to be displayed
     """
-    isLeaving = False
 
     # Stone floor
     if j == 1:

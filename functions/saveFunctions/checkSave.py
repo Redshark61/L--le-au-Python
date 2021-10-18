@@ -1,5 +1,4 @@
 import json
-import time
 from functions import config
 from functions.checkMod import checkMod
 from map.randomItemPosition import randomItemPosition
@@ -20,6 +19,7 @@ def checkSave(saveName):
         config.createdItems = savedData['itemPosition']
         config.questDone = savedData['questDone']
         config.questToDo = savedData['questToDo']
+        config.InventorySize = savedData['inventorySize']
     else:
 
         # Récupérer les coordonnés

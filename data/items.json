@@ -5,7 +5,8 @@
         "type": "food",
         "nutrition": 10,
         "spawn": "generic",
-        "mark": "f09f8d8c"
+        "mark": "f09f8d8c",
+        "size": 1
     },
     "water": {
         "number": 30,
@@ -13,7 +14,8 @@
         "type": "liquid",
         "nutrition": 10,
         "spawn": "generic",
-        "mark": "f09fa789"
+        "mark": "f09fa789",
+        "size": 1
     },
     "poo": {
         "number": 5,
@@ -21,6 +23,7 @@
         "type": "food",
         "nutrition": -10,
         "spawn": "generic",
-        "mark": "f09f92a9"
+        "mark": "f09f92a9",
+        "size": 1
     }
 }

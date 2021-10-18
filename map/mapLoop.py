@@ -58,7 +58,6 @@ def mapLoop(saveName) -> None:
             noDuplicateInventory = []
             numbersOfItem = []
         else:
-            print(position(1, 1, ' '*40))
             numbersOfItem = Counter(item['name'] for item in config.pickedUpItem)
             print(position(3, 35, ' '*40))
             print(position(3, 36, ' '*40))
@@ -107,6 +106,7 @@ def save(saveName):
     savedData['currentItems'] = config.currentItems
     savedData['questDone'] = config.questDone
     savedData['questToDo'] = config.questToDo
+    savedData['inventorySize'] = config.InventorySize
 
     with open(saveName, 'w', encoding='utf-8') as f:
         json.dump(savedData, f, indent=4)
