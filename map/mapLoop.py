@@ -76,7 +76,7 @@ def mapLoop(saveName) -> None:
 
         if config.vitalSigns["foodMax"] <= 0 or config.vitalSigns["waterMax"] <= 0 or config.vitalSigns["energyMax"] <= 0:
             print(position(105, 10, 'Vous êtes mort !'))
-            playerFace = position(config.playerCoord[0]*2+1, config.playerCoord[1]+2, emojiDecoder('f09f9280'))
+            playerFace = position(config.playerCoord[0]*2+1, config.playerCoord[1]+1, emojiDecoder('f09f9280'))
             displayMap(playerFace)
             time.sleep(5)
             return
