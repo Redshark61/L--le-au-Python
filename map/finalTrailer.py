@@ -7,7 +7,7 @@ from functions.emojiDecoder import emojiDecoder
 from functions.Position import position
 
 
-def finalCinematic():
+def finalTrailer():
     clear()
     color = Colors()
     color.init()

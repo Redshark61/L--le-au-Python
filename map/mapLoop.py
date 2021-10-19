@@ -16,7 +16,7 @@ from map.closeInventory import closeInventory
 from functions import config
 from functions.saveFunctions.checkSave import checkSave
 from map.displayKey import displayKey
-from map.finalCinematic import finalCinematic
+from map.finalTrailer import finalTrailer
 
 
 def mapLoop(saveName) -> None:
@@ -50,8 +50,7 @@ def mapLoop(saveName) -> None:
         displayKey()
 
         if config.isLeaving:
-            print("here")
-            finalCinematic()
+            finalTrailer()
             return
 
         if isQuestDone:
