@@ -75,6 +75,8 @@ def openInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
 
 
 def leftInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
+    if config.itemSelected == 0:
+        return noDuplicateInventory
     config.itemSelected -= 1
     prevWidth = len(noDuplicateInventory[config.itemSelected][0])
     print(position(config.currentPosition, 37, ' '.center(prevWidth, ' ')))
@@ -88,6 +90,9 @@ def leftInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
 
 
 def rightInventory(noDuplicateInventory: list[tuple]) -> list[tuple]:
+    if config.itemSelected == len(noDuplicateInventory)-1:
+        return noDuplicateInventory
+
     config.itemSelected += 1
     prevWidth = len(noDuplicateInventory[config.itemSelected-1][0])
     print(position(config.currentPosition, 37, ' '.center(prevWidth, ' ')))
