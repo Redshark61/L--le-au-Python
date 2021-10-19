@@ -7,5 +7,6 @@ def eating(noDuplicateInventory: list[tuple], itemName: str, value: dict):
     elif itemName == noDuplicateInventory[config.itemSelected][0] and value["type"] == "liquid" and config.vitalSigns['waterMax']+value['nutrition'] <= 100:
         config.vitalSigns['waterMax'] += config.pickedUpItem[config.itemSelected]['nutrition']
     else:
-        return False
-    return True
+        return False, value["type"]
+
+    return True, value["type"]
