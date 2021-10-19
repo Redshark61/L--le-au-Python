@@ -14,7 +14,7 @@ def main() -> None:
     text = checkLength(fileName)
     for index, line in enumerate(text):
         print(position(105, 4+index+1, line), flush=True)
-        time.sleep(0.2)
+        time.sleep(2)
 
     clearBox()
 

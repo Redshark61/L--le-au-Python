@@ -29,7 +29,7 @@ def main() -> None:
     # Print the story
     for index, line in enumerate(text):
         print(position(105, 4+index+1, line), flush=True)
-        time.sleep(0.2)
+        time.sleep(2)
 
     # Cleat the right panel
     clearBox()
