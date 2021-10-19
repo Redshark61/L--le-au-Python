@@ -18,9 +18,6 @@ def displayMap(playerFace: str = None) -> None:
     color = Colors()
     color.init()
 
-    # Move the cursor all the way to the top
-    # print(position(1, 0, ''))
-
     row = 0
     mapBg = ''
     isQuestDone = False
@@ -47,8 +44,6 @@ def displayMap(playerFace: str = None) -> None:
                                 config.InventorySize += config.currentItems[name]["size"]
                                 config.pickedUpItem.append(config.currentItems[name])
                                 del config.createdItems[index]
-                                print(position(1, 1, config.InventorySize))
-                                print(position(1, 2, config.inventoryMax))
                                 break
             if config.InventorySize >= config.inventoryMax:
                 print(position(3, 38, color.setBackground('red', 'Tu es plein')))
