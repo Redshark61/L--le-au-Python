@@ -1,13 +1,16 @@
 import os
 import time
+import random
 from functions.Clear import clear
 from functions.checkMod import checkMod
 from functions.Colors import Colors
 from functions.emojiDecoder import emojiDecoder
 from functions.Position import position
+from functions import config
 
 
 def finalTrailer():
+    print(config.hiddenCursor)
     clear()
     color = Colors()
     color.init()
@@ -24,7 +27,7 @@ def finalTrailer():
 
         if shake:
             for _ in range(50):
-                time.sleep(0.1)
+                time.sleep(0.15)
                 shake = True
                 line, shakeIndex = displayMapEnd(mapEndData, color,  line, shake, shakeIndex, index)
                 shakeIndex = 0 if shakeIndex == 1 else 1
@@ -41,13 +44,13 @@ def finalTrailer():
 def displayMapEnd(mapEndData, color, line, shake, shakeIndex, index):
     mapEnd = ''
     print(position(1, 1, ''))
-    for indexI, i in enumerate(mapEndData):
+    for indexI, value in enumerate(mapEndData):
         if shake and shakeIndex == 0:
             mapEnd += f'{color.colorBgEnd} {color.colorBgEnd}'
         elif shake and shakeIndex == 1:
             mapEnd += ''
 
-        for indexJ, j in enumerate(i):
+        for indexJ, j in enumerate(value):
             if indexI == line and indexJ == 24 and line >= 5:
                 if j in ("e1", "e5"):
                     bgColor = "darkYellow"
@@ -62,7 +65,13 @@ def displayMapEnd(mapEndData, color, line, shake, shakeIndex, index):
                 mapEnd += color.setBackground(bgColor, emojiDecoder("f09fa4a0"))
                 line -= 1 if line > 5 and index == 10 else 0
             elif j == 'e1':
-                mapEnd += color.setBackground("darkYellow", "  ")
+                fireCoords = randomFire(mapEndData)
+                for i in fireCoords:
+                    if i[0] == indexJ and i[1] == indexI:
+                        fireColor = 'red'
+                        break
+                    fireColor = 'darkYellow'
+                mapEnd += color.setBackground(fireColor, "  ")
             elif j == 'e2':
                 mapEnd += color.setBackground("brightGreen", "  ")
             elif j == 'e3':
@@ -121,3 +130,15 @@ def Endcredits():
         for i in range(len(credit)-1, -1, -1):
             print(position(0, height-currentHeight+credit[i][1], credit[len(credit)-1-i][0].center(width, ' ')))
         time.sleep(0.8)
+
+
+def randomFire(mapEndData):
+    fireCoords = []
+    for _ in range(5):
+        fireX = random.randint(0, len(mapEndData[0])-1)
+        fireY = random.randint(0, len(mapEndData)-1)
+        if mapEndData[fireY][fireX] != 'e1':
+            continue
+        fireCoords.append([fireX, fireY])
+        fireX, fireY = 0, 0
+    return fireCoords
