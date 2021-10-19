@@ -19,7 +19,6 @@ def checkSaveFiles():
     clear()
     # Begining of the program
     saveInSavesFolder = os.listdir('./saves')
-    print(saveInSavesFolder)
 
     # If there are no save, create one and launch the game
     if len(saveInSavesFolder) == 0:
@@ -70,6 +69,11 @@ def oneSave(saveInSavesFolder):
                 saveName = checkSaveFiles()
         case '3':
             saveName = initSave()
+        case _:
+            print("Je n'ai pas compris")
+            time.sleep(2)
+            clear()
+            saveName = oneSave(saveInSavesFolder)
     return saveName
 
 
@@ -88,6 +92,11 @@ def multipleSave(saveInSavesFolder):
             saveName = choiceSave(saveInSavesFolder, fileChoice)
         case '2':
             saveName = initSave()
+        case _:
+            print("Je n'ai pas compris")
+            time.sleep(2)
+            clear()
+            multipleSave(saveInSavesFolder)
     return saveName
 
 
@@ -121,8 +130,12 @@ def choiceSave(saveInSavesFolder, fileChoice):
                 saveName = checkSaveFiles()
             else:
                 saveName = multipleSave(saveInSavesFolder)
-
             return saveName
+        case _:
+            print("Je n'ai pas compris")
+            time.sleep(2)
+            clear()
+            choiceSave(saveInSavesFolder, fileChoice)
 
 
 if __name__ == "__main__":
