@@ -48,10 +48,10 @@ def mapBackground(color: type, char: str, map: str, j: int, row: int, col: int) 
     # Lava
     elif j == 8:
         map += color.setBackground('darkYellow', char)
-    # Key closed
+    # Lock closed
     elif j == 9 and config.key < 3:
         map += color.setBackground('darkYellow', emojiDecoder("f09f9492"))
-    # Key opened
+    # Lock opened
     elif j == 9 and config.key == 3:
         map += color.setBackground('darkYellow', emojiDecoder("f09f9493"))
         if row == config.playerCoord[1] and col == config.playerCoord[0]:

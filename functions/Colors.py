@@ -28,10 +28,19 @@ class Colors:
         self.colorFgEnd = "\033[39m"
 
     def init(self) -> None:
+        """
+        Initalize the console to print colors
+        """
         os.system('')
 
     def setBackground(self, color: str, text: str) -> str:
+        """
+        Set a background for a given string (emoji, char, sentence...)
+        """
         return self.colorsBg[color] + text + self.colorBgEnd
 
     def setForeground(self, color: str, text: str) -> str:
+        """
+        Set a foreground for a given string (emoji, char, sentence...)
+        """
         return self.colorsFg[color] + text + self.colorFgEnd

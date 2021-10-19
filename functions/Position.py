@@ -33,23 +33,31 @@ def printBox(xStart: int, YStart: int, width: int, height: int) -> int:
     print(f"\033[{YStart+height};{xStart+width}H\u255d")
 
 
-def clearBoxWithLine(line, n):
+def clearBoxWithLine(line: int, n: int):
+    """
+    Return the number of line you need to add if you want to display long text inside a box, and clear the box if the text is too long
+    """
     if line+n >= 30:
         for i in range(105, 153):
             for j in range(2, 36):
                 print(position(x=i, y=j, text=" "))
         return 0
-    else:
-        return line + n
+    return line + n
 
 
 def clearBox():
+    """
+    Clear the right panel
+    """
     for i in range(105, 153):
         for j in range(2, 36):
             print(position(x=i, y=j, text=" "))
 
 
 def clearBottomPanel():
+    """
+    Clear the bottom panel
+    """
     for i in range(3, 100):
         for j in range(31, 40):
             print(position(x=i, y=j, text=" "))

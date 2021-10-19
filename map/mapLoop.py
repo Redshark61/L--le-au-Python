@@ -25,60 +25,70 @@ def mapLoop(saveName) -> None:
     checkSave(saveName)
     config.saveName = saveName
 
-    # Récupérer la map
+    # Get the json map
     config.data = checkMod('map')
 
+    # Previous coords are a deepcopy of the current coords
     config.prevPlayerCoord = copy.deepcopy(config.playerCoord)
 
-    print('')
-    # global char
     inventoryOpen = False
 
+    # Print the right and bottom panel, and the vital sign (food, water, energy)
     printBox(103, 1, 50, 38)
     printBox(1, 30, 101, 9)
-
     drawFood(config.vitalSigns["foodMax"])
     drawWater(config.vitalSigns["waterMax"])
     drawEnergy(config.vitalSigns["energyMax"])
     print(position(3, 34, '-'*98))
     drawRightPanel()
-    # Tant que le code de la touche pressé n'est pas 113 (q)
+
+    # While the 'q' letter is not pressed
     while ord(config.char) != 113:
 
-        # Afficher la carte
+        # Display the map
         isQuestDone = displayMap()
+        # Display the key (if there are)
         displayKey()
 
+        # Leave the game if the player is on the lock
         if config.isLeaving:
             finalTrailer()
             return
 
+        # Refresh if the player just did a quest
         if isQuestDone:
             displayMap()
             isQuestDone = False
 
+        # If the inventory is empty, empty everything
         inventoryX = 3
         if len(config.pickedUpItem) == 0:
             inventoryOpen = closeInventory(inventoryOpen)
             noDuplicateInventory = []
             numbersOfItem = []
         else:
+            # Get the number of each item in the list of dict pickedUpItem
             numbersOfItem = Counter(item['name'] for item in config.pickedUpItem)
             print(position(3, 35, ' '*40))
             print(position(3, 36, ' '*40))
+            # Convert into list of tuples
             listOfTuple = [*numbersOfItem.items()]
             listOfTuple.sort(key=lambda x: x[0])
+            # Print each item above its number
             for key, value in listOfTuple:
                 print(position(inventoryX, 35, key))
                 print(position(inventoryX, 36, str(value).center(len(key), ' ')))
                 inventoryX += len(key) + 5
                 noDuplicateInventory = listOfTuple
 
+        # Get the key press
         inventoryOpen, noDuplicateInventory = getKeyPress(inventoryOpen, noDuplicateInventory)
+
         drawFood(config.vitalSigns["foodMax"])
         drawWater(config.vitalSigns["waterMax"])
         drawEnergy(config.vitalSigns["energyMax"])
 
+        # Conditions to die
         if config.vitalSigns["foodMax"] <= 0 or config.vitalSigns["waterMax"] <= 0 or config.vitalSigns["energyMax"] <= 0:
             print(position(105, 10, 'Vous êtes mort !'))
             playerFace = position(config.playerCoord[0]*2+1, config.playerCoord[1]+1, emojiDecoder('f09f9280'))
@@ -96,7 +106,7 @@ def save(saveName):
 
     with open(saveName, encoding='utf-8') as f:
         savedData = json.load(f)
-
+    # Save everything into the file
     savedData['playerCoord'] = config.playerCoord
     savedData['currentDate'] = today.strftime("%d/%m/%Y %H:%M:%S")
     savedData['key'] = config.key

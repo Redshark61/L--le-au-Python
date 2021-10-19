@@ -54,8 +54,6 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
                 else:
                     print(position(105, 11, " "*40))
                     print(position(105, 11, f"Tu n'as pas envie de {'manger' if foodType == 'food' else 'boire'}"))
-                    # time.sleep(2)
-                # break
 
     # * Close inventory
     elif ord(config.char) == 50 and inventoryOpen:

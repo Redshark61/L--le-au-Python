@@ -6,7 +6,9 @@ def decode(codedSentence: str, code: int, alphabet: list[str]) -> str:
     """
 
     newSentence = ''
+    # Each letter in the sentence
     for i in codedSentence.lower():
+        # We pass every character wich are not letter (such as ? , .)
         if i not in alphabet:
             newSentence += i
         else:

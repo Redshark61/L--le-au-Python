@@ -2,7 +2,6 @@ from datetime import datetime
 import time
 import json
 import os
-from map.finalCinematic import Endcredits, finalCinematic
 from map.mapLoop import mapLoop
 from functions.Clear import clear
 from functions import config
@@ -10,8 +9,6 @@ from functions import config
 
 def main() -> None:
 
-    # Endcredits()
-    # finalCinematic()
     saveName = checkSaveFiles()
 
     mapLoop(saveName)

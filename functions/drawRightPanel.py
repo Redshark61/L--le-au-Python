@@ -2,6 +2,9 @@ from functions.Position import position
 
 
 def drawRightPanel():
+    """
+    Draw the right panel
+    """
     print(position(105, 2, "L'île aux Pythons !".center(47, ' ')))
     print(position(105, 3, "-"*47))
     print(position(105, 4, "1 - Dormir"))
