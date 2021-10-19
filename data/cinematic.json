@@ -7,6 +7,13 @@
     "number": [
         "Tu te promenais lorsque soudain tu te retrouve face à une grotte gigantesque ! Malgré l'obscurité tu rentres, et découvre alors un sphinx ! À ces pieds se trouvent une clé en bronze. Tu t'approche doucement, mais dès que tes mains se sont posé sur la clé, ses yeux se sont illuminé ! ",
         " \u00abBonjour explorateur ! Pour pouvoir quitter l'île, tu devras tout d’abord prouver ta valeur en gagnant les 3 clés que tu obtiendras en relevant les défis appropriés. Celle est la première des trois.\u00bb",
+
         "Il poursuit : \u00ab3 fois de suite, tu devras deviner le nombre que j’ai en tête, tu as 20 essais maximum pour les trouver tous, es-tu prêt ?\u00bb"
+    ],
+    "cesar": [
+        "Au nord de l'île, tu trouves un petit temple taillé dans la paroi rocheuse. Au-dessus de l’arche d’entrée, est écrit un message dans une langue apparemment inconnue mais utilisant l’alphabet habituel. Sur les colonnes de l’arche, sont d’ailleurs gravées en relief toutes les lettres de l’alphabet. ",
+        "Curieux, tu appuies au hasard sur l’une des lettres et tu t’aperçois que les lettres formant le message changent.",
+        " Malgré cela, le message en lui-même reste incompréhensible. En effectuant plusieurs tests, tu te rends compte qu’a une lettre définie correspond une composition spécifique du message. Ne voyant pas trop quoi faire d’autre pour le moment, tu décides d’entrer dans le temple.",
+        " À l’intérieur, tout le sol est recouvert de sable. Au milieu de la petite pièce, se trouve un autel avec une niche fermée par une grille apparemment sans serrure. À l’intérieur de la niche tu vois une grosse clé en argent (inatteignable tant que la grille est en place). À côté de la niche, un écriteau en bois indique : \u00ab Récite le crédo du Python, puis trace ton nom secret \u00bb."
     ]
 }

@@ -1,17 +1,20 @@
+import os
 from random import randint
 import string
+import time
 from cesar.encode import encode
 from cesar.decode import decode
-from functions.Position import position
+from functions.Position import clearBox, position
 from functions import config
 from functions.Colors import Colors
+from functions.checkLength import checkLength
 
 # Alphabet
 alphabet = string.ascii_lowercase
 alphabet = list(alphabet)
 
-# Player name (requested at the beginning at th game)
-name = 'Timothee'
+# Player name (requested at the beginning of the game)
+name = config.playerName
 zen = """Beautiful is better than ugly.
 Explicit is better than implicit.
 Simple is better than complex."""
@@ -28,14 +31,25 @@ def main():
     Main function wich runs the caesar code quest
     """
 
+    # Get the story associated to the file
+    fileName = os.path.basename(__file__)[:-3]
+    text = checkLength(fileName)
+
+    # Print the story
+    for index, line in enumerate(text):
+        print(position(105, 4+index+1, line), flush=True)
+        time.sleep(2)
+
+    clearBox()
+
     tried = 5
     decodedInput = ''
     code = alphabet.index(randomLetter)
 
     print(position(105, 2, 'Règles :'.center(47, '-')))
-    print(position(105, 3, '- Ne rentre rien pour avoir le zen décodé'))
+    print(position(105, 3, '- Ne rentre rien pour avoir le Zen décodé'))
     print(position(105, 4, '- Rentre une lettre pour essayer de trouver le'))
-    print(position(105, 5, '  cryptage du zen'))
+    print(position(105, 5, '  cryptage du Zen'))
     print(position(105, 6, '- Rentre plusieurs lettres pour décoder ton nom'))
 
     # We print the zen of python
