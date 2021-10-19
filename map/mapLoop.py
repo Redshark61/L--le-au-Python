@@ -23,6 +23,7 @@ def mapLoop(saveName) -> None:
 
     clear()
     checkSave(saveName)
+    config.saveName = saveName
 
     # Récupérer la map
     config.data = checkMod('map')
@@ -47,6 +48,11 @@ def mapLoop(saveName) -> None:
         # Afficher la carte
         isQuestDone = displayMap()
         displayKey()
+
+        if config.isLeaving:
+            print("here")
+            finalCinematic()
+            return
 
         if isQuestDone:
             displayMap()
@@ -79,11 +85,6 @@ def mapLoop(saveName) -> None:
             playerFace = position(config.playerCoord[0]*2+1, config.playerCoord[1]+1, emojiDecoder('f09f9280'))
             displayMap(playerFace)
             time.sleep(5)
-            return
-
-        if config.isLeaving:
-            print("here")
-            finalCinematic()
             return
 
         save(saveName)
