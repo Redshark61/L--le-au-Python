@@ -6,6 +6,7 @@ coord, data, playerCoord, questToDo, prevPlayerCoord, questDone, createdItems, c
 key = 0
 char = ' '
 isLeaving = False
+playerName = ''
 
 # Inventory
 InventorySize, itemSelected, toBePosition, currentPosition = 0, 0, 0, 0

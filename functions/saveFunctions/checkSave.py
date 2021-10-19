@@ -10,6 +10,7 @@ def checkSave(saveName):
         savedData = json.load(f)
 
     if len(savedData) > 2:
+        config.playerName = savedData['playerName']
         config.coord = checkMod('coordinates')
         config.playerCoord = savedData['playerCoord']
         config.key = savedData['key']
@@ -23,6 +24,7 @@ def checkSave(saveName):
     else:
 
         # Récupérer les coordonnés
+        config.playerName = savedData['playerName']
         config.coord = checkMod('coordinates')
         config.playerCoord.append(config.coord['player']["coords"][0])
         config.playerCoord.append(config.coord['player']["coords"][1])
