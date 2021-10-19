@@ -31,24 +31,26 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
         for index, value in enumerate(config.pickedUpItem):
             itemName = value["name"]
             if itemName == noDuplicateInventory[config.itemSelected][0]:
-                eating(noDuplicateInventory, itemName, value)
+                ate = eating(noDuplicateInventory, itemName, value)
 
-                if len(config.pickedUpItem) == 1:
-                    config.pickedUpItem = []
-                    return inventoryOpen
-                del config.pickedUpItem[index]
+                if ate:
 
-                stillInInventory = False
-                for item in config.pickedUpItem:
+                    if len(config.pickedUpItem) == 1:
+                        config.pickedUpItem = []
+                        return inventoryOpen
+                    del config.pickedUpItem[index]
 
-                    if item['name'] == itemName:
-                        stillInInventory = True
-                        break
-                if not stillInInventory:
-                    if config.itemSelected == 0:
-                        break
-                    leftInventory(noDuplicateInventory)
-                break
+                    stillInInventory = False
+                    for item in config.pickedUpItem:
+
+                        if item['name'] == itemName:
+                            stillInInventory = True
+                            break
+                    if not stillInInventory:
+                        if config.itemSelected == 0:
+                            break
+                        leftInventory(noDuplicateInventory)
+                    break
 
     # * Close inventory
     elif ord(config.char) == 50 and inventoryOpen:
