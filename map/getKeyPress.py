@@ -42,6 +42,8 @@ def getKeyPress(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> Union
             config.vitalSigns["foodMax"] = looseFood(config.vitalSigns["foodMax"])
             drawEnergy(config.vitalSigns["energyMax"])
             drawFood(config.vitalSigns["foodMax"])
+        if config.vitalSigns['energyMax'] > 100:
+            config.vitalSigns['energyMax'] = 100
         print(position(105, 9, 'Je ne dors plus !'))
 
     inventoryOpen = inventory(inventoryOpen, noDuplicateInventory)
