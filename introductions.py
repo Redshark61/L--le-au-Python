@@ -42,6 +42,28 @@ def introduction():
     translateTextUp(splitedMap, 0.2)
     time.sleep(3)
 
+    print("Tu es un aventurier à la recherche du graal".center(width, ' '))
+    time.sleep(5)
+    print("Comme beaucoup de personnes, tu t'es rendu dans le triangle des Bermudes.".center(width, ' '))
+    time.sleep(5)
+    print("La légende raconte que personne n'en est sorti vivant.".center(width, ' '))
+    for i in range(1, 4):
+        print(('.'*i).center(width, ' '), end='\r', flush=True)
+        time.sleep(0.5)
+    time.sleep(5)
+    print("Mais toi... Toi tu n'es pas né de la dernière pluie, et tu sais bien qu'il ne faut pas forcer le destin.".center(width, ' '))
+    time.sleep(5)
+    print("Mais de la à faire couler son propre bateau et se laisser dériver, c'est INCENSÉ".center(width, ' '))
+    time.sleep(5)
+    print("Et pourtant, tu te retrouve sur une île que personne sur laquelle personne n'a jamais mis les pieds !".center(width, ' '))
+    time.sleep(5)
+    print("Incroyable, tu as réussi".center(width, ' '))
+    for i in range(1, 4):
+        print(('.'*i).center(width, ' '), end='\r', flush=True)
+        time.sleep(0.5)
+
+    time.sleep(6)
+    clear()
     print("Pour jouer, utilisez les flèches du clavier".center(width, ' '))
     time.sleep(4)
     clear()
