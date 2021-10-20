@@ -7,6 +7,7 @@ from functions.Colors import Colors
 from functions.emojiDecoder import emojiDecoder
 from functions.Position import position
 from functions import config
+from functions.translateText import translateTextUp
 
 
 def finalTrailer():
@@ -100,36 +101,17 @@ def displayMapEnd(mapEndData, color, line, shake, shakeIndex, index):
 
 
 def Endcredits():
-    clear()
-    time.sleep(0.5)
     credit = [
-        ["Merci d'avoir joué à mon jeu", 0],
-        ["J'espère que ça vous à plu", 0],
-        ["Merci à Alain pour ses cours incroyable", 0],
-        ["Merci à toutes la classe pour leur aide et leur soutien", 0],
-        ["Je n'aurais rien fait sans eux", 0],
-        ["(C'est faux)", 0],
-        ["(Je me débrouille mieux tout seul)", 0],
-        ["Merci à mon génie démesuré", 0],
+        "Merci d'avoir joué à mon jeu",
+        "J'espère que ça vous à plu",
+        "Merci à Alain pour ses cours incroyable",
+        "Merci à toutes la classe pour leur aide et leur soutien",
+        "Je n'aurais rien fait sans eux",
+        "(C'est faux)",
+        "(Je me débrouille mieux tout seul)",
+        "Merci à mon génie démesuré"
     ]
-    width = os.get_terminal_size()[0]
-    height = os.get_terminal_size()[1]
-    currentHeight = 0
-    for index, value in enumerate(credit):
-        print(position(0, height-value[1], value[0].center(width, ' ')))
-        time.sleep(0.8)
-        value[1] += 1
-        currentHeight += 1
-        for i in range(index):
-            credit[i][1] += 1
-
-    currentHeight += 1
-    while currentHeight <= height:
-        clear()
-        currentHeight += 1
-        for i in range(len(credit)-1, -1, -1):
-            print(position(0, height-currentHeight+credit[i][1], credit[len(credit)-1-i][0].center(width, ' ')))
-        time.sleep(0.8)
+    translateTextUp(credit, 0.8)
 
 
 def randomFire(mapEndData):
