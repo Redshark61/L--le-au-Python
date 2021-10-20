@@ -47,8 +47,16 @@ def initSave():
     with open(f'./saves/{saveName}', 'w', encoding='utf-8') as f:
         json.dump(save, f, indent=4)
     print(config.hiddenCursor)
-    introduction()
-    return "./saves/"+saveName
+    clear()
+    wannaSeeTuto = ''
+    while wannaSeeTuto.upper() not in ('O', 'N'):
+        wannaSeeTuto = input("Veux-tu voir le tutoriel ? (o/n) : \n")
+    match wannaSeeTuto.upper():
+        case 'O':
+            introduction()
+            return "./saves/"+saveName
+        case 'N':
+            return "./saves/"+saveName
 
 
 def oneSave(saveInSavesFolder):
