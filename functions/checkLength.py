@@ -9,17 +9,17 @@ def checkLength(fileName: str) -> list[str]:
     It's very important that the dialog key and the filename have the same name
     """
 
-    allCinematics = checkMod('cinematic')
-    cinematic = ''.join(allCinematics[fileName])
+    allStoriess = checkMod('stories')
+    stories = ''.join(allStoriess[fileName])
 
-    separatedCinematic = ['']
+    separatedStories = ['']
     maxLength = 45
-    splitCinematic = cinematic.split(' ')
+    splitStories = stories.split(' ')
     i = 0
-    for word in splitCinematic:
-        if len(word + separatedCinematic[i]) >= maxLength:
-            separatedCinematic.append(word + ' ')
+    for word in splitStories:
+        if len(word + separatedStories[i]) >= maxLength:
+            separatedStories.append(word + ' ')
             i += 1
         else:
-            separatedCinematic[i] += word+' '
-    return separatedCinematic
+            separatedStories[i] += word+' '
+    return separatedStories
