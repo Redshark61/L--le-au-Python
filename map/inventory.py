@@ -36,6 +36,7 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
                 if ate:
 
                     print(position(105, 11, " "*40))
+
                     if len(config.pickedUpItem) == 1:
                         config.pickedUpItem = []
                         return inventoryOpen
@@ -43,14 +44,16 @@ def inventory(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> bool:
 
                     stillInInventory = False
                     for item in config.pickedUpItem:
-
                         if item['name'] == itemName:
                             stillInInventory = True
                             break
+
                     if not stillInInventory:
                         if config.itemSelected == 0:
                             break
                         leftInventory(noDuplicateInventory)
+                    break
+
                 else:
                     print(position(105, 11, " "*40))
                     print(position(105, 11, f"Tu n'as pas envie de {'manger' if foodType == 'food' else 'boire'}"))

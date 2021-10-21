@@ -2,7 +2,7 @@ import os.path
 import json
 
 
-def checkMod(name: str) -> dict:
+def checkMod(name: str) -> dict | list:
     """
     Enter the name of the data file (without the .json), and you will automaticly get the data
     from the mods folder if there is, or the data folder if ther is no mods

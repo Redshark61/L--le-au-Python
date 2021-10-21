@@ -117,6 +117,8 @@ def save(saveName):
     savedData['questDone'] = config.questDone
     savedData['questToDo'] = config.questToDo
     savedData['inventorySize'] = config.InventorySize
+    savedData['playerSkinName'] = config.skinName
+    savedData['playerSkinMark'] = config.playerMark
 
     with open(saveName, 'w', encoding='utf-8') as f:
         json.dump(savedData, f, indent=4)

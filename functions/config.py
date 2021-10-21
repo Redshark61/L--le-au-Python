@@ -1,6 +1,4 @@
-from functions.checkMod import checkMod
 
-stats = checkMod('playerStats')
 # Map data
 coord, data, playerCoord, questToDo, prevPlayerCoord, questDone, createdItems, currentItems, pickedUpItem = [], [], [], [], [], [], [], [], []
 key = 0
@@ -11,13 +9,24 @@ playerName = ''
 # Inventory
 InventorySize, itemSelected, toBePosition, currentPosition = 0, 0, 0, 0
 noDuplicateInventory = []
-inventoryMax = stats["inventoryMax"]
 
-# Health
+# Player Stats :
+energyMax = 0
+foodMax = 0
+waterMax = 0
+inventoryMax = 0
+energyWhileSleeping = 0
+looseFoodSleep = 0
+looseFoodPerStep = 0
+looseWaterPerStep = 0
+looseEnergiePerStep = 0
+playerMark = ""
+skinName = ""
+
 vitalSigns = {
-    "energyMax": stats["energyMax"],
-    "foodMax": stats["foodMax"],
-    "waterMax": stats["waterMax"]
+    "energyMax": 0,
+    "foodMax": 0,
+    "waterMax": 0
 }
 
 

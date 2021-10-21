@@ -21,6 +21,7 @@ def checkSave(saveName):
         config.questDone = savedData['questDone']
         config.questToDo = savedData['questToDo']
         config.InventorySize = savedData['inventorySize']
+        config.playerMark = savedData['playerSkinMark']
     else:
 
         # Récupérer les coordonnés

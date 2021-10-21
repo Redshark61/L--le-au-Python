@@ -68,7 +68,7 @@ def displayMap(playerFace: str = None) -> None:
                         elif playerFace is not None:
                             char = playerFace
                         else:
-                            char = symbol
+                            char = emojiDecoder(config.playerMark)
 
             if len(config.questDone) > 0:
                 for quest in config.questDone:

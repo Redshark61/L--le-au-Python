@@ -1,6 +1,38 @@
 {
-    "energyMax": 100,
-    "foodMax": 100,
-    "waterMax": 100,
-    "inventoryMax": 10
+    "IndianaJones": {
+        "energyMax": 120,
+        "foodMax": 100,
+        "waterMax": 100,
+        "inventoryMax": 10,
+        "energyWhileSleeping": 2,
+        "looseFoodSleep": 1,
+        "looseFoodPerStep": 2,
+        "looseWaterPerStep": 2,
+        "looseEnergiePerStep": 3,
+        "mark": "f09fa4a0"
+    },
+    "Glasses": {
+        "energyMax": 80,
+        "foodMax": 80,
+        "waterMax": 80,
+        "inventoryMax": 15,
+        "energyWhileSleeping": 3,
+        "looseFoodSleep": 2,
+        "looseFoodPerStep": 4,
+        "looseWaterPerStep": 4,
+        "looseEnergiePerStep": 5,
+        "mark": "f09fa493"
+    },
+    "Asleep": {
+        "energyMax": 60,
+        "foodMax": 100,
+        "waterMax": 100,
+        "inventoryMax": 8,
+        "energyWhileSleeping": 5,
+        "looseFoodSleep": 2,
+        "looseFoodPerStep": 2,
+        "looseWaterPerStep": 2,
+        "looseEnergiePerStep": 2,
+        "mark": "f09f98aa"
+    }
 }

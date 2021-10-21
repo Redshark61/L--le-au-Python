@@ -9,8 +9,8 @@ def startQuest(index: int, quest: dict) -> Union[list[dict], int, bool]:
     clearBox()
     module = __import__(f"{config.coord[quest]['folder']}.{config.coord[quest]['mainFile']}", fromlist=[None])
     hasWon = module.main()
-    config.vitalSigns['foodMax'] = 90
-    config.vitalSigns['waterMax'] = 90
+    config.vitalSigns['foodMax'] = config.foodMax - 20
+    config.vitalSigns['waterMax'] = config.waterMax - 20
     isQuestDone = True
     if hasWon:
         config.questDone.append(config.questToDo[index][quest])
