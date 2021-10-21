@@ -1,13 +1,13 @@
+from datetime import datetime
+import time
+import json
+import os
 from functions import config
 from functions.Clear import clear
 from map.mapLoop import mapLoop
 from introductions import introduction
 from functions.emojiDecoder import emojiDecoder
 from functions.checkMod import checkMod
-from datetime import datetime
-import time
-import json
-import os
 
 
 def main() -> None:
