@@ -2,8 +2,12 @@ from datetime import datetime
 import time
 import json
 import os
+<<<<<<< HEAD
 from functions.checkMod import checkMod
 from functions.emojiDecoder import emojiDecoder
+=======
+from introductions import introduction
+>>>>>>> 1b27587309f9e0ad52d9d916097f6edef773db22
 from map.mapLoop import mapLoop
 from functions.Clear import clear
 from functions import config
@@ -12,7 +16,6 @@ from functions import config
 def main() -> None:
 
     saveName = checkSaveFiles()
-    # finalTrailer()
     mapLoop(saveName)
     clear()
 
@@ -51,6 +54,7 @@ def initSave(skinData):
     with open(f'./saves/{saveName}', 'w', encoding='utf-8') as f:
         json.dump(save, f, indent=4)
     print(config.hiddenCursor)
+<<<<<<< HEAD
 
     print("Quel skin choisis-tu ?")
 
@@ -74,6 +78,18 @@ def initSave(skinData):
     print(config.hiddenCursor)
 
     return "./saves/"+saveName
+=======
+    clear()
+    wannaSeeTuto = ''
+    while wannaSeeTuto.upper() not in ('O', 'N'):
+        wannaSeeTuto = input("Veux-tu voir le tutoriel ? (o/n) : \n")
+    match wannaSeeTuto.upper():
+        case 'O':
+            introduction()
+            return "./saves/"+saveName
+        case 'N':
+            return "./saves/"+saveName
+>>>>>>> 1b27587309f9e0ad52d9d916097f6edef773db22
 
 
 def oneSave(saveInSavesFolder, skinData):
