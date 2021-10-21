@@ -116,7 +116,7 @@ def save(saveName):
     savedData['currentItems'] = config.currentItems
     savedData['questDone'] = config.questDone
     savedData['questToDo'] = config.questToDo
-    savedData['inventorySize'] = config.InventorySize
+    savedData['inventorySize'] = config.inventorySize
     savedData['playerSkinName'] = config.skinName
     savedData['playerSkinMark'] = config.playerMark
 

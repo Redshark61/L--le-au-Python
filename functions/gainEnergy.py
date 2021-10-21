@@ -2,7 +2,7 @@ import time
 from functions import config
 
 
-def gainEnergy(energy):
+def gainEnergy(energy: int) -> int:
     """
     Increase the energy
     """

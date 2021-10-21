@@ -7,7 +7,7 @@ def position(x: int, y: int, text: str) -> str:
 
 def printBox(xStart: int, YStart: int, width: int, height: int) -> int:
     """
-    Permet d'afficher une boite aux coordonnées x et y (en haut à gauche) de longueur width et hauteur height
+    Permet d'afficher une boite aux coordonnées `x` et `y` (en haut à gauche) de longueur `width` et hauteur `height`
     """
 
     # Ligne du haut
@@ -33,7 +33,7 @@ def printBox(xStart: int, YStart: int, width: int, height: int) -> int:
     print(f"\033[{YStart+height};{xStart+width}H\u255d")
 
 
-def clearBoxWithLine(line: int, n: int):
+def clearBoxWithLine(line: int, n: int) -> int:
     """
     Return the number of line you need to add if you want to display long text inside a box, and clear the box if the text is too long
     """

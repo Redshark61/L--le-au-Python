@@ -4,11 +4,16 @@ from functions.checkMod import checkMod
 from map.randomItemPosition import randomItemPosition
 
 
-def checkSave(saveName):
+def checkSave(saveName: str) -> None:
+    """
+    Check if there is a save, and initalize all the variables
+    """
 
+    # Open the save file
     with open(saveName, encoding='utf-8') as f:
         savedData = json.load(f)
 
+    # If there is a full save, get all the data
     if len(savedData) > 2:
         config.playerName = savedData['playerName']
         config.coord = checkMod('coordinates')
@@ -20,11 +25,11 @@ def checkSave(saveName):
         config.createdItems = savedData['itemPosition']
         config.questDone = savedData['questDone']
         config.questToDo = savedData['questToDo']
-        config.InventorySize = savedData['inventorySize']
+        config.inventorySize = savedData['inventorySize']
         config.playerMark = savedData['playerSkinMark']
+    # If there is nothing (just the name of the player)
     else:
-
-        # Récupérer les coordonnés
+        # Set everything as default
         config.playerName = savedData['playerName']
         config.coord = checkMod('coordinates')
         config.playerCoord.append(config.coord['player']["coords"][0])

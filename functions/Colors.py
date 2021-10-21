@@ -2,6 +2,13 @@ import os
 
 
 class Colors:
+    """
+    You can add colors in you shell.
+
+    Create an instance of Colors : `color = Colors()`, then initalize the colors with `color.init()`
+
+    You can add Foreground to a char, a background or use the different variables
+    """
 
     def __init__(self) -> None:
         self.colorsBg = {

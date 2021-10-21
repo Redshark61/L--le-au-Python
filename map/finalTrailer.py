@@ -1,4 +1,3 @@
-import os
 import time
 import random
 from functions.Clear import clear
@@ -11,6 +10,11 @@ from functions.translateText import translateTextUp
 
 
 def finalTrailer():
+    """
+    Display the final trailer
+    """
+
+    # Initalization
     print(config.hiddenCursor)
     clear()
     color = Colors()
@@ -20,6 +24,8 @@ def finalTrailer():
     shake = False
     shakeIndex = 0
     index = 10
+
+    # For each line of the map
     for _ in range(len(mapEndData)):
         if line >= 11:
             time.sleep(0.2)
@@ -27,6 +33,7 @@ def finalTrailer():
             shake = True
 
         if shake:
+            # Loop to shake, and walk at the same time
             for _ in range(50):
                 time.sleep(0.15)
                 shake = True
@@ -35,23 +42,28 @@ def finalTrailer():
                 index = 0 if index == 10 else index+1
             shake = False
             break
-        else:
-            line, shakeIndex = displayMapEnd(mapEndData, color,  line, shake, shakeIndex, index)
+
+        line, shakeIndex = displayMapEnd(mapEndData, color,  line, shake, shakeIndex, index)
 
     time.sleep(1)
     Endcredits()
 
 
-def displayMapEnd(mapEndData, color, line, shake, shakeIndex, index):
+def displayMapEnd(mapEndData: list[list], color: Colors, line: int, shake: bool, shakeIndex: int, index: int) -> int | int:
     mapEnd = ''
     print(position(1, 1, ''))
+
+    # For each line
     for indexI, value in enumerate(mapEndData):
+        # If you need to shake, add space at the start of each line
         if shake and shakeIndex == 0:
             mapEnd += f'{color.colorBgEnd} {color.colorBgEnd}'
         elif shake and shakeIndex == 1:
             mapEnd += ''
 
+        # For each column of the map
         for indexJ, j in enumerate(value):
+            # Print the colors if the it's the position of the player
             if indexI == line and indexJ == 24 and line >= 5:
                 if j in ("e1", "e5"):
                     bgColor = "darkYellow"
@@ -65,7 +77,10 @@ def displayMapEnd(mapEndData, color, line, shake, shakeIndex, index):
                     bgColor = "brightYellow"
                 mapEnd += color.setBackground(bgColor, emojiDecoder("f09fa4a0"))
                 line -= 1 if line > 5 and index == 10 else 0
+
+            # else print the map without the player
             elif j == 'e1':
+                # Print fire
                 fireCoords = randomFire(mapEndData)
                 for i in fireCoords:
                     if i[0] == indexJ and i[1] == indexI:
@@ -88,6 +103,7 @@ def displayMapEnd(mapEndData, color, line, shake, shakeIndex, index):
             elif j == "e6":
                 mapEnd += color.setBackground("brightYellow", emojiDecoder("f09f928e"))
 
+        # If shake, add space at the end of each line
         if shake and shakeIndex == 0:
             mapEnd += f"{color.colorsBg['darkYellow']} {color.colorBgEnd}"
         elif shake and shakeIndex == 1:

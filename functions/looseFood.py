@@ -1,7 +1,7 @@
 from functions import config
 
 
-def looseFood(food):
+def looseFood(food: int) -> int:
     """
     Decrease your food
     """

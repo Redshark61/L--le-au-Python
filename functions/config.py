@@ -7,7 +7,7 @@ isLeaving = False
 playerName = ''
 
 # Inventory
-InventorySize, itemSelected, toBePosition, currentPosition = 0, 0, 0, 0
+inventorySize, itemSelected, toBePosition, currentPosition = 0, 0, 0, 0
 noDuplicateInventory = []
 
 # Player Stats :

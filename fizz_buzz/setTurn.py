@@ -2,7 +2,7 @@ from functions.Position import position
 from fizz_buzz import configFizzBuzz as conf
 
 
-def setTurn(data: dict, lineTurn: int):
+def setTurn(data: dict, lineTurn: int) -> None:
     """
     Set the turn of the player, if it's the monkeys, player or boss
     """

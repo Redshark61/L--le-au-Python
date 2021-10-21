@@ -33,15 +33,23 @@ def getKeyPress(inventoryOpen: bool, noDuplicateInventory: list[tuple]) -> Union
 
     # * Sleep
     elif ord(config.char) == 49 and not inventoryOpen:  # 1
+        # The player sleeps
         config.char = ' '
         print(position(105, 9, 'Je dors...' + ' ' * 10))
+
+        # Print a sleepy face
         playerFace = position(config.playerCoord[0] * 2 + 1, config.playerCoord[1] + 1, emojiDecoder('f09f98b4'))
         displayMap(playerFace)
+
+        # While his energy is not full or he has more than 20 food
         while config.vitalSigns["energyMax"] < config.energyMax and config.vitalSigns['foodMax'] > 20:
+            # He gain energy and loose food
             config.vitalSigns["energyMax"] = gainEnergy(config.vitalSigns["energyMax"])
             config.vitalSigns["foodMax"] = looseFood(config.vitalSigns["foodMax"])
             drawEnergy(config.vitalSigns["energyMax"])
             drawFood(config.vitalSigns["foodMax"])
+
+        # If he has more energy than he can store
         if config.vitalSigns['energyMax'] > config.energyMax:
             config.vitalSigns['energyMax'] = config.energyMax
         print(position(105, 9, 'Je ne dors plus !'))
