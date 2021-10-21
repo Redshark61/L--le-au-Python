@@ -1,17 +1,18 @@
 import time
-from typing import Union
 from functions.Position import clearBox
-import functions.config as config
+from functions import config
 from functions.drawRightPanel import drawRightPanel
 
 
-def startQuest(index: int, quest: dict) -> Union[list[dict], int, bool]:
+def startQuest(index: int, quest: dict) -> bool:
     clearBox()
+    # Import the given file
     module = __import__(f"{config.coord[quest]['folder']}.{config.coord[quest]['mainFile']}", fromlist=[None])
     hasWon = module.main()
     config.vitalSigns['foodMax'] = config.foodMax - 20
     config.vitalSigns['waterMax'] = config.waterMax - 20
     isQuestDone = True
+    # If he has won he get a key and the quest is not to do anymore
     if hasWon:
         config.questDone.append(config.questToDo[index][quest])
         config.questToDo.pop(index)
