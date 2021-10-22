@@ -28,6 +28,9 @@
 
 You need to take care of your energy, thirst and food, otherwise you could die. You also have an inventory, in wich you can store food, water bottles or artifacts to help you during your quests.
 
+![Introduction](https://github.com/Redshark61/Python-Island/blob/master/img/intro.png?raw=true)
+![Middle of the game](https://github.com/Redshark61/Python-Island/blob/master/img/milieu.png?raw=true)
+
 ## Prerequisite
 
 - The new windows terminal, just click on [this link](https://www.microsoft.com/fr-fr/p/windows-terminal/9n0dx20hk701#activetab=pivot:overviewtab) to download it from the windows store
