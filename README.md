@@ -11,11 +11,8 @@
   - [Ceasar Code](#ceasar-code)
 - [The map and graphical element](#the-map-and-graphical-element)
 - [End and credits](#end-and-credits)
-- [Mods](#mods)
-  - [How to create new quests](#to-create-new-quests)
-- [Functions](#functions)
-  - [checkLength](#checkLength)
-  - [checkMod](#checkMod)
+- [How to make Mods](#mods)
+- [Usefull Functions](#functions)
 - [Contribution](#contribution)
 
 ## Presentation
@@ -54,34 +51,17 @@ There is nothing fancy to say about this game.
 
 In this game, you'll have to decode a secret message. This will give you the silver key.
 
-- **cesar** : this file is main one, it choose a random word as key to encrypt the code, and chenck the input of the player
-- **decode** : this file take as parameter the coded sentence, the code you want to use in order to decode the sentence, and the alphabet. It returns the decoded sentence.
-- **encode** : this file does the exact opposite : you give the sentence you want to encode, the code and the alphabet and it returns the coded sentence.
-
 ### Fizzbuzz
 
 The last quest is random game. In fact, you dont have to do anything, just let the game play for you. You are against a certain number of monkeys and their boss. The goal is to enumerate numbers, starting from 1, and to say **fizz** when the number is a multiple of 3, **buzz** if it's a multiple of 5, and **fizzbuzz** if it's both. Otherwise, you just say the number.
 
-- **fizzBuzz** : it uses all the next functions to display stuff and configure all the chances
-- **checkChances** : this function just return a bool wich tell if the function needs to stop (because there are no monkeys anymore or the player failed)
-- **configFizzBuzz** : this file just store the important data for the fizzbuzz
-- **deletePlayer** : this file delete the player wich failed. It returns *True* if there is a reason for the program to stop (no more monkeys or the player failed). Otherwise it just returns *False*.
-- **jsonFetch** : just get all the data from the json and returns it.
-- **setTurn** : set the turn in order to know who is currently playing.
-
 ## The map and graphical element
 
-All the elements related to the map / animations are in the *map* folder. I won't explain everything, this folder is too heavy, but I'll explain the main part :
-
-- **displayMap** : thif file draw the map. In fact it loops over all the collumns, then the row of a json containing the elements of the map. If the current row and collumn is the same as an element (the player, an item, a tree, a quest...) the cell is not empty but it's another character. It's very easy then to add element on the map.
-- **getKeyPress** : it handle all the keypress using the *msvcrt* module from microsoft to read the keyboard input without typing *enter* everytime.
-- **inventory** : this file work with the inventory. You can move the arrow, and eat elements.
-- **mapBackground** : this is the file wich create the map, with all the colors, and emojies. If you want to use other colors than the current ones, it's this file you must modify.
-- **mapLoop** : it's the hub, where all the other file are used.
+All the elements related to the map / animations are in the *map* folder.
 
 ### Wich colors are supported
 
-This is the list of the colors and there code :
+This is the list of the colors and there code:
 
 1. dark grey (stone)
 2. bright cyan (river)
@@ -96,47 +76,83 @@ This is the list of the colors and there code :
 
 ## End and credits
 
-The map folder also contain the code to display the final trailer
+The map folder also contain the code to display the final trailer.
 
 ## Mods
 
 The most important point of this game is to be "modable". You have a _mod_ folder in wich you can store moded json file. If you want to do it, you **need** to respect the exact same syntax as the main json file stored in the _data_ folder.
 
-All what's inside the *data* folder  (the json can be modified). If you want to do it you must place your new file into the *mod* folder.
+All what's inside the *data* folder can be modified, just copy it in order not to delete the basic file. If you want to do it you must place your new file into the *mod* folder.
+
+- [To create new quests](#to-create-new-quests)
+- [To add new items](#to-add-new-items)
+- ["Change the value of an existing quest"](#change-the-value-of-an-existing-quest)
+- ["Add new skin"](#add-new-skin)
+- ["Modify a story"](#modify-a-story)
 
 ### To create new quests
 
-If you want to add a new quest, you first need to add its coordinate in a _coordinates.json_ file into the _mods_ folder. You must copy the _coordinates.json_ file in order to add your own coords among the original one. Moreover, you need to specify :
+If you want to add a new quest, you first need to add its coordinate in a _coordinates.json_ file into the _mods_ folder. You must copy the _coordinates.json_ file in order to add your own coords among the original one. Moreover, you need to specify:
 
 - what kind of mark should your quest be shown as
 - what's the name of the folder in wich your file is
 - what's the name of the file wich launch the quest
 
-You **need** to have a _main_ function into the main file. You can also use the _checkLength_ function to create your own story. To achieve this you can copy the _cinematic.json_ file and add your own story. You **need** to give the same name for the cinematic key and your main file.
+You **need** to have a `main` function into the main file. You can also use the _checkLength_ function to create your own story. To achieve this you can copy the _cinematic.json_ file and add your own story. You **need** to give the same name for the cinematic key and your main file.
+
+### To add new items
+
+Copy *items.json* inside the *data* folder. You can any items you want. It must be a food type (it can be eaten). Specify:
+
+- number: how much do want to spawn on the map
+- name: the real name of the item,
+- type: tell if it's *food* or *liquid*,
+- nutrition: tell how many point it gives (how many water if it's *liquid* or food if it's *food*),
+- spawn: always generic,
+- mark: the hexadecimal value of your emoji,
+- size: the size of the item in the inventory
+
+### Change the value of an existing quest
+
+Copy the json file of the quest you want to change and paste it into the *mod* folder. You can just change the value as what you want.
+
+### Add new skin
+
+Same as [add new Item](#to-add-new-items).
+
+### Modify a story
+
+Same as ["Change the value of an existing quest"](#change-the-value-of-an-existing-quest).
 
 ## Functions
 
-This folder contain all the functions used throughout the game.
+This folder contain all the functions used throughout the game and you can reuse. The most important ones are:
 
 - [checkLength](#checkLength)
-- [checkMod](#checkMod)
+- [emojiDecoder](#emojiDecoder)
+- [Clear](#clear)
+- [Position](#position)
 - [Colors](#colors)
 
 ### checkLength
 
-This function takes *one parameter* : the name of the file wich runs it.
+This function takes *one parameter*: the name of the file wich runs it.
 
 *It returns a list* of all the sentences.
 
 Its use is to get the story / dialog associated to this game. In order for this function to work, you must **set the same name** for the main file wich run the function as well as in the json wich store all the stories.
 
-### checkMod
+### emojiDecoder
 
-This function takes *one parameter* : the name of the json file we want to read.
+In this function you pass the *hexadecimal* value of your emoji, and get a str value that you can print wherever you want.
 
-*It returns the json* as a list or a dict.
+### Clear
 
-Its use is to get the json file required, but check first if this file already existed as a mod. In order for this function to work, you must set **the same name** for your moded json file as the original one. You also must **copy the original one**, or all the basic data won't be red.
+This function just clear the screen.
+
+### Position
+
+In this file you have multiple functions. The most important ones are the [position](https://github.com/Redshark61/Python-Island/blob/d7492f0682e9e5460898d53bfe75abca291a4271/functions/Position.py#L1) and [printBox](https://github.com/Redshark61/Python-Island/blob/d7492f0682e9e5460898d53bfe75abca291a4271/functions/Position.py#L8). Go check them if you need, they are pretty self-explanatoring.
 
 ### Colors
 
