@@ -55,7 +55,7 @@ def introduction():
     time.sleep(5)
     print("Mais de la à faire couler son propre bateau et se laisser dériver, c'est INCENSÉ".center(width, ' '))
     time.sleep(5)
-    print("Et pourtant, tu te retrouve sur une île que personne sur laquelle personne n'a jamais mis les pieds !".center(width, ' '))
+    print("Et pourtant, tu te retrouve sur une île sur laquelle personne n'a jamais mis les pieds !".center(width, ' '))
     time.sleep(5)
     print("Incroyable, tu as réussi".center(width, ' '))
     for i in range(1, 4):

@@ -119,22 +119,22 @@ def multipleSave(saveInSavesFolder, skinData):
 
     print("Il y a plusieurs sauvegarde, que veux-tu faire ?")
     choice = input("1 - Sélectionner une partie\n2 - Créer une nouvelle partie\n")
+    while choice not in ('1', '2', '3'):
+        clear()
+        print("Je n'ai pas compris")
+        choice = input("1 - Sélectionner une partie\n2 - Créer une nouvelle partie\n")
+
     clear()
-    match choice:
-        case '1':
-            for index, file in enumerate(saveInSavesFolder):
-                print(f"{index + 1} - {file[5:-5]}")
-            fileChoice = int(input(''))
-            clear()
-            print(f"Tu as choisis {saveInSavesFolder[int(fileChoice)-1][5:-5]}")
-            saveName = choiceSave(saveInSavesFolder, fileChoice, skinData, save['playerSkinName'])
-        case '2':
-            saveName = initSave(skinData)
-        case _:
-            print("Je n'ai pas compris")
-            time.sleep(2)
-            clear()
-            multipleSave(saveInSavesFolder, skinData)
+    if choice == '1':
+        for index, file in enumerate(saveInSavesFolder):
+            print(f"{index + 1} - {file[5:-5]}")
+        fileChoice = int(input(''))
+        clear()
+        print(f"Tu as choisis {saveInSavesFolder[int(fileChoice)-1][5:-5]}")
+        saveName = choiceSave(saveInSavesFolder, fileChoice, skinData, save['playerSkinName'])
+    elif choice == '2':
+        saveName = initSave(skinData)
+
     return saveName
 
 
