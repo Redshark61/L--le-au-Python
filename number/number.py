@@ -61,10 +61,10 @@ def main() -> None:
                 print(position(x=105, y=5+line, text=f"Mon nombre est plus {color.setForeground('brightCyan','petit')}"))
                 print(position(x=105, y=6+line, text=f"Attention, tu n'as plus que {maxTry-tried} essais"))
             elif(answer == rand and tried <= maxTry):
-                print(position(x=105, y=6+line, text={color.setForeground("brightGreen", "Tu as gagné !")}))
+                print(position(x=105, y=6+line, text=color.setForeground("brightGreen", "Tu as gagné !")))
                 break
         else:
-            print(position(x=105, y=6+line, text={color.setForeground("red", "Tu as perdu !")}))
+            print(position(x=105, y=6+line, text=color.setForeground("red", "Tu as perdu !")))
             time.sleep(2)
             return False
 
