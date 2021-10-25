@@ -25,7 +25,6 @@ def checkSaveFiles():
 
     # If there are no save, create one and launch the game
     if len(saveInSavesFolder) == 0:
-        print("no save")
         saveName = initSave(skinData)
     else:
         # If there is only one save
@@ -198,9 +197,6 @@ def setPlayerData(skinData, skinChoice):
 
     coordData = checkMod('coordinates')
     coordData['player']['mark'] = config.playerMark
-
-    with open("coordinates.json", 'w', encoding='utf-8') as f:
-        json.dump(coordData, f)
 
 
 if __name__ == "__main__":
